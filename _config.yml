@@ -1,5 +1,5 @@
 title:            andrew brooks
-description:      "data science, economics, photography, fun, life"
+description:      data science, economics, photography, fun, life
 logo:             site-logo.jpg
 disqus_shortname:
 search:           true
@@ -7,11 +7,9 @@ search:           true
 # You don't need to specify the protocol if you want it available on http and https. Example: //localhost:4000
 
 #url:              http://localhost:4000
- url: http://brooksandrew.github.io
- #baseurl: /simpleblog
-
-
-# Owner/author information
+url:               http://brooksandrew.github.io/simpleblog
+#baseurl: /simpleblog
+# Owner/author information1
 owner:
   name:           andrew brooks
   avatar:         bio-photo.jpg
