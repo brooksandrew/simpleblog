@@ -7,8 +7,8 @@ search:           true
 # You don't need to specify the protocol if you want it available on http and https. Example: //localhost:4000
 
 #url:              http://localhost:4000
- url: "http://brooksandrew.github.io"
- baseurl: "/simpleblog"
+ url: http://brooksandrew.github.io
+ #baseurl: /simpleblog
 
 
 # Owner/author information
