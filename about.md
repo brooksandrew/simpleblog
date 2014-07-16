@@ -5,7 +5,7 @@ title: About me
 tags: [Jekyll, theme, simple, minimal, minimalism, responsive]
 modified: 2013-09-13
 image:
-  feature: aboutphoto_milfordsound_small.jpg
+  feature: aboutphoto_milfordsound_compressed.jpg
 
 ---
 
