@@ -7,7 +7,7 @@ categories: jekyll
 # The Route
 
 <figure>
-	<img src="/images/newzealand_maproute.png">
+	<img src="{{ site.url }}/images/newzealand_maproute.png">
 </figure>
 
 # Itinerary
