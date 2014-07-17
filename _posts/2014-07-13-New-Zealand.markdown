@@ -10,6 +10,13 @@ categories: jekyll
 	<img src="/images/newzealand_maproute.png">
 </figure>
 
+<figure class="half">
+	<img src="/images/image-filename-1.jpg">
+	<img src="/images/image-filename-2.jpg">
+		<img src="/images/newzealand_maproute.png">
+
+	<figcaption>Caption describing these two images.</figcaption>
+</figure>
 
 # Itinerary
 June 20 - July 8 (2014)
