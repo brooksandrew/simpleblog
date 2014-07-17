@@ -8,5 +8,8 @@ categories: jekyll
 
 ### Itinerary
 
+Day 1
+Day 2
+
 
 
