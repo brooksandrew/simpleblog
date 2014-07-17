@@ -10,18 +10,10 @@ categories: jekyll
 	<img src="/images/newzealand_maproute.png">
 </figure>
 
-<figure class="half">
-	<img src="/images/image-filename-1.jpg">
-	<img src="/images/image-filename-2.jpg">
-		<img src="/images/newzealand_maproute.png">
-
-	<figcaption>Caption describing these two images.</figcaption>
-</figure>
-
 # Itinerary
 June 20 - July 8 (2014)
 
-##### Day 1: DC - Auckland
+#### Day 1: DC - Auckland
 
 We arrived in Auckland at 8am Sunday morning from DC via LAX (interesting).  Even the airport in LA feels like urban sprawl... 
 we ended up leaving what felt like the airport to run across some busy 4-lane roads to catch our international connection.
@@ -41,7 +33,7 @@ We were greeted with our names paging throughout the terminal and the kiwi equiv
 Beyond circumnavigating the city by foot, gawking at the [Sky Tower](http://en.wikipedia.org/wiki/Sky_Tower_(Auckland)), 
 checking out Devonport on the ferry, we had a pretty low key-day and crashed promptly at dark... which is 5pm in New Zealand winter.
 
-##### Day 2: Auckland - Waitomo
+#### Day 2: Auckland - Waitomo
 Black water rafting at Waitomo Caves - definitely worth it! The coolest thing we did on the north island.  
 
 Black water rafting = cave + underground river + tubing
@@ -59,7 +51,7 @@ No photos, because, well, we were in a cave with a lots of water and lots of dar
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/LKMUqxC1QBU" frameborder="0"></iframe>
 
-##### Day 3: Waitomo - Rotorua
+#### Day 3: Waitomo - Rotorua
 
 Rotorua: the land of hot springs, mud pools, geysers and that sulphur smell (it stinks).
 
@@ -93,27 +85,27 @@ The town itself was pretty normal.  The geothermal park was the big thing around
 Afterward we found Kerosene Creek - a waterfall flowing through a hot spring off a dirt road.  Off the beaten path, but definitely worth it - 
 much warmer than cave water!
 
-##### Day 4: Rotorua - Wellington  
+#### Day 4: Rotorua - Wellington  
 
-##### Day 5: Wellington - Abel Tasman  
+#### Day 5: Wellington - Abel Tasman  
 
-##### Day 6 & 7: Abel Tasman  
+#### Day 6 & 7: Abel Tasman  
 
-##### Day 8: Abel Tasman - Westport  
+#### Day 8: Abel Tasman - Westport  
 
-##### Day 9: Westport - Franz Joseph  
+#### Day 9: Westport - Franz Joseph  
 
-##### Day 10: Franz Joseph  
+#### Day 10: Franz Joseph  
 
-##### Day 11: Franz Joseph - Wanaka  
+#### Day 11: Franz Joseph - Wanaka  
 
-##### Day 12: Wanaka - Milford Sound  
+#### Day 12: Wanaka - Milford Sound  
 
-##### Day 13: Milford Sound - Queenstown 
+#### Day 13: Milford Sound - Queenstown 
  
-##### Day 14: Queenstown  
+#### Day 14: Queenstown  
 
-##### Day 15: Queenstown - Auckland  
+#### Day 15: Queenstown - Auckland  
 
 
 ## Internet
