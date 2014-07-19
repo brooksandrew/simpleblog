@@ -44,15 +44,15 @@ Black water rafting at Waitomo Caves - definitely worth it! The coolest thing we
 Black water rafting = cave + underground river + tubing
 
 Basically you show up to this small one road town of Waitomo.  The cave folk get you done up in a wetsuit with a head lamp and inner tube, 
-drive you over to a random spot on the side of the road and guide you down a short trail to a river flowing into a hole in the ground (hello cave).
-Parts of the cave river are slow enough for lazy river tubing and glo worm gazing.  Some sections are fast enough to get the heart pumping, 
+drive you to a random spot on the side of the road and guide you down a short trail to a river flowing into a hole in the ground (hello cave).
+Parts of the cave river are slow enough for lazy river tubing and glo worm gazing.  Some sections are fast enough to get the heart pumping.  
 Some sections are small waterfalls with one way down (jumping).  
 
 Beyond the awesomeness of tubing through a cave river, the style of the whole outfit struck me.  For a tourist attraction, it felt pretty real.
 No signs, no manufactured walkways or handrails, no lights inside, nothing unnatural.  Just a cave and a river.  A different style from the caves
-I've seen in the States [Ruby Falls](http://www.rubyfalls.com/) in Tennessee and the caverns in Virginia.
+I've seen in the States such as [Ruby Falls](http://www.rubyfalls.com/) in Tennessee and the caverns in Virginia.
 
-No photos, because, well, we were in a cave with a lots of water and lots of dark. However [Black Water Rafting Co](http://www.waitomo.com/black-water-rafting.aspx) has a cool video.
+No photos, because, well, we were in a cave with a lots of water and lots of darkness. However [Black Water Rafting Co](http://www.waitomo.com/black-water-rafting.aspx) has a cool video.
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/LKMUqxC1QBU" frameborder="0"></iframe>
 
@@ -98,12 +98,12 @@ Without the gear and very short of the 8+ hours to do the whole track, we passed
 <a href="http://1.bp.blogspot.com/-4oep9HXvJ_8/TfwjSWaaE-I/AAAAAAAAB7A/fxU-fiD-uaY/s320/Funny-Road-Sign-New-Zealand.png" title="Explosion sign"><img src="http://1.bp.blogspot.com/-4oep9HXvJ_8/TfwjSWaaE-I/AAAAAAAAB7A/fxU-fiD-uaY/s320/Funny-Road-Sign-New-Zealand.png" width="200" height="133" alt="DSC_0166"></a>
 {: .pull-right}
 It was so cloudy, we couldn't even see Mount Tongariro from the road.
-However we did see the New Zealand military training and driving vehicles around in Waiouru on the desert roads which was interesting.
-We did see some road signs like this one 
-
+However we did see the New Zealand military training grounds and driving vehicles around in Waiouru on the desert roads which was interesting.
+We saw some road signs like this one.
 
 <iframe width="700" height="394" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=tongariro+crossing&amp;aq=&amp;sll=-41.273299,174.779145&amp;sspn=0.007588,0.015568&amp;ie=UTF8&amp;hq=&amp;hnear=&amp;t=m&amp;layer=c&amp;cbll=-39.22639,175.734886&amp;panoid=b4NAcxZIGCxisWGBgn8rjg&amp;cbp=13,277.72,,0,2.36&amp;ll=-39.22826,175.73488&amp;spn=0.006549,0.01502&amp;z=16&amp;output=svembed"></iframe><br /><small><a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=tongariro+crossing&amp;aq=&amp;sll=-41.273299,174.779145&amp;sspn=0.007588,0.015568&amp;ie=UTF8&amp;hq=&amp;hnear=&amp;t=m&amp;layer=c&amp;cbll=-39.22639,175.734886&amp;panoid=b4NAcxZIGCxisWGBgn8rjg&amp;cbp=13,277.72,,0,2.36&amp;ll=-39.22826,175.73488&amp;spn=0.006549,0.01502&amp;z=16" style="color:#0000FF;text-align:left"></a></small>
-<figcaption>What we didn't see</figcaption>
+<figcaption>What we didn't see: Mount Ruapehu (left), Mount Ngauruhoe (right)</figcaption>
+
 
 
 **Wellington:** reminded me a bit of Hong Kong.  Super compact city, hilly, green, water, windy, trendy.
