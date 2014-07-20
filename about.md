@@ -21,6 +21,8 @@ Personal website: [brooksandrew.github.io]
 [Elder Research]: http://datamininglab.com/
 
 
+<img src="/images/so-simple-sample-image-3.jpg">
+
 <figure>
 	<a href="/images/so-simple-sample-image-3.jpg"><img src="/images/so-simple-sample-image-3.jpg"></a>
 </figure>
