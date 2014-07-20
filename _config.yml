@@ -18,9 +18,9 @@ owner:
   # Social networking links used in footer. Update and remove as you like.
   twitter:
   facebook:
-  github:        brooksandrew
+  github:     brooksandrew
   stackexchange:
-  linkedin:    andrew-brooks/14/41/773/
+  linkedin:
   instagram:
   flickr:
   tumblr:
@@ -37,7 +37,7 @@ bing_verify:
 # For external links add external: true
 links:
   - title: Home
-    url: http://brooksandrew.github.io
+    url: "http://brooksandrew.github.io"
     external: true   
   - title: About
     url: /about/

@@ -15,14 +15,14 @@ words into stories and stories into action for my clients.
 I'm interested in a wide range of things from machine learning to international issues to diy woodworking to long-distance running.  My aim is to write
 about interesting things throughout this spectrum in a pseudo organized fashion.
 
-personal website: [brooksandrew.github.io]
+Personal website: [brooksandrew.github.io]
 
 [brooksandrew.github.io]: http://brooksandrew.github.io
 [Elder Research]: http://datamininglab.com/
 
 
 <figure>
-	<a href="/images/lake_wanaka.jpg"> <img src="/images/lake_wanaka.jpg"></a>
+	<a href="/images/so-simple-sample-image-3.jpg"><img src="/images/so-simple-sample-image-3.jpg"></a>
 </figure>
 
 <figure>
@@ -35,4 +35,3 @@ personal website: [brooksandrew.github.io]
 	<a href="http://farm9.staticflickr.com/8426/7758832526_cc8f681e48_b.jpg"><img src="http://farm9.staticflickr.com/8426/7758832526_cc8f681e48_c.jpg"></a>
 </figure>
 
-[^1]: Example: *domain.com/category-name/post-title*
