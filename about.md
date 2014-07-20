@@ -20,5 +20,4 @@ personal website: [brooksandrew.github.io]
 [brooksandrew.github.io]: http://brooksandrew.github.io
 [Elder Research]: http://datamininglab.com/
 
-
 [^1]: Example: *domain.com/category-name/post-title*
