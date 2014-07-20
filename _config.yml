@@ -37,7 +37,7 @@ bing_verify:
 # For external links add external: true
 links:
   - title: Home
-    url: http://www.brooksandrew.github.io
+    url: http://brooksandrew.github.io/
     external: true   
   - title: About
     url: /about/
