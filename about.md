@@ -23,6 +23,14 @@ Personal website: [brooksandrew.github.io]
 
 <img src="/images/so-simple-sample-image-3.jpg">
 
+ <div class="gallery">
+<a href="/images/so-simple-sample-image-3.jpg">img1</a>
+<a href="/images/so-simple-sample-image-3.jpg">img2</a>
+ 
+ </div>
+
+
+
 <figure>
 	<a href="/images/so-simple-sample-image-3.jpg"><img src="/images/so-simple-sample-image-3.jpg"></a>
 </figure>
