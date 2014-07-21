@@ -26,11 +26,10 @@ the Prime Minister, various other government officials, as well as the Head of S
  and government officials use commercial or chartered flights (with Air New Zealand where available) to travel both domestically and internationally.
 
 <figure class="half">
-	<a href="https://www.flickr.com/photos/123438060@N05/14431010380" title="DSC_0014 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14431010380_b715f1825a.jpg" width="500" height="333" alt="DSC_0014"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14617164442" title="DSC_0037 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5510/14617164442_38174d2303.jpg" width="500" height="333" alt="DSC_0037"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14594698026" title="DSC_0056 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3905/14594698026_2fc9b13dfe.jpg" width="500" height="333" alt="DSC_0056"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14617172152" title="DSC_0045 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5528/14617172152_4a2ed8fbae.jpg" width="500" height="333" alt="DSC_0045"></a>
-	<figcaption>top left: College Hill. &nbsp;&nbsp;&nbsp;&nbsp; 
+<a href="https://farm3.staticflickr.com/2932/14431010380_09299825b2_h.jpg" class="image-popup" title="DSC_0014 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14431010380_09299825b2_h.jpg" width="1600" height="1064" alt="DSC_0014"></a>	
+<a href="https://farm6.staticflickr.com/5510/14617164442_b3eb97327b_h.jpg" class="image-popup" title="DSC_0037 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5510/14617164442_b3eb97327b_h.jpg" width="1600" height="1064" alt="DSC_0037"></a>
+<a href="https://farm4.staticflickr.com/3905/14594698026_55f3b10a60_h.jpg" class="image-popup" title="DSC_0056 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3905/14594698026_55f3b10a60_h.jpg" width="1600" height="1064" alt="DSC_0056"></a>
+<a href="https://farm6.staticflickr.com/5528/14617172152_669d6bb680_h.jpg" class="image-popup" title="DSC_0045 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5528/14617172152_669d6bb680_h.jpg" width="1600" height="1064" alt="DSC_0045"></a>	<figcaption>top left: College Hill. &nbsp;&nbsp;&nbsp;&nbsp; 
 	top right: Devonport Ferry. &nbsp;&nbsp;&nbsp;&nbsp; 
 	bottom left & right: Devonport.</figcaption>
 </figure>
@@ -61,27 +60,26 @@ No photos, because, well, we were in a cave with a lots of water and lots of dar
 Rotorua: the land of hot springs, mud pools, geysers and that sulphur smell (it stinks).
 
 <figure class="half">
-	<a href="https://www.flickr.com/photos/123438060@N05/14431368687" title="DSC_0092 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3916/14431368687_4a725614cb_c.jpg" width="800" height="532" alt="DSC_0092"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14637698703" title="DSC_0087 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3859/14637698703_b6182d32ea_c.jpg" width="800" height="532" alt="DSC_0087"></a>
+	<a href="https://farm4.staticflickr.com/3916/14431368687_058b900fb3_h.jpg" class="image-popup" title="DSC_0092 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3916/14431368687_058b900fb3_h.jpg" width="1600" height="1064" alt="DSC_0092"></a>	
+	<a href="https://farm4.staticflickr.com/3859/14637698703_b8e4db6d3e_h.jpg" class="image-popup" title="DSC_0087 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3859/14637698703_b8e4db6d3e_h.jpg" width="1600" height="1064" alt="DSC_0087"></a>
 	<figcaption>driving to Rotorua.</figcaption>
 </figure>
 
 The town itself was pretty normal.  The geothermal park was the big thing around, so we checked it out.  Cool for a day - pleasant walk, lots of photos.  
 
 <figure class="half">
-	<a href="https://www.flickr.com/photos/123438060@N05/14614699651" title="DSC_0179 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2915/14614699651_1859058260_c.jpg" width="800" height="532" alt="DSC_0179"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14431352409" title="DSC_0211 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3875/14431352409_db77f9f150_c.jpg" width="800" height="532" alt="DSC_0211"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14614720471" title="DSC_0199 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3841/14614720471_b32d682b3f_c.jpg" width="800" height="532" alt="DSC_0199"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14431555827" title="DSC_0215 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3874/14431555827_99ab05cf64_c.jpg" width="800" height="532" alt="DSC_0215"></a>
-	<figcaption>Geothermal park</figcaption>
+	<a href="https://farm3.staticflickr.com/2915/14614699651_07dfe3818f_h.jpg" class="image-popup" title="DSC_0179 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2915/14614699651_07dfe3818f_h.jpg" width="1600" height="1064" alt="DSC_0179"></a>
+	<a href="https://farm4.staticflickr.com/3875/14431352409_3ac8701007_h.jpg" class="image-popup" title="DSC_0211 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3875/14431352409_3ac8701007_h.jpg" width="1600" height="1064" alt="DSC_0211"></a>
+	<a href="https://farm4.staticflickr.com/3841/14614720471_f78edf7226_h.jpg" class="image-popup" title="DSC_0199 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3841/14614720471_f78edf7226_h.jpg" width="1600" height="1064" alt="DSC_0199"></a>
+	<a href="https://farm4.staticflickr.com/3874/14431555827_a8726591a1_h.jpg" class="image-popup" title="DSC_0215 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3874/14431555827_a8726591a1_h.jpg" width="1600" height="1064" alt="DSC_0215"></a>	<figcaption>Geothermal park</figcaption>
 </figure>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14614682491" title="DSC_0389 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3898/14637783993_41185055e0_c.jpg" width="800" height="532" alt="DSC_0134"></a>
+<a href="https://farm4.staticflickr.com/3898/14637783993_ef515712c0_h.jpg" class="image-popup" title="DSC_0134 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3898/14637783993_ef515712c0_h.jpg" width="1600" height="1064" alt="DSC_0134"></a>
 
 <figure class="third">
-	<a href="https://www.flickr.com/photos/123438060@N05/14614682491" title="DSC_0166 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2903/14614682491_049da0eb23_c.jpg" width="800" height="532" alt="DSC_0166"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14431168580" title="DSC_0129 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5586/14431168580_7be4b6e8f3_c.jpg" width="800" height="532" alt="DSC_0129"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14431150650" title="DSC_0118 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2912/14431150650_322d91427e_c.jpg" width="800" height="532" alt="DSC_0118"></a>
+	<a href="https://farm3.staticflickr.com/2903/14614682491_1ce39e13e9_h.jpg" class="image-popup" title="DSC_0166 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2903/14614682491_1ce39e13e9_h.jpg" width="1600" height="1064" alt="DSC_0166"></a>
+	<a href="https://farm6.staticflickr.com/5586/14431168580_69d9d7cd65_h.jpg" class="image-popup" title="DSC_0129 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5586/14431168580_69d9d7cd65_h.jpg" width="1600" height="1064" alt="DSC_0129"></a>
+	<a href="https://farm3.staticflickr.com/2912/14431150650_c4e53aac7a_h.jpg" class="image-popup" title="DSC_0118 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2912/14431150650_c4e53aac7a_h.jpg" width="1600" height="1064" alt="DSC_0118"></a>
 	<figcaption>lots of spider webs</figcaption>
 </figure>
 
