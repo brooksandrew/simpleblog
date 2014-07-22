@@ -321,10 +321,8 @@ We got word the Dept of Conversation was closing the Milford Sound road at 9am, 
 
 <a href="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" class="image-popup" title="DSC_0910 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" width="1600" height="1064" alt="DSC_0910"></a>
 
-<figure>
 <a href="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" class="image-popup" title="DSC_0920 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" width="1600" height="1064" alt="DSC_0920"></a>
 <figcaption>just 1000 feet lower</figcaption>
-</figure>
 
 <a href="https://farm4.staticflickr.com/3837/14527799149_c6a9b2e7d0_h.jpg" class="image-popup" title="DSC_0927_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3837/14527799149_c6a9b2e7d0_h.jpg" width="1600" height="1064" alt="DSC_0927_enhanced"></a>
 
@@ -339,9 +337,9 @@ We got word the Dept of Conversation was closing the Milford Sound road at 9am, 
 
 We got full-day mountain bike rentals and headed out to Wilson's Bay for some lakeside cliff hilly tracks.
 
- <figure class="half">
-<a href="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" class="image-popup" title="DSC_0941 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" width="1600" height="1064" alt="DSC_0941"></a>
-<a href="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" class="image-popup" title="DSC_0935 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" width="1600" height="1064" alt="DSC_0935"></a>  <figcaption>Biking Seven Mile Track in Wilson Bay</figcaption>
+<figure class="half">
+	<a href="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" class="image-popup" title="DSC_0941 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" width="1600" height="1064" alt="DSC_0941"></a>
+	<a href="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" class="image-popup" title="DSC_0935 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" width="1600" height="1064" alt="DSC_0935"></a>  <figcaption>Biking Seven Mile Track in Wilson Bay</figcaption>
 </figure>
 
 Then we packed up and headed to Glenorchy for lunch (where [Top of the Lake](http://www.imdb.com/title/tt2103085/) was filmed and set).
@@ -355,16 +353,11 @@ So we biked the rest of the way through some streams and past some lots of cows.
 <a href="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" class="image-popup" title="DSC_0969 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" width="1600" height="1064" alt="DSC_0969"></a>
 <figcaption>driving to Glenorchy</figcaption>
 
+<a href="{{ site.url }}/images/queenstown_hostel.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_hostel.jpg"></a>
+<figcaption>Queenstown hostel</figcaption>
 
-<figure>
-	<img src="{{ site.url }}/images/queenstown_hostel.jpg">
-	<figcaption>Queenstown hostel</figcaption>
-</figure>
-
-<figure>
-	<img src="{{ site.url }}/images/queenstown_airport.jpg">
-	<figcaption>Queenstown airport</figcaption>
-</figure>
+<a href="{{ site.url }}/images/queenstown_airport.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.jpg">
+<figcaption>Queenstown airport</figcaption>
 
 ## Day 15: Queenstown - Auckland
 
