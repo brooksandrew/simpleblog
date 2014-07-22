@@ -374,7 +374,7 @@ that one day I can take up surfing while still maintaining a job of some sort.
 <figcaption>Piha</figcaption>
 
 <figure>
-	<img src="{{ site.url }}/images/NZ_centralbank.jpg">
+	<img src="{{ site.url }}/images/NZ_centralbank.JPG">
 	<figcaption>New Zealand Central Bank first floor up for rent</figcaption>
 </figure>
 
