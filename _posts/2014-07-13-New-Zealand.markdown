@@ -353,10 +353,10 @@ So we biked the rest of the way through some streams and past some lots of cows.
 <a href="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" class="image-popup" title="DSC_0969 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" width="1600" height="1064" alt="DSC_0969"></a>
 <figcaption>driving to Glenorchy</figcaption>
 
-<a href="{{ site.url }}/images/queenstown_hostel.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_hostel.jpg"></a>
+<a href="{{ site.url }}/images/queenstown_hostel.JPG" class="image-popup"><img src="{{ site.url }}/images/queenstown_hostel.JPG"></a>
 <figcaption>Queenstown hostel</figcaption>
 
-<a href="{{ site.url }}/images/queenstown_airport.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.jpg"></a>
+<a href="{{ site.url }}/images/queenstown_airport.JPG" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.JPG"></a>
 <figcaption>Queenstown airport</figcaption>
 
 ## Day 15: Queenstown - Auckland
@@ -374,7 +374,7 @@ that one day I can take up surfing while still maintaining a job of some sort.
 <figcaption>Piha</figcaption>
 
 <figure>
-	<img src="{{ site.url }}/images/NZ_centralbank.JPG">
+	<a href="{{ site.url }}/images/NZ_centralbank.JPG" class="image-popup"><img src="{{ site.url }}/images/NZ_centralbank.JPG"></a>
 	<figcaption>New Zealand Central Bank first floor up for rent</figcaption>
 </figure>
 
