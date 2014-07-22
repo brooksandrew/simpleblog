@@ -356,7 +356,7 @@ So we biked the rest of the way through some streams and past some lots of cows.
 <a href="{{ site.url }}/images/queenstown_hostel.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_hostel.jpg"></a>
 <figcaption>Queenstown hostel</figcaption>
 
-<a href="{{ site.url }}/images/queenstown_airport.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.jpg">
+<a href="{{ site.url }}/images/queenstown_airport.jpg" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.jpg"></a>
 <figcaption>Queenstown airport</figcaption>
 
 ## Day 15: Queenstown - Auckland
