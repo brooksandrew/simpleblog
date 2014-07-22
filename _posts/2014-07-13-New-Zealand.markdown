@@ -44,7 +44,7 @@ Black water rafting = cave + underground river + tubing
 
 Basically you show up to this small one road town of Waitomo.  The cave folk get you done up in a wetsuit with a head lamp and inner tube, 
 drive you to a random spot on the side of the road and guide you down a short trail to a river flowing into a hole in the ground (hello cave).
-Parts of the cave river are slow enough for lazy river tubing and glo worm gazing.  Some sections are fast enough to get the heart pumping.  
+Parts of the cave river are slow enough for lazy river tubing and glo worm gazing.  Some sections are fast enough to get the heart pumping.
 Some sections are small waterfalls with one way down (jumping).  
 
 Beyond the awesomeness of tubing through a cave river, the style of the whole outfit struck me.  For a tourist attraction, it felt pretty real.
@@ -116,14 +116,11 @@ This solidified our "eat asian" strategy.
 We drove ourselves onto the 9am Wellington-Picton Ferry, sat back and relaxed for 3 hours and then drove to Marahua by way of Nelson.
 
 
-<a href="https://www.flickr.com/photos/123438060@N05/14677964521" title="Wellington"><img src="https://farm6.staticflickr.com/5587/14677964521_87466cf00e_k.jpg" width="2048" height="733" alt="DSC_0244_zoom"></a>
+<a href="https://farm3.staticflickr.com/2928/14710840191_e8e2a6fcee_h.jpg" class="image-popup" title="DSC_0244_zoom_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2928/14710840191_e8e2a6fcee_h.jpg" width="1600" height="572" alt="DSC_0244_zoom_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14615893374" title="Wellington-Picton Ferry"><img src="https://farm4.staticflickr.com/3856/14615893374_b178126658_c.jpg" width="800" height="532" alt="DSC_0245"></a>
+<a href="https://farm4.staticflickr.com/3856/14615893374_09d28219e7_h.jpg" class="image-popup" title="DSC_0245 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3856/14615893374_09d28219e7_h.jpg" width="1600" height="1064" alt="DSC_0245"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14431390579" title="Wellington-Picton Ferry"><img src="https://farm6.staticflickr.com/5507/14431390579_3499b7e6bc_c.jpg" width="800" height="532" alt="DSC_0253"></a>
-
-<a href="https://www.flickr.com/photos/123438060@N05/14614774651" title="Wellington-Picton Ferry"><img src="https://farm4.staticflickr.com/3899/14614774651_c763590326_c.jpg" width="800" height="532" alt="DSC_0261"></a>
-
+<a href="https://farm6.staticflickr.com/5507/14431390579_043fd71cb1_h.jpg" class="image-popup" title="DSC_0253 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5507/14431390579_043fd71cb1_h.jpg" width="1600" height="1064" alt="DSC_0253"></a>
 
 After stocking up on some Freeze Dri Back Country meals (a New Zealand original), super cheap merino wool clothes at [MacPac](http://www.macpac.co.nz/)
 and devouring a couple bowls of seafood chowder (another dish that we discovered was universally on point), we headed out to our hut 
@@ -147,9 +144,8 @@ We noticed that the equivalent of midnight in the States was around 7pm in New Z
 &nbsp;&nbsp;&nbsp; ***to***: Bark Bay  
 
  <figure class="half">
-	<a href="https://www.flickr.com/photos/123438060@N05/14431424819" title="DSC_0284 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3916/14431424819_b91e932e7e_c.jpg" width="800" height="532" alt="DSC_0284"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14614801461" title="DSC_0281 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2923/14614801461_a91eee76be_c.jpg" width="800" height="532" alt="DSC_0281"></a>
-	<figcaption>Abel Tasman track start at sunrise</figcaption>
+ <a href="https://farm4.staticflickr.com/3916/14431424819_f63d15438c_h.jpg" class="image-popup" title="DSC_0284 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3916/14431424819_f63d15438c_h.jpg" width="1600" height="1064" alt="DSC_0284"></a>
+ <a href="https://farm3.staticflickr.com/2923/14614801461_36a929460a_h.jpg" class="image-popup" title="DSC_0281 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2923/14614801461_36a929460a_h.jpg" width="1600" height="1064" alt="DSC_0281"></a>	<figcaption>Abel Tasman track start at sunrise</figcaption>
 </figure>
 
 We decided start our trek in Marahau where we left our car and take a water taxi back from Totaranui at the end.
@@ -167,19 +163,17 @@ Definitely recommend this track in the off-season.
 *   wood burning stoves in the huts
 *   brighter stars ([like this bright](http://www.asherworldturns.com/starscape-over-coromandel/))
 
-<a href="https://www.flickr.com/photos/123438060@N05/14595009456" title="DSC_0288 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3912/14595009456_b1daa8ff09_c.jpg" width="800" height="532" alt="DSC_0288"></a>
+<a href="https://farm3.staticflickr.com/2902/14527620107_aff7fbda81_h.jpg" class="image-popup" title="DSC_0288_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2902/14527620107_aff7fbda81_h.jpg" width="1600" height="1064" alt="DSC_0288_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14614816271" title="DSC_0291 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3851/14614816271_ab63f362a0_c.jpg" width="800" height="532" alt="DSC_0291"></a>
+<a href="https://farm4.staticflickr.com/3851/14614816271_c671798073_h.jpg" class="image-popup" title="DSC_0291 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3851/14614816271_c671798073_h.jpg" width="1600" height="1064" alt="DSC_0291"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14637984973" title="DSC_0304 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3878/14637984973_f55d5de63c_c.jpg" width="800" height="532" alt="DSC_0304"></a>
+<a href="https://farm4.staticflickr.com/3878/14637984973_b222c3a88b_h.jpg" class="image-popup" title="DSC_0304 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3878/14637984973_b222c3a88b_h.jpg" width="1600" height="1064" alt="DSC_0304"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14637999743" title="DSC_0315 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2901/14637999743_a057060da9_c.jpg" width="800" height="532" alt="DSC_0315"></a>
+<a href="https://farm3.staticflickr.com/2901/14637999743_23c8413e19_h.jpg" class="image-popup" title="DSC_0315 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2901/14637999743_23c8413e19_h.jpg" width="1600" height="1064" alt="DSC_0315"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14615986034" title="DSC_0322 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3926/14615986034_7c58e8ebff_c.jpg" width="800" height="532" alt="DSC_0322"></a>
+<a href="https://farm4.staticflickr.com/3862/14638027753_1de9be3854_h.jpg" class="image-popup" title="DSC_0342 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3862/14638027753_1de9be3854_h.jpg" width="1600" height="1064" alt="DSC_0342"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14638027753" title="DSC_0342 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3862/14638027753_4348d84e12_c.jpg" width="800" height="532" alt="DSC_0342"></a>
-
-<a href="https://www.flickr.com/photos/123438060@N05/14638010733" title="DSC_0329 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3900/14638010733_53b5c723e5_c.jpg" width="800" height="532" alt="DSC_0329"></a>
+<a href="https://farm4.staticflickr.com/3900/14638010733_3d1c2dd648_h.jpg" class="image-popup" title="DSC_0329 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3900/14638010733_3d1c2dd648_h.jpg" width="1600" height="1064" alt="DSC_0329"></a>
 
 **Day 2 on the track:**
 
@@ -187,24 +181,23 @@ Definitely recommend this track in the off-season.
 &nbsp;&nbsp;&nbsp; ***from***: Bark Bay  
 &nbsp;&nbsp;&nbsp; ***to***: Awaroa
  
-<a href="https://www.flickr.com/photos/123438060@N05/14638057503" title="DSC_0370 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5592/14638057503_baaf51bc3a_c.jpg" width="800" height="532" alt="DSC_0370"></a>
+<a href="https://farm4.staticflickr.com/3842/14527683307_d6b9acc522_h.jpg" class="image-popup" title="DSC_0370_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3842/14527683307_d6b9acc522_h.jpg" width="1600" height="1064" alt="DSC_0370_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14431561088" title="DSC_0426 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5566/14431561088_77e882953c_c.jpg" width="800" height="532" alt="DSC_0426"></a>
+<a href="https://farm6.staticflickr.com/5566/14431561088_90d9a74cb7_h.jpg" class="image-popup" title="DSC_0426 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5566/14431561088_90d9a74cb7_h.jpg" width="1600" height="1064" alt="DSC_0426"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14616384591" title="DSC_0452 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2925/14616384591_16a7e8970e_c.jpg" width="800" height="532" alt="DSC_0452"></a>
+<a href="https://farm3.staticflickr.com/2925/14616384591_9dff2439f4_h.jpg" class="image-popup" title="DSC_0452 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2925/14616384591_9dff2439f4_h.jpg" width="1600" height="1064" alt="DSC_0452"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433004798" title="DSC_0477 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14433004798_1829ebc9e7_c.jpg" width="800" height="532" alt="DSC_0477"></a>
+<a href="https://farm3.staticflickr.com/2917/14433004798_01a88c4ee8_h.jpg" class="image-popup" title="DSC_0477 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14433004798_01a88c4ee8_h.jpg" width="1600" height="1064" alt="DSC_0477"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14619612475" title="DSC_0475 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3877/14619612475_e5f177d374_c.jpg" width="800" height="532" alt="DSC_0475"></a>
+<a href="https://farm4.staticflickr.com/3877/14619612475_8420111dd5_h.jpg" class="image-popup" title="DSC_0475 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3877/14619612475_8420111dd5_h.jpg" width="1600" height="1064" alt="DSC_0475"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14596592936" title="DSC_0459 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2903/14596592936_67fa7b0c75_c.jpg" width="800" height="532" alt="DSC_0459"></a>
+<a href="https://farm3.staticflickr.com/2903/14596592936_3be1147cfe_h.jpg" class="image-popup" title="DSC_0459 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2903/14596592936_3be1147cfe_h.jpg" width="1600" height="1064" alt="DSC_0459"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14619068422" title="driftwood"><img src="https://farm6.staticflickr.com/5540/14619068422_e90859aa72_c.jpg" width="800" height="532" alt="DSC_0445"></a>
+<a href="https://farm6.staticflickr.com/5540/14619068422_74706a11c6_h.jpg" class="image-popup" title="DSC_0445 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5540/14619068422_74706a11c6_h.jpg" width="1600" height="1064" alt="DSC_0445"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14431551308" title="sunrise on rocks"><img src="https://farm3.staticflickr.com/2912/14431551308_b1d4f16191_c.jpg" width="800" height="532" alt="DSC_0417"></a>
+<a href="https://farm3.staticflickr.com/2912/14431551308_5c857a04c6_h.jpg" class="image-popup" title="DSC_0417 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2912/14431551308_5c857a04c6_h.jpg" width="1600" height="1064" alt="DSC_0417"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14595173946" title="track"><img src="https://farm6.staticflickr.com/5532/14595173946_86c34f7974_c.jpg" width="800" height="532" alt="DSC_0435"></a>
-
+<a href="https://farm6.staticflickr.com/5532/14595173946_9adfaffef5_h.jpg" class="image-popup" title="DSC_0435 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5532/14595173946_9adfaffef5_h.jpg" width="1600" height="1064" alt="DSC_0435"></a>
 
 ## Day 8: Abel Tasman - Westport  
 
@@ -223,36 +216,33 @@ At 5am and a little below freezing with ski jacket on top and bare feet on botto
 Promptly after we found the trailhead, we fired up the camping stove and warmed up to some hot cocoa, outmeal and of course, Tim Tams. 
 
  <figure class="half">
-    <a href="https://www.flickr.com/photos/123438060@N05/14431470130" title="DSC_0381 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3875/14431470130_f3cff27bb0_c.jpg" width="800" height="532" alt="DSC_0381"></a>
-	<a href="https://www.flickr.com/photos/123438060@N05/14431557118" title="DSC_0423 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14431557118_a13b58d10f_c.jpg" width="800" height="532" alt="DSC_0423"></a>
+<a href="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" class="image-popup" title="DSC_0381 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" width="1600" height="1064" alt="DSC_0381"></a>
+	<a href="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" class="image-popup" title="DSC_0423 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" width="1600" height="1064" alt="DSC_0423"></a>
 	<figcaption>night (low tide) & day (high tide)</figcaption>
 </figure>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433233887" title="Awaroa hut"><img src="https://farm4.staticflickr.com/3903/14433233887_d16b1b38bc_c.jpg" width="800" height="532" alt="DSC_0483"></a>
-<figcaption>Awaroa hut</figcaption>
+<a href="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" class="image-popup" title="DSC_0483 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" width="1600" height="1064" alt="DSC_0483"></a><figcaption>Awaroa hut</figcaption>
 
 Driving south without any plans for the night.  We ended up in the old mining town of Westport.  Feels a bit like West Virginia.
 
-<a href="https://www.flickr.com/photos/123438060@N05/14432982310" title="kiwis"><img src="https://farm4.staticflickr.com/3925/14432982310_f370f31006_c.jpg" width="800" height="532" alt="DSC_0487"></a>
-<figcaption>$2 for 20 kiwis!</figcaption>
+<a href="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" class="image-popup" title="DSC_0487 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" width="1600" height="1064" alt="DSC_0487"></a><figcaption>$2 for 20 kiwis!</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14619638275" title="rest stop"><img src="https://farm3.staticflickr.com/2923/14619638275_8f369af80e_c.jpg" width="800" height="532" alt="DSC_0491"></a>
-<figcaption>rest stop near Motueka</figcaption>
+<a href="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" class="image-popup" title="DSC_0491_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" width="1600" height="1064" alt="DSC_0491_enhanced"></a><figcaption>rest stop near Motueka</figcaption>
 
 ## Day 9: Westport - Franz Joseph  
 
 We spent the morning checking out the pancake rocks at Punakaiki.  
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433030220" title="DSC_0517 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2909/14433030220_a4806fb097_c.jpg" width="800" height="532" alt="DSC_0517"></a>
+<a href="https://farm3.staticflickr.com/2909/14433030220_2f6288ea57_h.jpg" class="image-popup" title="DSC_0517 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2909/14433030220_2f6288ea57_h.jpg" width="1600" height="1064" alt="DSC_0517"></a>
 <figcaption>Punakaiki</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433341997" title="DSC_0543 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5508/14433341997_1e00eafbcb_c.jpg" width="800" height="532" alt="DSC_0543"></a>
+<a href="https://farm6.staticflickr.com/5571/14711065981_2e01f4d94b_h.jpg" class="image-popup" title="DSC_0543_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5571/14711065981_2e01f4d94b_h.jpg" width="1600" height="1064" alt="DSC_0543_enhanced"></a>
 <figcaption>Punakaiki</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433100600" title="DSC_0557 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3854/14433100600_7232a56811_c.jpg" width="800" height="532" alt="DSC_0557"></a>
+<a href="https://farm4.staticflickr.com/3854/14433100600_a697c038fd_h.jpg" class="image-popup" title="DSC_0557 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3854/14433100600_a697c038fd_h.jpg" width="1600" height="1064" alt="DSC_0557"></a>
 <figcaption>Punakaiki</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433158868" title="DSC_0564 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2906/14433158868_8a75cec751_c.jpg" width="800" height="532" alt="DSC_0564"></a>
+<a href="https://farm4.staticflickr.com/3837/14711872634_b9ed6e27ef_h.jpg" class="image-popup" title="DSC_0564_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3837/14711872634_b9ed6e27ef_h.jpg" width="1600" height="1064" alt="DSC_0564_enhanced"></a>
 <figcaption>Punakaiki</figcaption>  
 
 
@@ -260,10 +250,10 @@ We ate lunch and checked out some thrift store at Hokitika.
 We also picked up some random CDs including some noise orchestra band, John Coltrane 
 and a flamenco guitarist for a grand total of $1 to supplement the podcasts and spice up the ride for the long South Island drives ahead. 
 
-<a href="https://www.flickr.com/photos/123438060@N05/14619254162" title="DSC_0565 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5498/14619254162_d6e1c68be2_c.jpg" width="800" height="532" alt="DSC_0565"></a>
+<a href="https://farm6.staticflickr.com/5498/14619254162_587f88dfb9_h.jpg" class="image-popup" title="DSC_0565 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5498/14619254162_587f88dfb9_h.jpg" width="1600" height="1064" alt="DSC_0565"></a>
 <figcaption>Hari Hari park</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14619258992" title="DSC_0567 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14619258992_125c293161_c.jpg" width="800" height="532" alt="DSC_0567"></a>
+<a href="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" class="image-popup" title="DSC_0567 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" width="1600" height="1064" alt="DSC_0567"></a>
 <figcaption>Franz Josef Hostel</figcaption>
 
 One of the best meals we had was here at [Alice May](http://www.tripadvisor.com/Restaurant_Review-g609170-d1531751-Reviews-Alice_May-Franz_Josef_Westland_National_Park_Te_Wahipounamu_West_Coast_Region_Sou.html) - 3 course winter special dinner for $30 NZD!
@@ -277,76 +267,72 @@ Heli trips for the previous 3 days were cancelled due to weather.
 ## Day 11: Franz Joseph - Wanaka  
 
  <figure class="half">
-  <a href="https://www.flickr.com/photos/123438060@N05/14619283342" title="DSC_0584 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5482/14619283342_7cbfc1d71e_c.jpg" width="800" height="532" alt="DSC_0584"></a>
-  <a href="https://www.flickr.com/photos/123438060@N05/14433202389" title="DSC_0582 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3857/14433202389_bfe80ced1e_c.jpg" width="800" height="532" alt="DSC_0582"></a>
+<a href="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" class="image-popup" title="DSC_0584 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" width="1600" height="1064" alt="DSC_0584"></a>
+<a href="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" class="image-popup" title="DSC_0582 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" width="1600" height="1064" alt="DSC_0582"></a>
   <figcaption>Biking Lake Wanaka</figcaption>
 </figure>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14617715274" title="DSC_0580 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3868/14617715274_5cc3b994ef_c.jpg" width="800" height="532" alt="DSC_0580"></a>
+<a href="https://farm4.staticflickr.com/3868/14617715274_9002b29a2b_h.jpg" class="image-popup" title="DSC_0580 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3868/14617715274_9002b29a2b_h.jpg" width="1600" height="1064" alt="DSC_0580"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14617710264" title="DSC_0577 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3910/14617710264_1fa24d9947_c.jpg" width="800" height="532" alt="DSC_0577"></a>
+<a href="https://farm4.staticflickr.com/3910/14617710264_fd03e535a0_h.jpg" class="image-popup" title="DSC_0577 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3910/14617710264_fd03e535a0_h.jpg" width="1600" height="1064" alt="DSC_0577"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433200988" title="DSC_0588 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3899/14433200988_68f73c1fc9_c.jpg" width="800" height="532" alt="DSC_0588"></a>
+<a href="https://farm4.staticflickr.com/3899/14433200988_c54ef08d7b_h.jpg" class="image-popup" title="DSC_0588 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3899/14433200988_c54ef08d7b_h.jpg" width="1600" height="1064" alt="DSC_0588"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433434947" title="DSC_0596 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5581/14433434947_44d7f1543a_c.jpg" width="800" height="532" alt="DSC_0596"></a>
+<a href="https://farm4.staticflickr.com/3874/14433181240_41666f5261_h.jpg" class="image-popup" class="image-popup" title="DSC_0600 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3874/14433181240_41666f5261_h.jpg" width="1600" height="1064" alt="DSC_0600"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433181240" title="DSC_0600 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3874/14433181240_d817ea2f34_c.jpg" width="800" height="532" alt="DSC_0600"></a>
-
-<a href="https://www.flickr.com/photos/123438060@N05/14433184220" title="DSC_0601 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3884/14433184220_6f06d75a6c_c.jpg" width="800" height="532" alt="DSC_0601"></a>
-
+<a href="https://farm4.staticflickr.com/3884/14433184220_4b3d56badc_h.jpg" class="image-popup" title="DSC_0601 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3884/14433184220_4b3d56badc_h.jpg" width="1600" height="1064" alt="DSC_0601"></a>
 
 ## Day 12: Wanaka - Milford Sound  
 
 It's a long drive from Queenstown to Milford Sound.  An even longer drive from Wanaka.  An even longer drive if you don't have snow chains 
 (or don't think you do until you realize you're forced to carry them to get to Milford Sound, check the back of the car and discover that you had them along). 
 
-<a href="https://www.flickr.com/photos/123438060@N05/14639848813" title="DSC_0643 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3855/14639848813_da7dcb82d3_c.jpg" width="800" height="532" alt="DSC_0643"></a>
+<a href="https://farm4.staticflickr.com/3855/14639848813_7d9a3b201c_h.jpg" class="image-popup" title="DSC_0643 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3855/14639848813_7d9a3b201c_h.jpg" width="1600" height="1064" alt="DSC_0643"></a>
 <figcaption>Homer Tunnel</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14617849434" title="DSC_0652 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3839/14617849434_db56e0ac98_c.jpg" width="800" height="532" alt="DSC_0652"></a>
+<a href="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" title="DSC_0652 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" width="1600" height="1064" alt="DSC_0652"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433286580" title="DSC_0657 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3909/14433286580_930d0ddc56_c.jpg" width="800" height="532" alt="DSC_0657"></a>
+<a href="https://farm4.staticflickr.com/3909/14433286580_f8c5705d21_h.jpg" class="image-popup" title="DSC_0657 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3909/14433286580_f8c5705d21_h.jpg" width="1600" height="1064" alt="DSC_0657"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14596945226" title="DSC_0661 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2906/14596945226_47a67d884e_c.jpg" width="800" height="532" alt="DSC_0661"></a>
+<a href="https://farm6.staticflickr.com/5594/14527700809_44ccfbd49f_h.jpg" class="image-popup" title="DSC_0661_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5594/14527700809_44ccfbd49f_h.jpg" width="1600" height="1064" alt="DSC_0661_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433386520" title="DSC_0701 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2921/14433386520_2f235a99a2_c.jpg" width="800" height="532" alt="DSC_0701"></a>
+<a href="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" class="image-popup" title="DSC_0701_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" width="1600" height="1064" alt="DSC_0701_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14640080583" title="DSC_0749 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2937/14640080583_208419586c_c.jpg" width="800" height="532" alt="DSC_0749"></a>
+<a href="https://farm4.staticflickr.com/3844/14734245433_1297f9fcfe_h.jpg" class="image-popup" title="DSC_0749_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3844/14734245433_1297f9fcfe_h.jpg" width="1600" height="1064" alt="DSC_0749_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14664957646" title="DSC_0781 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2907/14664957646_cfaa4fce5a_c.jpg" width="800" height="716" alt="DSC_0781"></a>
+<a href="https://farm3.staticflickr.com/2907/14664957646_9f59dd592f_h.jpg" class="image-popup" title="DSC_0781 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2907/14664957646_9f59dd592f_h.jpg" width="1600" height="1431" alt="DSC_0781"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14433638390" title="DSC_0815 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3858/14433638390_60f9b182f6_c.jpg" width="800" height="532" alt="DSC_0815"></a>
+<a href="https://farm4.staticflickr.com/3858/14433638390_be5ea60ed5_h.jpg" class="image-popup" title="DSC_0815 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3858/14433638390_be5ea60ed5_h.jpg" width="1600" height="1064" alt="DSC_0815"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14624897835" title="DSC_0862 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3849/14624897835_72f5473ca2_c.jpg" width="800" height="532" alt="DSC_0862"></a>
+<a href="https://farm4.staticflickr.com/3849/14624897835_6439ceb86d_h.jpg" class="image-popup" title="DSC_0862 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3849/14624897835_6439ceb86d_h.jpg" width="1600" height="1064" alt="DSC_0862"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438461267" title="DSC_0875 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3877/14438461267_1f0962db90_c.jpg" width="800" height="532" alt="DSC_0875"></a>
-
+<a href="https://farm4.staticflickr.com/3877/14438461267_955cfaab54_h.jpg" class="image-popup" title="DSC_0875 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3877/14438461267_955cfaab54_h.jpg" width="1600" height="1064" alt="DSC_0875"></a>
 
 ## Day 13: Milford Sound - Queenstown 
  
 We got word the Dept of Conversation was closing the Milford Sound road at 9am, so we booked it early.  We stopped for a sunrise hike at Key Summit 
 (beginning of the Routeburn track).
  
-<a href="https://www.flickr.com/photos/123438060@N05/14624406122" title="DSC_0882 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3873/14624406122_e2f7d5e868_c.jpg" width="800" height="532" alt="DSC_0882"></a>
+<a href="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" class="image-popup" title="DSC_0888 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" width="1600" height="1064" alt="DSC_0888"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438498897" title="DSC_0888 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14438498897_f95297f398_c.jpg" width="800" height="532" alt="DSC_0888"></a>
+<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="DSC_0899_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" width="1600" height="1064" alt="DSC_0899_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438284418" title="DSC_0899 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5559/14438284418_3a22e6c201_c.jpg" width="800" height="532" alt="DSC_0899"></a>
+<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="DSC_0904_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5567/14712044634_baba742334_h.jpg" width="1600" height="1064" alt="DSC_0904_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438292829" title="DSC_0904 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5488/14438292829_2c2b197af3_c.jpg" width="800" height="532" alt="DSC_0904"></a>
+<a href="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" class="image-popup" title="DSC_0910 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" width="1600" height="1064" alt="DSC_0910"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14624399942" title="DSC_0910 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5508/14624399942_5b40447033_c.jpg" width="800" height="532" alt="DSC_0910"></a>
-
-<a href="https://www.flickr.com/photos/123438060@N05/14438491427" title="DSC_0920 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5577/14438491427_e06a1cd333_c.jpg" width="800" height="532" alt="DSC_0920"></a>
+<figure>
+<a href="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" class="image-popup" title="DSC_0920 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" width="1600" height="1064" alt="DSC_0920"></a>
 <figcaption>just 1000 feet lower</figcaption>
+</figure>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14621637561" title="DSC_0927 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5516/14621637561_1c8ea0c902_c.jpg" width="800" height="532" alt="DSC_0927"></a>
+<a href="https://farm4.staticflickr.com/3837/14527799149_c6a9b2e7d0_h.jpg" class="image-popup" title="DSC_0927_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3837/14527799149_c6a9b2e7d0_h.jpg" width="1600" height="1064" alt="DSC_0927_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14624395352" title="DSC_0928 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2933/14624395352_24823c8abf_c.jpg" width="800" height="532" alt="DSC_0928"></a>
+<a href="https://farm3.staticflickr.com/2933/14624395352_1148e10182_h.jpg" class="image-popup" title="DSC_0928 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2933/14624395352_1148e10182_h.jpg" width="1600" height="1064" alt="DSC_0928"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14621665471" title="DSC_0929 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3858/14621665471_af2ea89af8_c.jpg" width="800" height="532" alt="DSC_0929"></a>
+<a href="https://farm4.staticflickr.com/3858/14621665471_97789a05a6_h.jpg" class="image-popup" title="DSC_0929 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3858/14621665471_97789a05a6_h.jpg" width="1600" height="1064" alt="DSC_0929"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14644812953" title="DSC_0931 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3871/14644812953_c7ef81e9b9_c.jpg" width="800" height="532" alt="DSC_0931"></a>
+<a href="https://farm4.staticflickr.com/3871/14644812953_77127d6451_h.jpg" class="image-popup" title="DSC_0931 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3871/14644812953_77127d6451_h.jpg" width="1600" height="1064" alt="DSC_0931"></a>
 <figcaption>pit stop</figcaption>
 
 ## Day 14: Queenstown  
@@ -354,9 +340,8 @@ We got word the Dept of Conversation was closing the Milford Sound road at 9am, 
 We got full-day mountain bike rentals and headed out to Wilson's Bay for some lakeside cliff hilly tracks.
 
  <figure class="half">
-  <a href="https://www.flickr.com/photos/123438060@N05/14601872876" title="DSC_0941 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3853/14601872876_5189fc10ce_c.jpg" width="800" height="532" alt="DSC_0941"></a>
-  <a href="https://www.flickr.com/photos/123438060@N05/14624877705" title="DSC_0935 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5518/14624877705_df146be110_c.jpg" width="800" height="532" alt="DSC_0935"></a>
-  <figcaption>Biking Seven Mile Track in Wilson Bay</figcaption>
+<a href="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" class="image-popup" title="DSC_0941 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3853/14601872876_9c9ecb9a76_h.jpg" width="1600" height="1064" alt="DSC_0941"></a>
+<a href="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" class="image-popup" title="DSC_0935 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5518/14624877705_99cb7807e9_h.jpg" width="1600" height="1064" alt="DSC_0935"></a>  <figcaption>Biking Seven Mile Track in Wilson Bay</figcaption>
 </figure>
 
 Then we packed up and headed to Glenorchy for lunch (where [Top of the Lake](http://www.imdb.com/title/tt2103085/) was filmed and set).
@@ -365,9 +350,9 @@ Check it out - one of my current favorites.
 We drove as far as we could to Paradise (town of 3 houses named after paradise ducks) on a dirt road until it became too hairy for 4 wheels.
 So we biked the rest of the way through some streams and past some lots of cows.  Also where Lord of the Rings locations Lothlorien, Amon Hen, Orthanc and Isengard were filmed.
 
-<a href="https://www.flickr.com/photos/123438060@N05/14644800023" title="DSC_0962 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3844/14644800023_8926cf9323_c.jpg" width="800" height="532" alt="DSC_0962"></a>
+<a href="https://farm6.staticflickr.com/5568/14527817729_bed000a424_h.jpg" class="image-popup" title="DSC_0962_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5568/14527817729_bed000a424_h.jpg" width="1600" height="1064" alt="DSC_0962_enhanced"></a>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14601862696" title="DSC_0969 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14601862696_ebdb9b0495_c.jpg" width="800" height="532" alt="DSC_0969"></a>
+<a href="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" class="image-popup" title="DSC_0969 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14601862696_a7900ffd9e_h.jpg" width="1600" height="1064" alt="DSC_0969"></a>
 <figcaption>driving to Glenorchy</figcaption>
 
 
@@ -386,13 +371,13 @@ So we biked the rest of the way through some streams and past some lots of cows.
 Daytrip to Piha.  Climbing Lion's Rock and checking out the surfers.  Saw a few changing from wetsuits to business suits which gives me hope 
 that one day I can take up surfing while still maintaining a job of some sort.
 
-<a href="https://www.flickr.com/photos/123438060@N05/14624370822" title="DSC_0984 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2915/14624370822_c7b3aec610_c.jpg" width="800" height="532" alt="DSC_0984"></a>
+<a href="https://farm3.staticflickr.com/2915/14624370822_45a6840e14_h.jpg" class="image-popup" title="DSC_0984 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2915/14624370822_45a6840e14_h.jpg" width="1600" height="1064" alt="DSC_0984"></a>
 <figcaption>Piha</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438463677" title="DSC_0994 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2916/14438463677_5e61e444c4_c.jpg" width="800" height="532" alt="DSC_0994"></a>
+<a href="https://farm3.staticflickr.com/2916/14438463677_a2d1efc7c1_h.jpg" class="image-popup" title="DSC_0994 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2916/14438463677_a2d1efc7c1_h.jpg" width="1600" height="1064" alt="DSC_0994"></a>
 <figcaption>Piha</figcaption>
 
-<a href="https://www.flickr.com/photos/123438060@N05/14438252418" title="DSC_0986 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3866/14438252418_607572f9ac_c.jpg" width="800" height="532" alt="DSC_0986"></a>
+<a href="https://farm4.staticflickr.com/3859/14711326371_1214ee33c0_h.jpg" class="image-popup" title="DSC_0986_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3859/14711326371_1214ee33c0_h.jpg" width="1600" height="1064" alt="DSC_0986_enhanced"></a>
 <figcaption>Piha</figcaption>
 
 <figure>
