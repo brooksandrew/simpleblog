@@ -221,13 +221,16 @@ Promptly after we found the trailhead, we fired up the camping stove and warmed 
 	<figcaption>night (low tide) & day (high tide)</figcaption>
 </figure>
 
-<a href="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" class="image-popup" title="DSC_0483 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" width="1600" height="1064" alt="DSC_0483"></a><figcaption>Awaroa hut</figcaption>
+<a href="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" class="image-popup" title="DSC_0483 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" width="1600" height="1064" alt="DSC_0483"></a>
+<figcaption>Awaroa hut</figcaption>
 
 Driving south without any plans for the night.  We ended up in the old mining town of Westport.  Feels a bit like West Virginia.
 
-<a href="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" class="image-popup" title="DSC_0487 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" width="1600" height="1064" alt="DSC_0487"></a><figcaption>$2 for 20 kiwis!</figcaption>
+<a href="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" class="image-popup" title="DSC_0487 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14432982310_d5f8db2a7a_h.jpg" width="1600" height="1064" alt="DSC_0487"></a>
+<figcaption>$2 for 20 kiwis!</figcaption>
 
-<a href="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" class="image-popup" title="DSC_0491_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" width="1600" height="1064" alt="DSC_0491_enhanced"></a><figcaption>rest stop near Motueka</figcaption>
+<a href="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" class="image-popup" title="DSC_0491_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5552/14734079763_122195ea58_h.jpg" width="1600" height="1064" alt="DSC_0491_enhanced"></a>
+<figcaption>rest stop near Motueka</figcaption>
 
 ## Day 9: Westport - Franz Joseph  
 
@@ -356,8 +359,10 @@ So we biked the rest of the way through some streams and past some lots of cows.
 <a href="{{ site.url }}/images/queenstown_hostel.JPG" class="image-popup"><img src="{{ site.url }}/images/queenstown_hostel.JPG"></a>
 <figcaption>Queenstown hostel</figcaption>
 
-<a href="{{ site.url }}/images/queenstown_airport.JPG" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.JPG"></a>
-<figcaption>Queenstown airport</figcaption>
+
+	<a href="{{ site.url }}/images/queenstown_airport.JPG" class="image-popup"><img src="{{ site.url }}/images/queenstown_airport.JPG"></a>
+	<figcaption>Queenstown airport</figcaption>
+
 
 ## Day 15: Queenstown - Auckland
 
