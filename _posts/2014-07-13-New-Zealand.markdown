@@ -373,10 +373,6 @@ that one day I can take up surfing while still maintaining a job of some sort.
 <a href="https://farm4.staticflickr.com/3859/14711326371_1214ee33c0_h.jpg" class="image-popup" title="DSC_0986_enhanced by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3859/14711326371_1214ee33c0_h.jpg" width="1600" height="1064" alt="DSC_0986_enhanced"></a>
 <figcaption>Piha</figcaption>
 
-<figure>
-	<a href="{{ site.url }}/images/NZ_centralbank.JPG" class="image-popup"><img src="{{ site.url }}/images/NZ_centralbank.JPG"></a>
-	<figcaption>New Zealand Central Bank first floor up for rent</figcaption>
-</figure>
 
 
 
