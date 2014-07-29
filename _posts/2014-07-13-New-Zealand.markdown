@@ -216,13 +216,13 @@ Among other things this meant that they're a couple thigh deep 50 meter wide riv
 At 5am and a little below freezing with ski jacket on top and bare feet on bottom, we made our way to other side of the estuary. 
 Promptly after we found the trailhead, we fired up the camping stove and warmed up to some hot cocoa, outmeal and of course, Tim Tams. 
 
- <figure class="half">
-<a href="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" class="image-popup" title="DSC_0381 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" width="1600" height="1064" alt="DSC_0381"></a>
-	<a href="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" class="image-popup" title="DSC_0423 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" width="1600" height="1064" alt="DSC_0423"></a>
+<figure class="half">
+	<a href="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" class="image-popup" title="Day 3 tramping (hiking) Abel Tasman Track"><img src="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" width="1600" height="1064" alt="DSC_0381"></a>
+	<a href="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" class="image-popup" title="Day 3 tramping (hiking) Abel Tasman Track"><img src="https://farm3.staticflickr.com/2932/14431557118_20029d9122_h.jpg" width="1600" height="1064" alt="DSC_0423"></a>
 	<figcaption>night (low tide) & day (high tide)</figcaption>
 </figure>
 
-<a href="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" class="image-popup" title="DSC_0483 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" width="1600" height="1064" alt="DSC_0483"></a>
+<a href="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" class="image-popup" title="Awaroa hut"><img src="https://farm4.staticflickr.com/3903/14433233887_54e569f2d3_h.jpg" width="1600" height="1064" alt="DSC_0483"></a>
 <figcaption>Awaroa hut</figcaption>
 
 Driving south without any plans for the night.  We ended up in the old mining town of Westport.  Feels a bit like West Virginia.
@@ -256,7 +256,7 @@ and a flamenco guitarist for a grand total of $1 to supplement the podcasts and 
 <a href="https://farm6.staticflickr.com/5498/14619254162_587f88dfb9_h.jpg" class="image-popup" title="Park art in just about the middle of nowhere (Hari Hari)"><img src="https://farm6.staticflickr.com/5498/14619254162_587f88dfb9_h.jpg" width="1600" height="1064" alt="DSC_0565"></a>
 <figcaption>Park art in just about the middle of nowhere (Hari Hari)</figcaption>
 
-<a href="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" class="image-popup" title="DSC_0567 by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" width="1600" height="1064" alt="DSC_0567"></a>
+<a href="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" class="image-popup" title="Franz Josef Hostel"><img src="https://farm3.staticflickr.com/2917/14619258992_3500f885a1_h.jpg" width="1600" height="1064" alt="DSC_0567"></a>
 <figcaption>Franz Josef Hostel</figcaption>
 
 One of the best meals we had was here at [Alice May](http://www.tripadvisor.com/Restaurant_Review-g609170-d1531751-Reviews-Alice_May-Franz_Josef_Westland_National_Park_Te_Wahipounamu_West_Coast_Region_Sou.html) - 3 course winter special dinner for $30 NZD!
@@ -270,9 +270,9 @@ Heli trips for the previous 3 days were cancelled due to weather.
 ## Day 11: Franz Joseph - Wanaka  
 
  <figure class="half">
-<a href="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" class="image-popup" title="DSC_0584 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" width="1600" height="1064" alt="DSC_0584"></a>
-<a href="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" class="image-popup" title="DSC_0582 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" width="1600" height="1064" alt="DSC_0582"></a>
-  <figcaption>Biking Lake Wanaka</figcaption>
+<a href="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" class="image-popup" title="Mountain biking Lake Wanaka"><img src="https://farm6.staticflickr.com/5482/14619283342_e4796db85e_h.jpg" width="1600" height="1064" alt="DSC_0584"></a>
+<a href="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" class="image-popup" title="Mountain biking Lake Wanaka"><img src="https://farm4.staticflickr.com/3857/14433202389_a34ecc19ac_h.jpg" width="1600" height="1064" alt="DSC_0582"></a>
+  <figcaption>Mountain biking Lake Wanaka</figcaption>
 </figure>
 
 <a href="https://farm4.staticflickr.com/3899/14433200988_c54ef08d7b_h.jpg" class="image-popup" title="Lake Wanaka"><img src="https://farm4.staticflickr.com/3899/14433200988_c54ef08d7b_h.jpg" width="1600" height="1064" alt="DSC_0588"></a>
@@ -292,11 +292,11 @@ It's a long drive from Queenstown to Milford Sound.  An even longer drive from W
 
 <figure class="half">
 	<a href="https://farm4.staticflickr.com/3855/14639848813_7d9a3b201c_h.jpg" class="image-popup" title="Homer Tunnel"><img src="https://farm4.staticflickr.com/3855/14639848813_7d9a3b201c_h.jpg" width="1600" height="1064" alt="DSC_0643"></a>
-	<a href="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" title="DSC_0652 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" width="1600" height="1064" alt="DSC_0652"></a>
+	<a href="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" title="Driving to Milford Sound"><img src="https://farm4.staticflickr.com/3839/14617849434_015a89f378_h.jpg" width="1600" height="1064" alt="DSC_0652"></a>
 	<figcaption>Driving to Milford</figcaption>
 </figure>
 
-<a href="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" class="image-popup" title="DSC_0701_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" width="1600" height="1064" alt="DSC_0701_enhanced"></a>
+<a href="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" class="image-popup" title="Milford Sound"><img src="https://farm3.staticflickr.com/2911/14714080592_097b05af8c_h.jpg" width="1600" height="1064" alt="DSC_0701_enhanced"></a>
 
 <figure class="half">
 	<a href="https://farm4.staticflickr.com/3909/14433286580_f8c5705d21_h.jpg" class="image-popup" title="Milford Sound"><img src="https://farm4.staticflickr.com/3909/14433286580_f8c5705d21_h.jpg" width="1600" height="1064" alt="DSC_0657"></a>
@@ -318,13 +318,13 @@ It's a long drive from Queenstown to Milford Sound.  An even longer drive from W
 We got word the Dept of Conversation was closing the Milford Sound road at 9am, so we booked it early.  We stopped for a sunrise hike at Key Summit 
 (beginning of the Routeburn track).
 
-<a href="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" class="image-popup" title="DSC_0888 by Andrew Brooks, on Flickr"><img src="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" width="1600" height="1064" alt="DSC_0888"></a>
+<a href="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" class="image-popup" title="Key Summit"><img src="https://farm4.staticflickr.com/3925/14438498897_1ab69a24db_h.jpg" width="1600" height="1064" alt="DSC_0888"></a>
 
  <figure class="half">
-	<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="DSC_0899_enhanced by Andrew Brooks, on Flickr"><img src="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" width="1600" height="1064" alt="DSC_0899_enhanced"></a>
-	<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="DSC_0904_enhanced by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5567/14712044634_baba742334_h.jpg" width="1600" height="1064" alt="DSC_0904_enhanced"></a>
-	<a href="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" class="image-popup" title="DSC_0910 by Andrew Brooks, on Flickr"><img src="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" width="1600" height="1064" alt="DSC_0910"></a>
-	<a href="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" class="image-popup" title="just 1000 feet lower"><img src="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" width="1600" height="1064" alt="DSC_0920"></a>
+	<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="Key Summit"><img src="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" width="1600" height="1064" alt="DSC_0899_enhanced"></a>
+	<a href="https://farm3.staticflickr.com/2917/14691426866_609111883b_h.jpg" class="image-popup" title="Key Summit"><img src="https://farm6.staticflickr.com/5567/14712044634_baba742334_h.jpg" width="1600" height="1064" alt="DSC_0904_enhanced"></a>
+	<a href="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" class="image-popup" title="Key Summit"><img src="https://farm6.staticflickr.com/5508/14624399942_eb5479e212_h.jpg" width="1600" height="1064" alt="DSC_0910"></a>
+	<a href="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" class="image-popup" title="Key Summit - just 1000 feet lower"><img src="https://farm6.staticflickr.com/5577/14438491427_eef6e560e7_h.jpg" width="1600" height="1064" alt="DSC_0920"></a>
 	<figcaption>Key Summit hike</figcaption>
 </figure>
 
