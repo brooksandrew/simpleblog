@@ -11,8 +11,6 @@ tags: [travel, new zealand]
 	<img src="{{ site.url }}/images/newzealand_maproute.png">
 </figure>
 
-# New Zealand Days 1 - 5: North Island
-
 ## Day 1: DC - Auckland
 
 We arrived in Auckland at 8am Sunday morning from DC via LAX (interesting).  Even the airport in LA feels like urban sprawl... 
