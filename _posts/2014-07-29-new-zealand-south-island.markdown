@@ -82,7 +82,7 @@ We chose sand, which meant we were up at 4:30am trekking across the tidal crossi
 Among other things this meant that they're a couple thigh deep 50 meter wide rivers to cross... even at low tide. 
 
 At 5am and a little below freezing with ski jacket on top and bare feet on bottom, we made our way to other side of the estuary. 
-Promptly after we found the trailhead, we fired up the camping stove and warmed up to some hot cocoa, outmeal and of course, Tim Tams. 
+Promptly after we found the trailhead, we fired up the camping stove and warmed up to some hot cocoa, oatmeal and of course, Tim Tams. 
 
 <figure class="half">
 	<a href="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" class="image-popup" title="Day 3 tramping (hiking) Abel Tasman Track"><img src="https://farm4.staticflickr.com/3875/14431470130_1e7bdc2dc0_h.jpg" width="1600" height="1064" alt="DSC_0381"></a>
