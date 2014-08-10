@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "how I got here"
+title:  "How I got here"
 date:   2014-06-06 23:41:23
 categories: jekyll
 ---
