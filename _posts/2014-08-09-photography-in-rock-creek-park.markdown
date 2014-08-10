@@ -3,11 +3,11 @@ layout: post
 title:   "Owl in Rock Creek Park"
 date:   2014-08-10
 categories: 
-tags: [Photography]
+tags: [photography]
 ---
 
 After attempting some low-light shots with the newly purchased DSLR camera, I quickly realized
-it was seemingly impossible to get any non-blurry photographs.  Any attempt at an exposure with 
+it was nearly impossible to get any non-blurry photographs.  Any attempt at an exposure with 
 shutter speed slower than 1/30 s just didn't work. I couldn't keep the camera steady enough
 with my hands--cycling through the hills of Rock Creek Park with a backpack filled with 
 gear and getting short of breath certainly didn't help.
