@@ -22,15 +22,21 @@ However, I did see this [Barred Owl](http://en.wikipedia.org/wiki/Barred_owl), w
 I chased around the park for a solid hour -- not incredibly hard to follow as they
 make a rather identifiable screeching sound.
 
-<figure>
-	<a href="https://farm4.staticflickr.com/3865/14846729186_c34a69367c_h.jpg" title="Barred Owl"><img src="https://farm4.staticflickr.com/3865/14846729186_c34a69367c_h.jpg" width="1600" height="1064"></a>
-	<figcaption>Barred Owl in Rock Creek Park</figcaption>
-</figure>
+<audio controls>
+	 <source src="http://www.stancourtney.com/sounds/birds/Barred%20Owl/2009.05.07_Barred_Owl_01.mp3" type="audio/wav">
+	<embed src="http://www.stancourtney.com/sounds/birds/Barred%20Owl/2009.05.07_Barred_Owl_01.mp3">
+</audio>
+Audio Credit: [stancourtney.com](http://stancourtney.com)
 
 <figure>
 	<a href="https://farm6.staticflickr.com/5592/14870238714_92fb191c7c_h.jpg" title="Barred Owl"><img src="https://farm6.staticflickr.com/5592/14870238714_92fb191c7c_h.jpg" width="1600" height="1161" alt="DSC_0079_zooom"></a>
-	<figcaption>Barred Owl in Rock Creek Park</figcaption>
 </figure>
+
+<figure>
+	<a href="https://farm4.staticflickr.com/3865/14846729186_c34a69367c_h.jpg" title="Barred Owl"><img src="https://farm4.staticflickr.com/3865/14846729186_c34a69367c_h.jpg" width="1600" height="1064"></a>
+	<figcaption>Barred Owl in Rock Creek Park - 200mm with 50-200mm lens (~4x zoom).</figcaption>
+</figure>
+
 
 
 
