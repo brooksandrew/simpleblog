@@ -29,7 +29,7 @@ make a rather identifiable screeching sound.
 
 <figure>
 	<a href="https://farm6.staticflickr.com/5592/14870238714_92fb191c7c_h.jpg" title="Barred Owl"><img src="https://farm6.staticflickr.com/5592/14870238714_92fb191c7c_h.jpg" width="1600" height="1161" alt="DSC_0079_zooom"></a>
-	<figcaption>Barred Owl</figcaption>
+	<figcaption>Barred Owl in Rock Creek Park</figcaption>
 </figure>
 
 
