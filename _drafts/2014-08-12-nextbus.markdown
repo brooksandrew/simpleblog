@@ -78,7 +78,7 @@ var buildhist = function(adata, cutoff){
     //taking just estimates where Minutes==cutoff
     var mydata = []
     for(i=0; i<10000; i++){
-        if (adata[i]["Minutes"]<cutoff) {
+        if (adata[i]["Minutes"]==cutoff) {
             mydata.push(adata[i]["est"])
         }
     }
@@ -93,11 +93,11 @@ var buildhist = function(adata, cutoff){
     console.log(dmin)
 
     var x = d3.scale.linear()
-        .domain([0,20])
+        .domain([0,dmax])
         .range([0, width]);
 
     var data = d3.layout.histogram()
-        .bins(x.ticks(20))(mydata);
+        .bins(x.ticks(100))(mydata);
     
     var y = d3.scale.linear()
         .domain([0, d3.max(data, function(d) { return d.y; })])
