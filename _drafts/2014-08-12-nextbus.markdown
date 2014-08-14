@@ -47,15 +47,15 @@ tags: [data science]
 <script>
 
 
+
 // var dataset = d3.csv("/assets/csv/cleanTrips.csv", function(d) {
 //     return {Minutes: +d.Minutes, est: +d.est} 
 // });
 
-var dataset 
+var dataset5
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset=d;
+    dataset5=d;
 })
-
 
 // Generate a Bates distribution of 10 random variables.
 var values = d3.range(1000).map(d3.random.bates(10));
@@ -71,10 +71,26 @@ var x = d3.scale.linear()
     .domain([0, 1])
     .range([0, width]);
 
-var buildhist = function(data, cutoff){
+
+
+
+var buildhist = function(adata, cutoff){
+
+    var dataset5
+        d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+        dataset5=d;
+    })
+
+    var mydata = []
+    for(i=0; i<10000; i++){
+        adata[i]["Minutes"] = +adata[i]["Minutes"] ;
+        mydata.push(adata[i]["Minutes"]/60);
+        console.log(mydata)
+
+    }
+
     var data = d3.layout.histogram()
-        .bins(x.ticks(20))(values.filter(function(d){return d>cutoff}));
-    
+        .bins(x.ticks(20))(mydata.filter(function(d){return d>cutoff}));
     
     var y = d3.scale.linear()
         .domain([0, d3.max(data, function(d) { return d.y; })])
@@ -115,6 +131,7 @@ var buildhist = function(data, cutoff){
 }
 
 
+
 /////////////////////////////////////////
 
 values3 = [0.1,.2,.3,.3,.5,.5,.6,.7,.8,.9,.9]
@@ -124,24 +141,28 @@ values3 = [0.1,.2,.3,.3,.5,.5,.6,.7,.8,.9,.9]
 //        values2 = dataset[j]["est"];
 //     }
 
-for(var j = 0; j < 5.length; j++)
-{
-    for(var anItem in dataset[j])
-    {
-        console.log(dataset[j][anItem])
-    }
-}
+// for(var j = 0; j < 5.length; j++)
+// {
+//     for(var anItem in dataset[j])
+//     {
+//         console.log(dataset[j][anItem])
+//     }
+// }
 
 
 
 
 // via http://www.d3noob.org/2014/04/using-html-inputs-with-d3js.html
+
 d3.select("#nMinutes").on("input", function() {
   d3.select("svg").remove();
-  buildhist(values, +this.value);
+  buildhist(dataset5, +this.value);
 });
 
 buildhist(values, .4)
+
+
+
 </script>
 
 </body>
