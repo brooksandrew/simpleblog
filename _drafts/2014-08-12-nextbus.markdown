@@ -35,7 +35,7 @@ tags: [data science]
          style="display: inline-block; width: 240px; text-align: right">
          Prediction in Minutes: <span id="nMinutes-value"></span>
   </label>
-  <input type="number" min="0" max="100" value="0.5" step="0.1" id="nMinutes">
+  <input type="number" min="0" max="100" value="1" step="1" id="nMinutes">
 </p>
 
 <br>
@@ -52,9 +52,9 @@ tags: [data science]
 //     return {Minutes: +d.Minutes, est: +d.est} 
 // });
 
-var dataset5
+var dataset2
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset5=d;
+    dataset2=d;
 })
 
 // Generate a Bates distribution of 10 random variables.
@@ -67,12 +67,6 @@ var margin = {top: 10, right: 30, bottom: 30, left: 30},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
-var x = d3.scale.linear()
-    .domain([0, 1])
-    .range([0, width]);
-
-
-
 
 var buildhist = function(adata, cutoff){
 
@@ -81,16 +75,29 @@ var buildhist = function(adata, cutoff){
         dataset5=d;
     })
 
+    //taking just estimates where Minutes==cutoff
     var mydata = []
     for(i=0; i<10000; i++){
-        adata[i]["Minutes"] = +adata[i]["Minutes"] ;
-        mydata.push(adata[i]["Minutes"]/60);
-        console.log(mydata)
-
+        if (adata[i]["Minutes"]<cutoff) {
+            mydata.push(adata[i]["est"])
+        }
     }
 
+    console.log(mydata)
+
+    //defining dynamic bounds for histogram
+    var dmax = Math.max.apply(Math, mydata);
+    var dmin = Math.min.apply(Math, mydata);
+
+    console.log(dmax)
+    console.log(dmin)
+
+    var x = d3.scale.linear()
+        .domain([0,20])
+        .range([0, width]);
+
     var data = d3.layout.histogram()
-        .bins(x.ticks(20))(mydata.filter(function(d){return d>cutoff}));
+        .bins(x.ticks(20))(mydata);
     
     var y = d3.scale.linear()
         .domain([0, d3.max(data, function(d) { return d.y; })])
@@ -156,10 +163,10 @@ values3 = [0.1,.2,.3,.3,.5,.5,.6,.7,.8,.9,.9]
 
 d3.select("#nMinutes").on("input", function() {
   d3.select("svg").remove();
-  buildhist(dataset5, +this.value);
+  buildhist(dataset2, +this.value);
 });
 
-buildhist(values, .4)
+buildhist(dataset2, .4)
 
 
 
