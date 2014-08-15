@@ -40,7 +40,7 @@ tags: [data science]
 
 <br>
 
-<body>
+<!-- <body> -->
 
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
@@ -60,13 +60,13 @@ var dataset2
 // Generate a Bates distribution of 10 random variables.
 //var values = d3.range(10000).map(d3.random.bates(10));
 
-// A formatter for counts.
-var formatCount = d3.format(",.0f");
-
+//controls size of app
 var margin = {top: 10, right: 30, bottom: 30, left: 30},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
 
 var buildhist = function(adata, cutoff){
 
@@ -77,30 +77,29 @@ var buildhist = function(adata, cutoff){
 
     //taking just estimates where Minutes==cutoff
     var mydata = []
-    for(i=0; i<190000; i++){
+    for(i=0; i<adata.length; i++){
         if (adata[i]["Minutes"]==cutoff) {
             mydata.push(adata[i]["est"])
         }
     }
 
-    console.log(mydata)
+    numOfBins = 20;
 
     //defining dynamic bounds for histogram
+    //var dmin = Math.floor(d3.min(mydata) / numOfBins) * numOfBins;
+    //var dmax = Math.ceil(d3.max(mydata) / numOfBins) * numOfBins;
     var dmax = Math.max.apply(Math, mydata);
     var dmin = Math.min.apply(Math, mydata);
 
-    console.log(dmax)
-    console.log(dmin)
-
     var x = d3.scale.linear()
-        .domain([0,dmax])
+        .domain([dmin, dmax])
         .range([0, width]);
 
     var data = d3.layout.histogram()
-        .bins(x.ticks(60))(mydata);
+        .bins(x.ticks(numOfBins))(mydata);
     
     var y = d3.scale.linear()
-        .domain([0, d3.max(data, function(d) { return d.y; })])
+        .domain([0, d3.max(data, function(d) { return d.y; })]) //when cutoff==10, 705
         .range([height, 0]);
     
     var xAxis = d3.svg.axis()
@@ -120,14 +119,14 @@ var buildhist = function(adata, cutoff){
         .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
     
     bar.append("rect")
-        .attr("x", 1)
-        .attr("width", x(data[0].dx) - 1)
+        .attr("x", 1) //shifts bars
+        .attr("width", (width/data.length)*0.9) //adds spacing between bars. modified to handle x domains that start >0
         .attr("height", function(d) { return height - y(d.y); });
-    
+
     bar.append("text")
         .attr("dy", ".75em")
         .attr("y", 6)
-        .attr("x", x(data[0].dx) / 2)
+        .attr("x", width/data.length / 2) 
         .attr("text-anchor", "middle")
         .text(function(d) { return formatCount(d.y); });
     
@@ -166,12 +165,12 @@ d3.select("#nMinutes").on("input", function() {
   buildhist(dataset2, +this.value);
 });
 
-buildhist(dataset5, 5)
+//buildhist(dataset2, 5)
 
 
 
 </script>
 
-</body>
+<!-- </body> -->
 
 
