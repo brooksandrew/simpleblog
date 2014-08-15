@@ -1,0 +1,167 @@
+  
+ 
+<style>
+	body {
+	  font: 10px sans-serif;
+	}
+
+	.bar rect {
+	  fill: steelblue;
+	  shape-rendering: crispEdges;
+	}
+
+	.bar text {
+	  fill: #fff;
+	}
+
+	.axis path, .axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+</style>
+
+<!-- Adding in numeric input -->
+<p>
+  <label for="nMinutes" 
+         style="display: inline-block; width: 240px; text-align: right">
+         Prediction in Minutes: <span id="nMinutes-value"></span>
+  </label>
+  <input type="number" min="0" max="100" value="1" step="1" id="nMinutes">
+</p>
+
+<br>
+
+<body>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+
+
+// var dataset = d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+//     return {Minutes: +d.Minutes, est: +d.est} 
+// });
+
+var dataset2
+    d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+    dataset2=d;
+})
+
+// Generate a Bates distribution of 10 random variables.
+//var values = d3.range(10000).map(d3.random.bates(10));
+
+//controls size of app
+var margin = {top: 10, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// A formatter for counts.
+var formatCount = d3.format(",.0f");
+
+var buildhist = function(adata, cutoff){
+
+    var dataset5
+        d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+        dataset5=d;
+    })
+
+    //taking just estimates where Minutes==cutoff
+    var mydata = []
+    for(i=0; i<adata.length; i++){
+        if (adata[i]["Minutes"]==cutoff) {
+            mydata.push(adata[i]["est"])
+        }
+    }
+
+    numOfBins = 20;
+
+    //defining dynamic bounds for histogram
+    //var dmin = Math.floor(d3.min(mydata) / numOfBins) * numOfBins;
+    //var dmax = Math.ceil(d3.max(mydata) / numOfBins) * numOfBins;
+    var dmax = Math.max.apply(Math, mydata);
+    var dmin = Math.min.apply(Math, mydata);
+
+    var x = d3.scale.linear()
+        .domain([dmin, dmax])
+        .range([0, width]);
+
+    var data = d3.layout.histogram()
+        .bins(x.ticks(numOfBins))(mydata);
+    
+    var y = d3.scale.linear()
+        .domain([0, d3.max(data, function(d) { return d.y; })]) //when cutoff==10, 705
+        .range([height, 0]);
+    
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+    
+    var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    var bar = svg.selectAll(".bar")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "bar")
+        .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+    
+    bar.append("rect")
+        .attr("x", 1) //shifts bars
+        .attr("width", (width/data.length)*0.9) //adds spacing between bars. modified to handle x domains that start >0
+        .attr("height", function(d) { return height - y(d.y); });
+
+    bar.append("text")
+        .attr("dy", ".75em")
+        .attr("y", 6)
+        .attr("x", width/data.length / 2) 
+        .attr("text-anchor", "middle")
+        .text(function(d) { return formatCount(d.y); });
+    
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+}
+
+
+
+/////////////////////////////////////////
+
+values3 = [0.1,.2,.3,.3,.5,.5,.6,.7,.8,.9,.9]
+
+// values2 = []
+//     for(var j=0; j<5; j++){
+//        values2 = dataset[j]["est"];
+//     }
+
+// for(var j = 0; j < 5.length; j++)
+// {
+//     for(var anItem in dataset[j])
+//     {
+//         console.log(dataset[j][anItem])
+//     }
+// }
+
+
+
+
+// via http://www.d3noob.org/2014/04/using-html-inputs-with-d3js.html
+
+d3.select("#nMinutes").on("input", function() {
+  d3.select("svg").remove();
+  buildhist(dataset2, +this.value);
+});
+
+//buildhist(dataset2, 5)
+
+
+
+</script>
+
+</body>
