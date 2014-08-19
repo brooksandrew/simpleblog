@@ -1,12 +1,12 @@
   
- 
+
 <style>
 	body {
 	  font: 10px sans-serif;
 	}
 
 	.bar rect {
-	  fill: steelblue;
+	  /*fill: forestgreen;*/
 	  shape-rendering: crispEdges;
 	}
 
@@ -20,7 +20,16 @@
 	  shape-rendering: crispEdges;
 	}
 
+	.bar highlight {
+    	fill: purple;
+	};
+
 </style>
+
+
+<div class="head" id="head">
+ 	<h2></h2>
+</div>
 
 <!-- Adding in numeric input -->
 <p>
@@ -28,18 +37,29 @@
          style="display: inline-block; width: 240px; text-align: right">
          Prediction in Minutes: <span id="nMinutes-value"></span>
   </label>
-  <input type="number" min="0" max="100" value="1" step="1" id="nMinutes">
+  <input type="number" min="0" max="100" value="5" step="1" id="nMinutes">
 </p>
 
 <br>
 
+
 <body>
 
+<!-- loading JS libraries -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>
 
+var Median = function(values) {
 
+    values.sort( function(a,b) {return a - b;} );
+    var half = Math.floor(values.length/2);
+    if(values.length % 2)
+        return values[half];
+    else
+        return (values[half-1] + values[half]) / 2.0;
+}
 
 // var dataset = d3.csv("/assets/csv/cleanTrips.csv", function(d) {
 //     return {Minutes: +d.Minutes, est: +d.est} 
@@ -76,7 +96,7 @@ var buildhist = function(adata, cutoff){
         }
     }
 
-    numOfBins = 20;
+    numOfBins = 40;
 
     //defining dynamic bounds for histogram
     //var dmin = Math.floor(d3.min(mydata) / numOfBins) * numOfBins;
@@ -110,11 +130,16 @@ var buildhist = function(adata, cutoff){
         .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-    
+        
     bar.append("rect")
-        .attr("x", 1) //shifts bars
+        .attr("x", 0) //shifts bars
         .attr("width", (width/data.length)*0.9) //adds spacing between bars. modified to handle x domains that start >0
-        .attr("height", function(d) { return height - y(d.y); });
+        .attr("height", function(d) {return height - y(d.y); })
+		.style("fill", function(dfff) {
+			if (dfff.x>cutoff) {col="firebrick"}
+			else {col="forestgreen"}
+			return col
+		});
 
     bar.append("text")
         .attr("dy", ".75em")
@@ -127,7 +152,23 @@ var buildhist = function(adata, cutoff){
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
+
+
+//find statistics for each sentenance
+var busMedian = Median(mydata);
+console.log(busMedian)
+//busMedian = 4
+//var busMedian = busMedian.toFixed(2);
+
+//printing sentences
+$(".head h2").html("Nextbus prediction of " + cutoff + " minutes really means " + busMedian + " minutes");
+
 }
+
+
+
+
+    //document.writeln("Have a nice day!" + data[4][1]);
 
 
 
@@ -158,7 +199,7 @@ d3.select("#nMinutes").on("input", function() {
   buildhist(dataset2, +this.value);
 });
 
-//buildhist(dataset2, 5)
+
 
 
 
