@@ -21,11 +21,16 @@
 	}
 
 	span.underline{
-        /*font-size: 20px;*/
         border-bottom: 2px solid grey;
 		display:block;
 		color:#606060;
     }
+
+	.brush .extent {
+	    stroke: #000;
+	    fill-opacity: .125;
+	    shape-rendering: crispEdges;
+	}
 
 
 </style>
@@ -46,8 +51,11 @@
  	<span style="color:firebrick"><h2></h2></span>
 </div>
 
+<div class="test">
+ 	<h2></h2>
+</div>
 
-
+<div class="myslider" id="sliderid"></div>
 
 <!-- Adding in numeric input -->
 <p>
@@ -66,6 +74,10 @@
 <!-- loading JS libraries -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="/assets/js/posts/jquery.nouislider.min.js"></script>
+<link href="/assets/css/posts/jquery.nouislider.css" rel="stylesheet">
+
+
 
 <script>
 
@@ -87,21 +99,21 @@ var Quantile = function(values, quantile){
     return parseFloat(ret).toFixed(1);
 }
 
-// var countNA = function(values){
-// 	for(i )
-//}
-
-// var dataset = d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-//     return {Minutes: +d.Minutes, est: +d.est} 
-// });
+var militaryTime2string = function(time){
+	var t = Math.round(time);
+	
+	if(t==0)
+		return "12:00am"
+	else if(t <= 11 & t >0)
+		return t + ":00am"
+	else
+		return t-12 + ":00pm"
+}
 
 var dataset2
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
     dataset2=d;
 })
-
-// Generate a Bates distribution of 10 random variables.
-//var values = d3.range(10000).map(d3.random.bates(10));
 
 //controls size of app
 var margin = {top: 10, right: 30, bottom: 30, left: 30},
@@ -118,10 +130,6 @@ d3.select("#nMinutes").on("input", function() {
   buildhist(dataset2, +this.value);
 });
 
-//console.log(dataset2);
-//buildhist(dataset2, 10);
-
-
 
 
 var buildhist = function(adata, cutoff){
@@ -137,8 +145,6 @@ var buildhist = function(adata, cutoff){
     numOfBins = 40;
 
     //defining dynamic bounds for histogram
-    //var dmin = Math.floor(d3.min(mydata) / numOfBins) * numOfBins;
-    //var dmax = Math.ceil(d3.max(mydata) / numOfBins) * numOfBins;
     var dmax = Math.max.apply(Math, mydata);
     var dmin = Math.min.apply(Math, mydata);
 
@@ -156,7 +162,7 @@ var buildhist = function(adata, cutoff){
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom");
-    
+
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -203,11 +209,29 @@ $(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + busQ10 + " minutes on an ear
 $(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busMedian + " minutes on an average day.");
 $(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busQ90 + " minutes on a late day.");
 
-}
+
+$(function(){
+
+	$('.myslider').noUiSlider({
+
+	start: [ 0, 23 ],
+	step: 1,
+	connect:true,
+	range: {
+		'min': 0,
+		'max': 23
+		   }
+	});
+});
+
+var beginHour = $('#sliderid').val()[0];
+var endHour = $('#sliderid').val()[1];
+
+var a = "Between " + militaryTime2string(beginHour) + " and " + militaryTime2string(endHour)
+$(".test h2").html(a);
 
 
-
-
+};
 
 
 
