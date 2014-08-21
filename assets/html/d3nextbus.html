@@ -20,16 +20,34 @@
 	  shape-rendering: crispEdges;
 	}
 
-	.bar highlight {
-    	fill: purple;
-	};
+	span.underline{
+        /*font-size: 20px;*/
+        border-bottom: 2px solid grey;
+		display:block;
+		color:#606060;
+    }
+
 
 </style>
 
-
-<div class="head" id="head">
- 	<h2></h2>
+ <div class="intro">
+ 	<span class="underline"><h2></h2></span>
 </div>
+
+<div class="headQ10">
+ 	<span style="color:forestgreen"><h2></h2></span>
+</div>
+
+<div class="headMed">
+ 	<span style="color:black"><h2></h2></span>
+</div>
+
+<div class="headQ90">
+ 	<span style="color:firebrick"><h2></h2></span>
+</div>
+
+
+
 
 <!-- Adding in numeric input -->
 <p>
@@ -51,15 +69,27 @@
 
 <script>
 
+//defining math functions used in js
 var Median = function(values) {
-
     values.sort( function(a,b) {return a - b;} );
     var half = Math.floor(values.length/2);
     if(values.length % 2)
-        return values[half];
+        var ret = values[half];
     else
-        return (values[half-1] + values[half]) / 2.0;
+        var ret = (Number(values[half-1]) + Number(values[half])) / 2.0;
+    return parseFloat(ret).toFixed(1);
 }
+
+var Quantile = function(values, quantile){
+	values.sort( function(a,b) {return a - b;} );
+	var q = Math.floor(values.length*quantile);
+    var ret = values[q];
+    return parseFloat(ret).toFixed(1);
+}
+
+// var countNA = function(values){
+// 	for(i )
+//}
 
 // var dataset = d3.csv("/assets/csv/cleanTrips.csv", function(d) {
 //     return {Minutes: +d.Minutes, est: +d.est} 
@@ -81,12 +111,20 @@ var margin = {top: 10, right: 30, bottom: 30, left: 30},
 // A formatter for counts.
 var formatCount = d3.format(",.0f");
 
-var buildhist = function(adata, cutoff){
+//intitialize
+// via http://www.d3noob.org/2014/04/using-html-inputs-with-d3js.html
+d3.select("#nMinutes").on("input", function() {
+  d3.select("svg").remove();
+  buildhist(dataset2, +this.value);
+});
 
-    var dataset5
-        d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-        dataset5=d;
-    })
+//console.log(dataset2);
+//buildhist(dataset2, 10);
+
+
+
+
+var buildhist = function(adata, cutoff){
 
     //taking just estimates where Minutes==cutoff
     var mydata = []
@@ -156,48 +194,23 @@ var buildhist = function(adata, cutoff){
 
 //find statistics for each sentenance
 var busMedian = Median(mydata);
-console.log(busMedian)
-//busMedian = 4
-//var busMedian = busMedian.toFixed(2);
+var busQ90 = Quantile(mydata, 0.9);
+var busQ10 = Quantile(mydata, 0.1);
 
 //printing sentences
-$(".head h2").html("Nextbus prediction of " + cutoff + " minutes really means " + busMedian + " minutes");
+$(".intro h2").html("Nextbus prediction of " + cutoff + " minutes really means:");
+$(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + busQ10 + " minutes on an early day.");
+$(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busMedian + " minutes on an average day.");
+$(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busQ90 + " minutes on a late day.");
 
 }
 
 
 
 
-    //document.writeln("Have a nice day!" + data[4][1]);
 
 
 
-/////////////////////////////////////////
-
-values3 = [0.1,.2,.3,.3,.5,.5,.6,.7,.8,.9,.9]
-
-// values2 = []
-//     for(var j=0; j<5; j++){
-//        values2 = dataset[j]["est"];
-//     }
-
-// for(var j = 0; j < 5.length; j++)
-// {
-//     for(var anItem in dataset[j])
-//     {
-//         console.log(dataset[j][anItem])
-//     }
-// }
-
-
-
-
-// via http://www.d3noob.org/2014/04/using-html-inputs-with-d3js.html
-
-d3.select("#nMinutes").on("input", function() {
-  d3.select("svg").remove();
-  buildhist(dataset2, +this.value);
-});
 
 
 
