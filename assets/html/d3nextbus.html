@@ -1,6 +1,6 @@
   
 
-<style>
+<style type="text/css">
 	body {
 	  font: 10px sans-serif;
 	}
@@ -32,6 +32,7 @@
 	    shape-rendering: crispEdges;
 	}
 
+  
 
 </style>
 
@@ -51,20 +52,15 @@
  	<span style="color:firebrick"><h2></h2></span>
 </div>
 
-<div class="test">
- 	<h2></h2>
-</div>
-
-<div class="myslider" id="sliderid"></div>
 
 <!-- Adding in numeric input -->
-<p>
+<h3>
   <label for="nMinutes" 
-         style="display: inline-block; width: 240px; text-align: right">
+         style="display: inline-block; width: 140px; text-align: right">
          Prediction in Minutes: <span id="nMinutes-value"></span>
   </label>
-  <input type="number" min="0" max="100" value="5" step="1" id="nMinutes">
-</p>
+  <input type="number" min="0" max="100" step="1" value="5" id="nMinutes">
+</h3>
 
 <br>
 
@@ -99,17 +95,6 @@ var Quantile = function(values, quantile){
     return parseFloat(ret).toFixed(1);
 }
 
-var militaryTime2string = function(time){
-	var t = Math.round(time);
-	
-	if(t==0)
-		return "12:00am"
-	else if(t <= 11 & t >0)
-		return t + ":00am"
-	else
-		return t-12 + ":00pm"
-}
-
 var dataset2
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
     dataset2=d;
@@ -132,6 +117,19 @@ d3.select("#nMinutes").on("input", function() {
 
 
 
+console.log(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+    dataset2=d}));
+
+// buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+//     dataset2=d}), 10);
+
+// buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+//     dataset2=d
+//     return dataset2})
+// , 4)
+
+
+
 var buildhist = function(adata, cutoff){
 
     //taking just estimates where Minutes==cutoff
@@ -142,11 +140,19 @@ var buildhist = function(adata, cutoff){
         }
     }
 
-    numOfBins = 40;
 
     //defining dynamic bounds for histogram
     var dmax = Math.max.apply(Math, mydata);
     var dmin = Math.min.apply(Math, mydata);
+
+    //numOfBins = 40;
+    if((dmax-dmin)>8) var numOfBins = dmax-dmin
+    else var numOfBins = (dmax-dmin)*4; 
+
+    //find statistics for each sentenance
+    var busMedian = Median(mydata);
+    var busQ90 = Quantile(mydata, 0.9);
+    var busQ10 = Quantile(mydata, 0.1);
 
     var x = d3.scale.linear()
         .domain([dmin, dmax])
@@ -161,7 +167,7 @@ var buildhist = function(adata, cutoff){
     
     var xAxis = d3.svg.axis()
         .scale(x)
-        .orient("bottom");
+        .orient("bottom").ticks(dmax-dmin);
 
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -177,11 +183,11 @@ var buildhist = function(adata, cutoff){
         
     bar.append("rect")
         .attr("x", 0) //shifts bars
-        .attr("width", (width/data.length)*0.9) //adds spacing between bars. modified to handle x domains that start >0
+        .attr("width", (width/data.length)*0.85) //adds spacing between bars. modified to handle x domains that start >0
         .attr("height", function(d) {return height - y(d.y); })
 		.style("fill", function(dfff) {
-			if (dfff.x>cutoff) {col="firebrick"}
-			else {col="forestgreen"}
+			if (dfff.x<cutoff) {col="forestgreen"}
+			else {col="firebrick"}
 			return col
 		});
 
@@ -198,10 +204,6 @@ var buildhist = function(adata, cutoff){
         .call(xAxis);
 
 
-//find statistics for each sentenance
-var busMedian = Median(mydata);
-var busQ90 = Quantile(mydata, 0.9);
-var busQ10 = Quantile(mydata, 0.1);
 
 //printing sentences
 $(".intro h2").html("Nextbus prediction of " + cutoff + " minutes really means:");
@@ -210,29 +212,16 @@ $(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busMedian + " minutes on an a
 $(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busQ90 + " minutes on a late day.");
 
 
-$(function(){
-
-	$('.myslider').noUiSlider({
-
-	start: [ 0, 23 ],
-	step: 1,
-	connect:true,
-	range: {
-		'min': 0,
-		'max': 23
-		   }
-	});
-});
-
-var beginHour = $('#sliderid').val()[0];
-var endHour = $('#sliderid').val()[1];
-
-var a = "Between " + militaryTime2string(beginHour) + " and " + militaryTime2string(endHour)
-$(".test h2").html(a);
-
-
 };
 
+console.log(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+    dataset2=d;
+}));
+
+buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
+    dataset2=d;
+    return dataset2
+}), +this.value);
 
 
 
