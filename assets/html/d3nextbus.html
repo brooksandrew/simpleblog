@@ -1,4 +1,4 @@
-  
+
 
 <style type="text/css">
 	body {
@@ -36,7 +36,7 @@
 
 </style>
 
- <div class="intro">
+<div class="intro">
  	<span class="underline"><h2></h2></span>
 </div>
 
@@ -70,24 +70,10 @@
 <!-- loading JS libraries -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="/assets/js/posts/jquery.nouislider.min.js"></script>
-<link href="/assets/css/posts/jquery.nouislider.css" rel="stylesheet">
-
-
 
 <script>
 
 //defining math functions used in js
-var Median = function(values) {
-    values.sort( function(a,b) {return a - b;} );
-    var half = Math.floor(values.length/2);
-    if(values.length % 2)
-        var ret = values[half];
-    else
-        var ret = (Number(values[half-1]) + Number(values[half])) / 2.0;
-    return parseFloat(ret).toFixed(1);
-}
-
 var Quantile = function(values, quantile){
 	values.sort( function(a,b) {return a - b;} );
 	var q = Math.floor(values.length*quantile);
@@ -95,10 +81,12 @@ var Quantile = function(values, quantile){
     return parseFloat(ret).toFixed(1);
 }
 
-var dataset2
+var dataset2 =
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset2=d;
-})
+        dataset2=d;
+        buildhist(dataset2, 5);
+    });
+
 
 //controls size of app
 var margin = {top: 10, right: 30, bottom: 30, left: 30},
@@ -115,21 +103,6 @@ d3.select("#nMinutes").on("input", function() {
   buildhist(dataset2, +this.value);
 });
 
-
-
-console.log(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset2=d}));
-
-// buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-//     dataset2=d}), 10);
-
-// buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-//     dataset2=d
-//     return dataset2})
-// , 4)
-
-
-
 var buildhist = function(adata, cutoff){
 
     //taking just estimates where Minutes==cutoff
@@ -140,7 +113,6 @@ var buildhist = function(adata, cutoff){
         }
     }
 
-
     //defining dynamic bounds for histogram
     var dmax = Math.max.apply(Math, mydata);
     var dmin = Math.min.apply(Math, mydata);
@@ -150,7 +122,7 @@ var buildhist = function(adata, cutoff){
     else var numOfBins = (dmax-dmin)*4; 
 
     //find statistics for each sentenance
-    var busMedian = Median(mydata);
+    var busMedian = Quantile(mydata, 0.5);
     var busQ90 = Quantile(mydata, 0.9);
     var busQ10 = Quantile(mydata, 0.1);
 
@@ -203,8 +175,6 @@ var buildhist = function(adata, cutoff){
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
 
-
-
 //printing sentences
 $(".intro h2").html("Nextbus prediction of " + cutoff + " minutes really means:");
 $(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + busQ10 + " minutes on an early day.");
@@ -214,21 +184,9 @@ $(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busQ90 + " minutes on a late 
 
 };
 
-console.log(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset2=d;
-}));
-
-buildhist(d3.csv("/assets/csv/cleanTrips.csv", function(d) {
-    dataset2=d;
-    return dataset2
-}), +this.value);
-
-
-
-
-
-
 
 </script>
+
+
 
 </body>
