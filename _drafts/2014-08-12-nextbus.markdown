@@ -7,7 +7,7 @@ tags: [data science]
 ---
 
 
-<iframe src="../assets/html/d3nextbus.html" width="1000" height="700"></iframe>
+<iframe style="border: 0px;" src="../assets/html/d3nextbus.html" width="1000" height="700"></iframe>
 
 
 
