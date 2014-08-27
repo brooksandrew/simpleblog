@@ -81,6 +81,20 @@ var Quantile = function(values, quantile){
     return parseFloat(ret).toFixed(1);
 }
 
+var sumArray = function (array) {
+  for (var i = 0, sum = 0; i < array.length; sum += array[i++]);
+  return sum;
+};
+
+var earlyORlate = function(values, cutoff) {
+    late = [];
+    for(i=0; i<values.length; i++){
+        if(values[i]>cutoff) late.push(1)
+        else late.push(0)
+    };
+    return sumArray(late)/values.length
+}
+
 var dataset2 =
     d3.csv("/assets/csv/cleanTrips.csv", function(d) {
         dataset2=d;
@@ -89,7 +103,7 @@ var dataset2 =
 
 
 //controls size of app
-var margin = {top: 10, right: 30, bottom: 30, left: 30},
+var margin = {top: 10, right: 30, bottom: 50, left: 30},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
@@ -174,6 +188,29 @@ var buildhist = function(adata, cutoff){
         .attr("class", "x axis")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
+
+    // xAxis label
+svg.append("text") 
+    .attr("transform", "translate(" + width + " ," + (height + margin.bottom-15) +")")
+    .style("text-anchor", "end")
+    .text("Bus is late " + parseFloat(earlyORlate(mydata, cutoff)*100).toFixed(0) + "% of the time")
+    .style("font-size", "15px")
+    .style("fill", "firebrick");
+
+svg.append("text") 
+    .attr("transform", "translate(" + 0 + " ," + (height + margin.bottom-15) +")")
+    .style("text-anchor", "left")
+    .text("Bus is early " + parseFloat((1-earlyORlate(mydata, cutoff))*100).toFixed(0) + "% of the time")
+    .style("font-size", "15px")
+    .style("fill", "forestgreen");
+
+svg.append("text") 
+    .attr("transform", "translate(" + width/2 + " ," + (height + margin.bottom-15) +")")
+    .style("text-anchor", "middle")
+    .text("Minutes until bus arrival")
+    .style("font-size", "18px");
+    
+
 
 //printing sentences
 $(".intro h2").html("Nextbus prediction of " + cutoff + " minutes really means:");

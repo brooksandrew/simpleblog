@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "Testing Nextbus app"
+title:   "How accurate is Nextbus?"
 date:   2014-08-12
 categories: 
 tags: [data science]
@@ -11,7 +11,7 @@ tags: [data science]
 
 
 
-Next to add: 
+<!-- Next to add: 
 
 * make app work on default view
 * add a vertical line to the histogram, or highlight the bar or something to indicate where the current selection is
@@ -27,4 +27,4 @@ Next to add:
 * add error scatter chart
 * add scroll scatter plot (maybe) 
     http://bl.ocks.org/stepheneb/1182434
-    http://jsfiddle.net/PyvZ7/7/
+    http://jsfiddle.net/PyvZ7/7/ -->
