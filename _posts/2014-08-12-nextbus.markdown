@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How accurated is Nextbus?"
+title:   "How accurate is Nextbus?"
 date:   2014-08-12
 categories: 
 tags: [data science]
