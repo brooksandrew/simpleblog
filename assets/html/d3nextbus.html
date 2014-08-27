@@ -95,8 +95,10 @@ var earlyORlate = function(values, cutoff) {
     return sumArray(late)/values.length
 }
 
+
+
 var dataset2 =
-    d3.csv("simpleblog/assets/csv/cleanTrips.csv", function(d) {
+    d3.csv("brooksandrew.github.io/simpleblog/assets/csv/cleanTrips.csv", function(d) {
         dataset2=d;
         buildhist(dataset2, 5);
     });
