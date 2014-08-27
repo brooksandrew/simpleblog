@@ -96,7 +96,7 @@ var earlyORlate = function(values, cutoff) {
 }
 
 var dataset2 =
-    d3.csv("/simpleblog/assets/csv/cleanTrips.csv", function(d) {
+    d3.csv("assets/csv/cleanTrips.csv", function(d) {
         dataset2=d;
         buildhist(dataset2, 5);
     });
