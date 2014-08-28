@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How accurate is Nextbus?"
+title:   "How Accurate is Nextbus?"
 date:   2014-08-12
 categories: 
 tags: [data science]
@@ -9,7 +9,7 @@ tags: [data science]
 
 
 
-<iframe style="border: 0px;" src="../assets/html/d3nextbus.html" width="1000" height="700"></iframe>
+<iframe style="border: 0px;" src="assets/html/d3nextbus.html" width="1000" height="700"></iframe>
 
 
 
