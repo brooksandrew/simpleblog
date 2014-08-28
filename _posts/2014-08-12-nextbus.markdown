@@ -9,7 +9,7 @@ tags: [data science]
 
 
 
-<iframe style="border: 0px;" src="simpleblog/assets/html/d3nextbus.html" width="1000" height="750"></iframe>
+<iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="750"></iframe>
 
 
 
