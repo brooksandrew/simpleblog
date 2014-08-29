@@ -44,8 +44,10 @@ var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 //setup x
 var x = d3.time.scale().range([0, width]),
     x2 = d3.time.scale().range([0, width]),
+    xMap = function(d) { return x2(d.time); } 
     y = d3.scale.linear().range([height, 0]),
     y2 = d3.scale.linear().range([height2, 0]);
+    yMap = function(d) { return y2(d.Minutes); } // data -> display
 
 //setup y
 var xAxis = d3.svg.axis().scale(x).orient("bottom"),
@@ -59,42 +61,28 @@ var brush = d3.svg.brush()
     .x(x2)
     .on("brush", brushed);
 
-// var area = d3.svg.area()
-//     .interpolate("monotone")
-//     .x(function(d) { return x(d.time); })
-//     .y0(height)
-//     .y1(function(d) { return y(d.Minutes); });
+var area = d3.svg.area()
+    //.interpolate("monotone")
+    .x(function(d) { return x(d.time); })
+    .y0(height)
+    .y1(function(d) { return y(d.Minutes); });
 
-// var area2 = d3.svg.area()
-//     .interpolate("monotone")
-//     .x(function(d) { return x2(d.time); })
-//     .y0(height2)
-//     .y1(function(d) { return y2(d.Minutes); });
+var area2 = d3.svg.area()
+    //.interpolate("monotone")
+    .x(function(d) { return x2(d.time); })
+    .y0(height2)
+    .y1(function(d) { return y2(d.Minutes); });
 
+// add the graph canvas to the body of the webpage
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
+    .attr("height", height + margin.top + margin.bottom)
 
-// svg.append("defs").append("clipPath")
-//     .attr("id", "clip")
-//   .append("rect")
-//     .attr("width", width)
-//     .attr("height", height);
-
-
-
-// setup x 
-// var xValue = function(d) { return d.time;}, // data -> value
-//     xScale = d3.time.scale().range([0, width]), // value -> display
-    xMap = function(d) { return x(parseDate(d));} // data -> display
-//     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-
-// // setup y
-// var yValue = function(d) { return d["Minutes"];}, // data -> value
-//     yScale = d3.scale.linear().range([height, 0]), // value -> display
-     yMap = function(d) { return yScale(yValue(d));} // data -> display
-//     yAxis = d3.svg.axis().scale(yScale).orient("left");
-
+svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+  .append("rect")
+    .attr("width", width)
+    .attr("height", height);
 
 var focus = svg.append("g")
     .attr("class", "focus")
@@ -110,10 +98,10 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
   x2.domain(x.domain());
   y2.domain(y.domain());
 
-  // focus.append("path")
-  //     .datum(data)
-  //     .attr("class", "area")
-  //     .attr("d", area);
+  focus.append("path")
+      .datum(data)
+      .attr("class", "area")
+      .attr("d", area);
 
   focus.append("g")
       .attr("class", "x axis")
@@ -124,16 +112,17 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
       .attr("class", "y axis")
       .call(yAxis);
 
-  // context.append("path")
-  //     .datum(data)
-  //     .attr("class", "area")
-  //     .attr("d", area2);
+  context.append("path")
+      .datum(data)
+      .attr("class", "area")
+      .attr("d", area2);
 
   context.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height2 + ")")
       .call(xAxis2);
 
+ // brush slider display
   context.append("g")
       .attr("class", "x brush")
       .call(brush)
@@ -141,14 +130,15 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
       .attr("y", -6)
       .attr("height", height2 + 7);
 
+
       // draw dots
   svg.selectAll(".dot")
       .data(data)
     .enter().append("circle")
       .attr("class", "dot")
       .attr("r", 3.5)
-      .attr("cx", xmap) //xmap
-      .attr("cy", ymap) //ymap
+      .attr("cx", xMap) 
+      .attr("cy", yMap) 
       .style("fill", cValue);
 });
 
@@ -158,7 +148,7 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
 
 function brushed() {
   x.domain(brush.empty() ? x2.domain() : brush.extent());
-  //focus.select(".svg").attr("d", area);
+  focus.select(".svg").attr("d", area);
   focus.select(".x.axis").call(xAxis);
 }
 

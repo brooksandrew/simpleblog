@@ -1,7 +1,7 @@
 ---
 layout: post
 title:   "How Accurate is Nextbus?"
-date:   2014-08-12
+date:   2014-08-28
 categories: 
 tags: [data science]
 ---
