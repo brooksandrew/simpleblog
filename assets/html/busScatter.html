@@ -47,7 +47,7 @@ var x = d3.time.scale().range([0, width]),
     xMap = function(d) { return x2(d.time); } 
     y = d3.scale.linear().range([height, 0]),
     y2 = d3.scale.linear().range([height2, 0]);
-    yMap = function(d) { return y2(d.Minutes); } // data -> display
+    yMap = function(d) { return y(d.Minutes); } // data -> display
 
 //setup y
 var xAxis = d3.svg.axis().scale(x).orient("bottom"),
@@ -61,17 +61,21 @@ var brush = d3.svg.brush()
     .x(x2)
     .on("brush", brushed);
 
-var area = d3.svg.area()
-    //.interpolate("monotone")
-    .x(function(d) { return x(d.time); })
-    .y0(height)
-    .y1(function(d) { return y(d.Minutes); });
+// var area = d3.svg.area()
+//     //.interpolate("monotone")
+//     .x(function(d) { return x(d.time); })
+//     .y0(height)
+//     .y1(function(d) { return y(d.Minutes); });
 
-var area2 = d3.svg.area()
-    //.interpolate("monotone")
+// var area2 = d3.svg.area()
+//     //.interpolate("monotone")
+//     .x(function(d) { return x2(d.time); })
+//     .y0(height2)
+//     .y1(function(d) { return y2(d.Minutes); });
+
+var mypoints = d3.svg.line()
     .x(function(d) { return x2(d.time); })
-    .y0(height2)
-    .y1(function(d) { return y2(d.Minutes); });
+    .y(function(d) { return y2(d.Minutes); });
 
 // add the graph canvas to the body of the webpage
 var svg = d3.select("body").append("svg")
@@ -80,7 +84,7 @@ var svg = d3.select("body").append("svg")
 
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
-  .append("rect")
+    .append("rect")
     .attr("width", width)
     .attr("height", height);
 
@@ -98,10 +102,10 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
   x2.domain(x.domain());
   y2.domain(y.domain());
 
-  focus.append("path")
-      .datum(data)
-      .attr("class", "area")
-      .attr("d", area);
+  // focus.append("path")
+  //     .datum(data)
+  //     .attr("class", "area")
+  //     .attr("d", area);
 
   focus.append("g")
       .attr("class", "x axis")
@@ -112,11 +116,13 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
       .attr("class", "y axis")
       .call(yAxis);
 
-  context.append("path")
-      .datum(data)
-      .attr("class", "area")
-      .attr("d", area2);
+ // small bottom chart
+  // context.append("path")
+  //     .datum(data)
+  //     .attr("class", "area")
+  //     .attr("d", area2);
 
+//brush slider display
   context.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + height2 + ")")
@@ -132,14 +138,34 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
 
 
       // draw dots
-  svg.selectAll(".dot")
+  var mydots = svg.selectAll(".dot") //seems like you can put anything in  the selectAll("")
       .data(data)
-    .enter().append("circle")
+      .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", 6)
       .attr("cx", xMap) 
       .attr("cy", yMap) 
       .style("fill", cValue);
+
+//copied from http://jsfiddle.net/PyvZ7/7/
+//   var circlegroup = focus.append("g");
+//     circlegroup.attr("clip-path", "url(#clip)");
+//     circlegroup.selectAll('.dot')
+//     .data(data)
+//     .enter().append("circle")
+//     .attr('class', 'dot')
+//     .attr("cx",function(d){ return x(format.parse(d3.keys(d)[0]));})
+//     .attr("cy", function(d){ return y(d3.values(d)[0]);})
+//     .attr("r", function(d){ return 4;})
+
+// function brush() {
+//   x.domain(brush.empty() ? x2.domain() : brush.extent());
+//   focus.select("path").attr("d", area);
+//   focus.select(".x.axis").call(xAxis);
+//   circlegroup.selectAll(".dot").attr("cx",function(d){ return x(format.parse(d3.keys(d)[0]));}).attr("cy", function(d){ return y(d3.values(d)[0]);});
+// }
+
+
 });
 
   
@@ -148,8 +174,9 @@ d3.csv("../csv/cleanTrips_small.csv", type, function(error, data) {
 
 function brushed() {
   x.domain(brush.empty() ? x2.domain() : brush.extent());
-  focus.select(".svg").attr("d", area);
+  //focus.select(".svg").attr("d", mypoints);  // this is the line that connects bottom panel to main chart
   focus.select(".x.axis").call(xAxis);
+  focus.selectAll(".dot").attr("cx",function(d){ return x(format.parse(d3.keys(d)[0]));}).attr("cy", function(d){ return y(d3.values(d)[0]);});
 }
 
 function type(d) {
