@@ -29,6 +29,13 @@ svg {
   stroke: #000;
 }
 
+.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+}
+
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
@@ -41,6 +48,31 @@ var margin = {top: 10, right: 10, bottom: 100, left: 40},
     height2 = 500 - margin2.top - margin2.bottom;
 
 var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
+
+var number2minutes = function(d) {
+  d2 = Math.abs(d)
+  if (d2<1) {ret = parseFloat(d2*60).toFixed(0) + " seconds"}
+  else {
+    mins = Math.floor(parseFloat(d2)) 
+    secs = (parseFloat(d2-Math.floor(d2))*60).toFixed(0)
+    if(secs.length==1) {secstmp =  "0" + secs; secs=secstmp}
+    if(secs=="60") {secs="59"} //correcting weird rounding
+    ret = mins + ":" + secs + " minutes"
+  }
+  return ret 
+}
+
+var earlyLateMouseover = function(d) {
+  if (d<0) {ret = number2minutes(d) + " early"}
+  else {ret = number2minutes(d) + " late"} 
+  return ret
+}; 
+
+// var earlyLateMouseover = function(d) {
+//   if (d<0) {ret = parseFloat(Math.abs(d)).toFixed(1) + " minutes early"}
+//   else {ret = parseFloat(d).toFixed(1) + " minutes late"} 
+//   return ret
+// }; 
 
 //setup x
 var x = d3.time.scale().range([0, width]),
@@ -56,7 +88,11 @@ var xAxis = d3.svg.axis().scale(x).orient("bottom"),
     yAxis = d3.svg.axis().scale(y).orient("left");
 
 // setup fill color
-var cValue = "firebrick"
+var cValue = d3.scale.linear()
+    .domain([-5, 0, 5])
+    .range(["green", "white", "red"]);
+
+//var cValue = "firebrick"
 
 var brush = d3.svg.brush()
     .x(x2)
@@ -87,12 +123,19 @@ var context = svg.append("g")
     .attr("class", "context")
     .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
+// add the tooltip area to the webpage
+var tooltip = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+//load data
 var dataset=
 d3.csv("../csv/cleanTrips_small.csv", function(error, data) {
   dataset=data;
   dataset.forEach(function(d){
     d['time'] = parseDate(d['time'])
     d['Minutes'] = +d['Minutes']
+    d['err'] = +d['err']
   })
   initialize();
 });  
@@ -131,10 +174,26 @@ function initialize() {
       .data(dataset)
       .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 6)
+      .attr("r", 5)
       .attr("cx", xMap) 
       .attr("cy", yMap) 
-      .style("fill", cValue);
+      .style("fill", function(d) {return cValue(d.err)})
+      .on("mouseover", function(d) {
+          tooltip.transition()
+               .duration(200)
+               .style("opacity", .9);
+          tooltip.html("prediction: " + d['Minutes'] + " minutes" + "<br>" +
+            "actual: " + earlyLateMouseover(d['err']))
+               .style("left", (d3.event.pageX + 10) + "px")
+               .style("top", (d3.event.pageY - 48) + "px")
+               .style("font-weight", "bold");
+      })
+      .on("mouseout", function(d) {
+          tooltip.transition()
+               .duration(500)
+               .style("opacity", 0);
+      });
+
 
 };
 
@@ -143,7 +202,7 @@ function brushed() {
   focus.select(".x.axis").call(xAxis);
   mydots.selectAll(".dot")
    .attr("cx", xMap)
-     .attr("cy", yMap);
+   .attr("cy", yMap);
 }
 
 function type(d) {
