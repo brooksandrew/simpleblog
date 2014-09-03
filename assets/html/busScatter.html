@@ -54,6 +54,8 @@ var margin = {top: 10, right: 10, bottom: 100, left: 50},
 
 var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 
+var timeFormat = d3.time.format("%I:%M:%S %p");
+
 // converts number like "2.5" into "2:30 minutes" 
 var number2minutes = function(d) {
   d2 = Math.abs(d)
@@ -96,8 +98,8 @@ var xAxis = d3.svg.axis().scale(x).orient("bottom"),
 
 // setup fill color
 var cValue = d3.scale.linear()
-    .domain([-6, 0, 6])
-    .range(["green", "white", "red"]);
+    .domain([-15, -6, 0, 6, 15])
+    .range(["forestgreen", "green", "white", "red", "firebrick"]);
 
 //setting up brush and defaultExtent
 var brush = d3.svg.brush()
@@ -188,7 +190,6 @@ function initialize() {
       .attr("height", height2 + 7);
 
   // draw dots
-  
   mydots.selectAll(".dot") //seems like you can put anything in  the selectAll("")
       .data(dataset)
       .enter().append("circle")
@@ -202,7 +203,9 @@ function initialize() {
                .duration(10)
                .style("opacity", 1);
           tooltip.html("prediction: " + d['Minutes'] + " minutes" + "<br>" +
-            "actual: " + " <span style='color:" + getColor(d["err"]) + "'>"  + earlyLateMouseover(d['err']) + "</span>")
+						//"time: " + timeFormat(d['time']) + "<br>" +
+						"actual: " + number2minutes(d["err"] + d["Minutes"]) + "<br>" +
+						"bus arrived <span style='color:" + getColor(d["err"]) + "'>"  + earlyLateMouseover(d['err']) + "</span>")
                .style("left", (d3.event.pageX + 10) + "px")
                .style("top", (d3.event.pageY - 48) + "px")
                .style("font-weight", "bold");
