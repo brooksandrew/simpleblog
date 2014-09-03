@@ -98,13 +98,13 @@ var xAxis = d3.svg.axis().scale(x).orient("bottom"),
 
 // setup fill color
 var cValue = d3.scale.linear()
-    .domain([-15, -8, 0, 8, 15])
+    .domain([-15, -6, 0, 6, 15])
     .range(["forestgreen", "green", "white", "red", "firebrick"]);
 
 //setting up brush and defaultExtent
 var brush = d3.svg.brush()
     .x(x2)
-    .extent([parseDate("2014-08-06 12:22:22"), parseDate("2014-08-07 12:22:22")])
+    .extent([parseDate("2014-08-06 12:22:22"), parseDate("2014-08-07 12:22:22")]) //trying to intialize brush
     .on("brush", brushed);
 
 // add the graph canvas to the body of the webpage
@@ -127,6 +127,7 @@ var focus = svg.append("g")
     .attr("class", "focus")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+//need to define scatter plot globally
 var mydots = focus.append("g");
 
 var context = svg.append("g")
@@ -180,14 +181,16 @@ function initialize() {
       .attr("height", height2 + 7);
 
   // draw dots
-  mydots.selectAll(".dot") //seems like you can put anything in  the selectAll("")
+  mydots.selectAll(".circle") //seems like you can put anything in  the selectAll("")
       .data(dataset)
       .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 5)
+      .attr("class", "circle")
+      .attr("r", 6)
       .attr("cx", xMap) 
       .attr("cy", yMap) 
       .style("fill", function(d) {return cValue(d.err)})
+	  .style("stroke", "black")
+	  .style("stroke-width", ".3")
       .on("mouseover", function(d) {
           tooltip.transition()
                .duration(10)
@@ -212,9 +215,8 @@ function initialize() {
 function brushed() {
   x.domain(brush.empty() ? x2.domain() : brush.extent());
   focus.select(".x.axis").call(xAxis);
-  mydots.selectAll(".dot")
+  mydots.selectAll(".circle")
    .attr("cx", xMap)
-   .attr("width", width + margin.left + margin.right-100)
    .attr("cy", yMap);
 }
 
