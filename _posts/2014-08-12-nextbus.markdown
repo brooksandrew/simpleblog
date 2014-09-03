@@ -221,6 +221,13 @@ coming soon...
 
 <iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="750"></iframe>
 
+<h3>One week of Nextbus predictions</h3>
+<iframe style="border: 0px;" src="/simpleblog/assets/html/busScatter.html" width="1000" height="750"></iframe>
+
+green dots are early buses.
+red dots are late buses.
+
+
 
 
 

@@ -41,14 +41,15 @@ svg {
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
-var margin = {top: 10, right: 10, bottom: 100, left: 40},
-    margin2 = {top: 430, right: 10, bottom: 20, left: 40},
+var margin = {top: 10, right: 10, bottom: 100, left: 50},
+    margin2 = {top: 430, right: 10, bottom: 20, left: 50},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
     height2 = 500 - margin2.top - margin2.bottom;
 
 var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 
+// converts number like "2.5" into "2:30 minutes" 
 var number2minutes = function(d) {
   d2 = Math.abs(d)
   if (d2<1) {ret = parseFloat(d2*60).toFixed(0) + " seconds"}
@@ -62,17 +63,12 @@ var number2minutes = function(d) {
   return ret 
 }
 
+// determines if time is late(+) or early(-)
 var earlyLateMouseover = function(d) {
   if (d<0) {ret = number2minutes(d) + " early"}
   else {ret = number2minutes(d) + " late"} 
   return ret
 }; 
-
-// var earlyLateMouseover = function(d) {
-//   if (d<0) {ret = parseFloat(Math.abs(d)).toFixed(1) + " minutes early"}
-//   else {ret = parseFloat(d).toFixed(1) + " minutes late"} 
-//   return ret
-// }; 
 
 //setup x
 var x = d3.time.scale().range([0, width]),
@@ -89,13 +85,13 @@ var xAxis = d3.svg.axis().scale(x).orient("bottom"),
 
 // setup fill color
 var cValue = d3.scale.linear()
-    .domain([-5, 0, 5])
+    .domain([-6, 0, 6])
     .range(["green", "white", "red"]);
 
-//var cValue = "firebrick"
-
+//setting up brush and defaultExtent
 var brush = d3.svg.brush()
     .x(x2)
+    .extent([parseDate("2014-08-06 12:22:22"), parseDate("2014-08-07 12:22:22")])
     .on("brush", brushed);
 
 var mypoints = d3.svg.line()
@@ -106,6 +102,17 @@ var mypoints = d3.svg.line()
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
+
+// yaxis label
+svg.append("text")
+    .attr("class", "y label")
+    .attr("text-anchor", "middle")
+    .attr("y", 5)
+    .attr("x", -(height)/2)
+    .attr("dy", ".75em")
+    .attr("transform", "rotate(-90)")
+    .text("prediction (minutes)")
+      .style("font-size", "15px");
 
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -130,7 +137,7 @@ var tooltip = d3.select("body").append("div")
 
 //load data
 var dataset=
-d3.csv("../csv/cleanTrips_small.csv", function(error, data) {
+d3.csv("../csv/cleanTrips_d3scatter.csv", function(error, data) {
   dataset=data;
   dataset.forEach(function(d){
     d['time'] = parseDate(d['time'])
@@ -180,7 +187,7 @@ function initialize() {
       .style("fill", function(d) {return cValue(d.err)})
       .on("mouseover", function(d) {
           tooltip.transition()
-               .duration(200)
+               .duration(10)
                .style("opacity", .9);
           tooltip.html("prediction: " + d['Minutes'] + " minutes" + "<br>" +
             "actual: " + earlyLateMouseover(d['err']))
@@ -190,7 +197,7 @@ function initialize() {
       })
       .on("mouseout", function(d) {
           tooltip.transition()
-               .duration(500)
+               .duration(800)
                .style("opacity", 0);
       });
 
