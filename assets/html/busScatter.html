@@ -61,7 +61,13 @@ var number2minutes = function(d) {
     ret = mins + ":" + secs + " minutes"
   }
   return ret 
-}
+};
+
+// determines color for tooltip text
+var getColor = function(d) {
+	if(d < 0) {return "green"}
+	else {return "red"}
+};
 
 // determines if time is late(+) or early(-)
 var earlyLateMouseover = function(d) {
@@ -177,6 +183,7 @@ function initialize() {
       .attr("height", height2 + 7);
 
   // draw dots
+  
   mydots.selectAll(".dot") //seems like you can put anything in  the selectAll("")
       .data(dataset)
       .enter().append("circle")
@@ -188,9 +195,9 @@ function initialize() {
       .on("mouseover", function(d) {
           tooltip.transition()
                .duration(10)
-               .style("opacity", .9);
+               .style("opacity", 1);
           tooltip.html("prediction: " + d['Minutes'] + " minutes" + "<br>" +
-            "actual: " + earlyLateMouseover(d['err']))
+            "actual: " + " <span style='color:" + getColor(d["err"]) + "'>"  + earlyLateMouseover(d['err']) + "</span>")
                .style("left", (d3.event.pageX + 10) + "px")
                .style("top", (d3.event.pageY - 48) + "px")
                .style("font-weight", "bold");
