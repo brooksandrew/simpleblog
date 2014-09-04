@@ -52,6 +52,8 @@ var margin = {top: 10, right: 10, bottom: 100, left: 50},
     height = 500 - margin.top - margin.bottom,
     height2 = 500 - margin2.top - margin2.bottom;
 
+var currentRange;
+
 var parseDate = d3.time.format("%Y-%m-%d %H:%M:%S").parse;
 
 var timeFormat = d3.time.format("%I:%M:%S %p");
@@ -85,12 +87,25 @@ var earlyLateMouseover = function(d) {
 
 // setup x
 var x = d3.time.scale().range([0, width]),
-    x2 = d3.time.scale().range([0, width]),
+    x2 = d3.time.scale()
+            .domain([parseDate("2014-08-04 18:30:00"), parseDate("2014-08-12 15:30:00")]) //this works... but have to hardcode start and end dates
+			//.domain(d3.extent(dataset.map(function(d) { return d.time; })))
+            .nice(d3.time.minute)
+            .range([0, width]),
     xMap = function(d) { return x(d.time); } 
     y = d3.scale.linear().range([height, 0]),
     y2 = d3.scale.linear().range([height2, 0]);
     yMap = function(d) { return y(d.Minutes); } // data -> display
-
+	
+	//making radius of circle zero when circle is beyond range
+    var inRange = function(d) { 
+        if(!currentRange || d.time < currentRange[0] || d.time > currentRange[1] ) {
+            return 0;
+        } else {
+            return 6;
+        }
+    }
+    
 // setup y
 var xAxis = d3.svg.axis().scale(x).orient("bottom"),
     xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
@@ -104,13 +119,13 @@ var cValue = d3.scale.linear()
 //setting up brush and defaultExtent
 var brush = d3.svg.brush()
     .x(x2)
-    .extent([parseDate("2014-08-06 12:22:22"), parseDate("2014-08-07 12:22:22")]) //trying to intialize brush
+    .extent([parseDate("2014-08-04 18:30:00"), parseDate("2014-08-05 02:00:00")]) // starting window.  needs to be subset of x2.domain
     .on("brush", brushed);
 
 // add the graph canvas to the body of the webpage
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("height", height + margin.top + margin.bottom);
 
 // y-axis label
 svg.append("text")
@@ -176,6 +191,7 @@ function initialize() {
   context.append("g")
       .attr("class", "x brush")
       .call(brush)
+      .call(brush.event)
       .selectAll("rect")
       .attr("y", -6)
       .attr("height", height2 + 7);
@@ -213,17 +229,14 @@ function initialize() {
 };
 
 function brushed() {
+  currentRange = (brush.empty()? undefined : brush.extent());
   x.domain(brush.empty() ? x2.domain() : brush.extent());
   focus.select(".x.axis").call(xAxis);
   mydots.selectAll(".circle")
    .attr("cx", xMap)
-   .attr("cy", yMap);
-}
-
-function type(d) {
-  d.time = parseDate(d.time);
-  d.Minutes = +d.Minutes;
-  return d;
+   .attr("cy", yMap)
+   .attr("r", inRange);
 }
 
 </script>
+
