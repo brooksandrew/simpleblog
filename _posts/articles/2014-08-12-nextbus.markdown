@@ -9,6 +9,9 @@ share: true
 ---
 
 
+* Table of Contents
+{:toc}
+
 **Motivation:** If you're a bus-rider and public transportation enthusiast like myself, you probably use Nextbus -- well I do anyway.
 Nextbus is great (usually).  It tells me exactly how many minutes I have until the bus rolls up to my bus stop... when it's right.
 
@@ -19,7 +22,7 @@ and cool intereactive visualizations using JavaScript and D3.
 **Disclaimer:** I use R and Python on a regular basis for data analysis.  I've worked with APIs before, but am by no means an expert.  
 This is my first real venture into JavaScript and D3.  So this is much more of an experiment than an expert-guide.  Anyhow, this is how I did it...
 
-<h2>Step 1: Get data from API</h2>
+## Step 1: Get data from API
 I live in DC, so I tapped the [WMATA (Washington Metropolitan Area Transit Authority)](http://www.wmata.com/) API for my data.
 I live in a house, which is near a bus stop, so I pulled predictions for my bus stop (selfish, I know) every 10 seconds for about a week.
 
@@ -213,10 +216,10 @@ def write2text(filename, freq=10, mins=10, stopid='1003043'):
  
 {% endhighlight %}
 
-<h2>Step 2: Process data in R</h2>
+## Step 2: Process data in R
 coming soon...
 
-<h2>Step 3: Build Javascript+D3 app</h2>
+## Step 3: Build Javascript+D3 visualization
 coming soon...
 
 
@@ -225,11 +228,9 @@ coming soon...
 
 <iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="750"></iframe>
 
-<h3>One week of Nextbus predictions</h3>
+### One week of Nextbus predictions
 <iframe style="border: 0px;" src="/simpleblog/assets/html/busScatter.html" width="1000" height="550"></iframe>
 
-green dots are early buses.
-red dots are late buses.
 
 
 
