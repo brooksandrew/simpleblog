@@ -1,0 +1,11 @@
+# Site navigation links
+
+- title: About
+  url: /about/
+
+- title: Articles
+  url: /articles/
+
+- title: Home
+  url: "http://brooksandrew.github.io"
+
