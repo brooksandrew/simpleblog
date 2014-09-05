@@ -5,7 +5,9 @@ locale: en_US
 description: curious ventures into data science, travel and interesting things
 logo: ab-logo.jpg
 search: true
-url: 
+
+#url:              http://localhost:4000
+url:               http://brooksandrew.github.io/simpleblog
 
 
 # Jekyll configuration
