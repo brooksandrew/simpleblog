@@ -31,7 +31,19 @@
 	    fill-opacity: .125;
 	    shape-rendering: crispEdges;
 	}
-
+	
+	.d3-tip {
+	  line-height: 1;
+	  font-size: 15px;
+	  padding: 12px;
+	  background: rgba(0, 0, 0, 0.8);
+	  color: #fff;
+	  border-radius: 2px;
+	}
+	
+	.bar:hover {
+	  fill: orangered ;
+	}
   
 
 </style>
@@ -69,6 +81,7 @@
 
 <!-- loading JS libraries -->
 <script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <script>
@@ -93,6 +106,12 @@ var earlyORlate = function(values, cutoff) {
         else late.push(0)
     };
     return sumArray(late)/values.length
+}
+
+var fmtPct = function(x) {
+	if(x > 1) ret = Math.round(parseFloat(x))
+	else ret = parseFloat(x).toFixed(1)
+	return ret
 }
 
 // alert(window.location.pathname);
@@ -156,6 +175,31 @@ var buildhist = function(adata, cutoff){
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom").ticks(dmax-dmin);
+		
+	var tip = d3.tip()
+		  .attr('class', 'd3-tip')
+		  .offset(function(d) {
+			if(d.x<cutoff) xoff = 200
+			else xoff = 0
+			return [-10, xoff]
+		  })
+		  .html(function(d) {
+		  
+			var mydatagt = []
+			var mydatalt = []
+			for(i=0; i<mydata.length; i++){
+				if (mydata[i]>=d.x) mydatagt.push(mydata[i])
+				if (mydata[i]<=d.x+1) mydatalt.push(mydata[i])
+			}
+			
+			if(d.x>=cutoff) {
+				return "<span style='font-weight:bold; font-size:18px'>" +  fmtPct(d.y/mydata.length*100) +  "% </span>" + " chance bus will arrive " + parseFloat(d.x-cutoff) + "-" + parseFloat(d.x-cutoff+1) + " minutes <span style='color:red'> late </span>"  + "<br>" +
+				       "<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatagt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive more than " + parseFloat(d.x-cutoff) + " minutes <span style='color:red'> late </span>"
+			} else {
+				return "<span style='font-weight:bold; font-size:18px'>" +  fmtPct(d.y/mydata.length*100) +  "% </span>" + " chance bus will arrive " + parseFloat(cutoff-d.x-1) + "-" + parseFloat(cutoff-d.x) + " minutes <span style='color:green'> early </span>" + "<br>" +
+						"<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatalt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive more than " + parseFloat(cutoff-d.x-1) + " minutes <span style='color:green'> early </span>"
+		  }
+		  });
 
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -163,11 +207,14 @@ var buildhist = function(adata, cutoff){
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
+	svg.call(tip);
+	
     var bar = svg.selectAll(".bar")
         .data(data)
         .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
         
     bar.append("rect")
         .attr("x", 0) //shifts bars
@@ -177,7 +224,10 @@ var buildhist = function(adata, cutoff){
 			if (dfff.x<cutoff) {col="forestgreen"}
 			else {col="firebrick"}
 			return col
-		});
+		})
+		.on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+		 
 
     bar.append("text")
         .attr("dy", ".75em")

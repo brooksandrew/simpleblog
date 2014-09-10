@@ -11,10 +11,10 @@ share: true
 
 
 
-<iframe style="border: 0px;" src="../assets/html/d3nextbus.html" width="1000" height="600"></iframe>
+<iframe style="border: 0px;" src="../../assets/html/d3nextbus.html" width="1000" height="600"></iframe>
 
 ### One week of Nextbus predictions
-<iframe style="border: 0px;" src="../assets/html/busScatter.html" width="1000" height="550"></iframe>
+<iframe style="border: 0px;" src="../../assets/html/busScatter.html" width="1000" height="550"></iframe>
 
 
 
