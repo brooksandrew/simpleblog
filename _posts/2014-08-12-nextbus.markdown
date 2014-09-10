@@ -145,6 +145,17 @@ buspred=api.bus_prediction(stopid)
 
 It returns something like this:
 
+{% highlight R%}
+time                            Minutes  VehicleID  DirectionText                  RouteID  TripID
+2014-08-04 18:43:33.525000      17       6506       South to Federal Triangle      64       6464186
+2014-08-04 18:43:33.525000      37       7228       South to Federal Triangle      64       6464187
+2014-08-04 18:43:33.525000      56       7235       South to Federal Triangle      64       6464188
+2014-08-04 18:43:33.525000      80       7231       South to Federal Triangle      64       6464189
+2014-08-04 18:43:43.868000      17       6506       South to Federal Triangle      64       6464186
+2014-08-04 18:43:43.868000      37       7228       South to Federal Triangle      64       6464187
+{% endhighlight %}
+
+
 Here's the first function I wrote to actually process the pulled data from the API.  It's pretty simple -- it parses the .JSON object 
 pulled from the API into an array with the useful bits of information we want to save.
 
