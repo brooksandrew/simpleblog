@@ -2,7 +2,7 @@
 layout: post
 title:   How Accurate is Nextbus???? DRAFT
 date:   2014-08-28
-categories: 
+categories: articles
 tags: [data science]
 comments: true
 share: true
