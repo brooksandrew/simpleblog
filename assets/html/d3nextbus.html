@@ -98,7 +98,7 @@ var earlyORlate = function(values, cutoff) {
 // alert(window.location.pathname);
 
 var dataset2 =
-    d3.csv("/simpleblog/assets/csv/cleanTrips.csv", function(d) {
+    d3.csv("../csv/cleanTrips.csv", function(d) {
         dataset2=d;
         buildhist(dataset2, 5);
     });
@@ -107,7 +107,7 @@ var dataset2 =
 //controls size of app
 var margin = {top: 10, right: 30, bottom: 50, left: 30},
     width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    height = 350 - margin.top - margin.bottom;
 
 // A formatter for counts.
 var formatCount = d3.format(",.0f");
@@ -184,7 +184,8 @@ var buildhist = function(adata, cutoff){
         .attr("y", 6)
         .attr("x", width/data.length / 2) 
         .attr("text-anchor", "middle")
-        .text(function(d) { return formatCount(d.y); });
+        .text(function(d) { return Math.round(d.y/mydata.length*100)+'%'; });
+        //.text(function(d) { return formatCount(d.y); });
     
     svg.append("g")
         .attr("class", "x axis")
@@ -215,10 +216,10 @@ svg.append("text")
 
 
 //printing sentences
-$(".intro h2").html("Nextbus prediction of " + cutoff + " minutes really means:");
-$(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + busQ10 + " minutes on an early day.");
-$(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busMedian + " minutes on an average day.");
-$(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" +busQ90 + " minutes on a late day.");
+$(".intro h2").html("Nextbus prediction of " + "<font size=5>" + cutoff + "</font>" + " minutes really means:");
+$(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ10 + "</font>" + " minutes on an early day.");
+$(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busMedian + "</font>" +" minutes on an average day.");
+$(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ90 + "</font>" +" minutes on a late day.");
 
 
 };
