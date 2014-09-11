@@ -10,6 +10,17 @@
 	  shape-rendering: crispEdges;
 	}
 
+    .bar rect:hover {
+      opacity: 0.6;
+    }
+
+    rect {
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+    }
+
 	.bar text {
 	  fill: #fff;
 	}
@@ -41,9 +52,7 @@
 	  border-radius: 2px;
 	}
 	
-	.bar:hover {
-	  fill: orangered ;
-	}
+
   
 
 </style>
