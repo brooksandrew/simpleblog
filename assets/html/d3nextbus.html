@@ -33,7 +33,7 @@
 	}
 	
 	.d3-tip {
-	  line-height: 1;
+	  line-height: 1.5;
 	  font-size: 15px;
 	  padding: 12px;
 	  background: rgba(0, 0, 0, 0.8);
@@ -114,7 +114,19 @@ var fmtPct = function(x) {
 	return ret
 }
 
-// alert(window.location.pathname);
+//format hover over text
+var fmtNumHover = function(x, earlyORlate){
+    if (earlyORlate=='late') tcol = 'red'
+    else tcol = 'green'
+    
+    if(x<=1) smartmin = " minute "
+    else smartmin = " minutes "
+
+    if(x==0) ret = "<span style=color:" + tcol + ">" + earlyORlate + "</span>"
+    else ret = "more than " + x + smartmin + "<span style=color:" + tcol + ">" + earlyORlate + "</span>"
+
+    return ret
+}
 
 var dataset2 =
     d3.csv("../csv/cleanTrips.csv", function(d) {
@@ -194,10 +206,10 @@ var buildhist = function(adata, cutoff){
 			
 			if(d.x>=cutoff) {
 				return "<span style='font-weight:bold; font-size:18px'>" +  fmtPct(d.y/mydata.length*100) +  "% </span>" + " chance bus will arrive " + parseFloat(d.x-cutoff) + "-" + parseFloat(d.x-cutoff+1) + " minutes <span style='color:red'> late </span>"  + "<br>" +
-				       "<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatagt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive more than " + parseFloat(d.x-cutoff) + " minutes <span style='color:red'> late </span>"
+				       "<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatagt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive " + fmtNumHover(d.x-cutoff, 'late')
 			} else {
 				return "<span style='font-weight:bold; font-size:18px'>" +  fmtPct(d.y/mydata.length*100) +  "% </span>" + " chance bus will arrive " + parseFloat(cutoff-d.x-1) + "-" + parseFloat(cutoff-d.x) + " minutes <span style='color:green'> early </span>" + "<br>" +
-						"<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatalt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive more than " + parseFloat(cutoff-d.x-1) + " minutes <span style='color:green'> early </span>"
+						"<span style='font-weight:bold; font-size:18px'>" + fmtPct(mydatalt.length/mydata.length*100) +  "% </span>" + " chance bus will arrive " + fmtNumHover(cutoff-d.x-1, 'early')
 		  }
 		  });
 
