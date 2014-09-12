@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus - Part I: Extract Data from API"
+title:   "How Accurate is Next Bus - Part I: Extracting Data from API"
 date:   2014-08-28
 categories: articles
 tags: [data science]
@@ -283,7 +283,7 @@ time                            Minutes  VehicleID  DirectionText               
 
 
 So now we've collected a lot of data from Next Bus.  I got ~190,000 rows for one bus stop for just one week.  So what do we do with it all?
-Checkout the [next post](../2014-09-10-nextbus2_analyze).
+Checkout the [next post](../nextbus2_analyze).
 
 
 

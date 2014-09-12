@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus - Part II: Analyze Data"
+title:   "How Accurate is Next Bus - Part II: Analyzing and Wrangling Data"
 date:   2014-09-10
 categories: articles
 tags: [data science]
@@ -11,7 +11,7 @@ share: true
 * Table of Contents
 {:toc}
 
-In a the [previous post](/2014-08-12-nextbus1_api) we extracted Next Bus predictions from the [Wmata API](http://developer.wmata.com/).  
+In a the [previous post](../nextbus1_api) we extracted Next Bus predictions from the [Wmata API](http://developer.wmata.com/).  
 If that's too much or uninteresting to you, start here.  Our extracted data looks something like this:
 
 {% highlight bash%}
@@ -124,7 +124,7 @@ df$err <- df$est - df$Minutes
 
 ## Step 4: Write out data to csv
 
-Easy enough.  This is the data that will feed the d3 visualizations built in the [next post](/2014-09-11-nextbus3_viz).
+Easy enough.  This is the data that will feed the d3 visualizations built in the [next post](../nextbus3_viz).
 
 {% highlight R %}
 write.table(df, file='/Users/ajb/Documents/github/nextbus/data/cleanTrips.csv', row.names=F, sep=',')
