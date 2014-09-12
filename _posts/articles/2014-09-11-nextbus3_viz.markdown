@@ -27,8 +27,8 @@ all this time, but transformations that happen in the app take almost no time at
 
 
 
-The scatter plot with zoom+pan+brush loaded to slow with the full dataset (24MB) of all 190,000 predictions for the week.
-It also made for a crowded visualization.  So I took a sample preserving the distance between predictions.  The sampled data (2.5MB) takes every 10th prediction which turns out to be approx a prediction every 90 seconds
+The scatter plot with zoom+pan+brush loaded too slow with the full dataset (24MB) of all 190,000 predictions for the week.
+It also made for a crowded visualization.  So I took a sample preserving a consistent distance between predictions.  The sampled data (2.5MB) takes every 10th prediction which turns out to be approximately a prediction every 90 seconds.
 
 {% highlight R %}
 # keeping just estimates every nth prediction when time between predictions is less than 30 seconds
