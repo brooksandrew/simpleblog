@@ -12,7 +12,7 @@ share: true
 See the prior 2 posts for context:  
 
 * [How Accurate is Next Bus - Part III: Extracting data from API](../nextbus1_api)
-* [How Accurate is Next Bus - Part III: Analyzing and wrangling data](../nextbus2_analye)
+* [How Accurate is Next Bus - Part III: Analyzing and wrangling data](../nextbus2_analyze)
 
 
 <iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="600"></iframe>
