@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   How Accurate is Nextbus?
+title:   "How Accurate is Next Bus - Part I: Extract Data from API"
 date:   2014-08-28
 categories: articles
 tags: [data science]
@@ -8,21 +8,17 @@ comments: true
 share: true
 ---
 
+**Motivation:** If you're a bus-rider and public transportation enthusiast like myself, you probably use Next Bus -- well I do anyway.
+Next Bus is great (usually).  It tells me exactly how many minutes I have until the bus rolls up to my bus stop... when it's right.
 
-* Table of Contents
-{:toc}
-
-**Motivation:** If you're a bus-rider and public transportation enthusiast like myself, you probably use Nextbus -- well I do anyway.
-Nextbus is great (usually).  It tells me exactly how many minutes I have until the bus rolls up to my bus stop... when it's right.
-
-Having missed my fair share of early buses and waiting for what seems like ages when Nextbus continuously predicts just a few minutes, 
+Having missed my fair share of early buses and waiting for what seems like ages when Next Bus continuously predicts just a few more minutes, 
 I thought it would be an interesting and worthwhile problem to investigate... and also a good excuse to experiment working with some APIs 
-and cool intereactive visualizations using JavaScript and D3.
+and cool intereactive visualizations using JavaScript and D3.  So I sought out to determine how accurate Next Bus predictions really are.
 
-**Disclaimer:** I use R and Python on a regular basis for data analysis.  I've worked with APIs before, but am by no means an expert.  
-This is my first real venture into JavaScript and D3.  So this is much more of an experiment than an expert-guide.  Anyhow, this is how I did it...
 
-## Step 1: Get data from API
+**Disclaimer:** I use R and Python on a regular basis for scripting and data analysis.  I've worked with APIs before, but am by no means an expert.  
+This is my first real venture into JavaScript and D3, so this is much more of an experiment than an expert-guide.  Anyhow, this is what I did:
+
 I live in DC, so I tapped the [WMATA (Washington Metropolitan Area Transit Authority)](http://www.wmata.com/) API for my data.
 I live in a house, which is near a bus stop, so I pulled predictions for my bus stop (selfish, I know) every 10 seconds for about a week.
 
@@ -135,24 +131,34 @@ With this Wmata class, here's the fastest way to access the API:
 
 {% highlight python %}
 
-runfile('python-wmata.py')
+runfile('python-wmata.py') # running code above that defines the class `Wmata` 
 api = Wmata('kfgpmgvfgacx98de9q3xazww') # put your API key here
-stopid = '1003043' 
-buspred=api.bus_prediction(stopid)
-
+stopid = '1003043' # put your bus stop ID here
+buspred=api.bus_prediction(stopid) # hitting API
 
 {% endhighlight %}
 
-It returns something like this:
+which returns something like this when you `print buspred`:
 
-{% highlight R%}
-time                            Minutes  VehicleID  DirectionText                  RouteID  TripID
-2014-08-04 18:43:33.525000      17       6506       South to Federal Triangle      64       6464186
-2014-08-04 18:43:33.525000      37       7228       South to Federal Triangle      64       6464187
-2014-08-04 18:43:33.525000      56       7235       South to Federal Triangle      64       6464188
-2014-08-04 18:43:33.525000      80       7231       South to Federal Triangle      64       6464189
-2014-08-04 18:43:43.868000      17       6506       South to Federal Triangle      64       6464186
-2014-08-04 18:43:43.868000      37       7228       South to Federal Triangle      64       6464187
+{% highlight python %}
+
+>>> print buspred
+
+{u'Predictions': [{u'DirectionNum': u'1',
+   u'DirectionText': u'South to Federal Triangle',
+   u'Minutes': 19,
+   u'RouteID': u'64',
+   u'TripID': u'6783533',
+   u'VehicleID': u'6495'},
+  {u'DirectionNum': u'1',
+   u'DirectionText': u'South to Federal Triangle',
+   u'Minutes': 41,
+   u'RouteID': u'64',
+   u'TripID': u'6783534',
+   u'VehicleID': u'2100'}].
+u'StopName': u'New Hampshire Ave + 7th St'}
+
+
 {% endhighlight %}
 
 
@@ -186,8 +192,32 @@ def extractPred(buspred):
  
 {% endhighlight %}
 
-This is the function that I initialize with the information I want to extract from the API and let rip for an hour, day, week or however long you want to save predictions for.
-It's basically a big wrapper around `extractPred`.  It writes the predictions to a .csv file every 10 seconds for however long you specify.
+This turns the JSON into an array of arrays.  Something like this:
+
+{% highlight python %}
+
+>>> print extractPred(buspred)
+
+[[datetime.datetime(2014, 9, 11, 22, 58, 11, 776324),
+  19,
+  u'6495',
+  u'South to Federal Triangle',
+  u'64',
+  u'6783533'],
+ [datetime.datetime(2014, 9, 11, 22, 58, 11, 776324),
+  41,
+  u'2100',
+  u'South to Federal Triangle',
+  u'64',
+  u'6783534']]
+{% endhighlight %}
+
+I probably could have skipped this step and transformed the the JSON directly to a flat file (or database), but this was made the most sense to me at the time
+and it works.
+
+
+`write2text` is the function that I initialize with the information I want to extract from the API and let rip for an hour, day, week, or however long you want to save predictions for.
+It's basically a big wrapper around `extractPred`.  It writes the predictions to a .txt file every 10 seconds, or however often you specify with the `freq` argument.
 
 * `filename` is the name of the output .csv datafile where results will be written
 * `freq` is the frequency in seconds that the function will make a call to the API
@@ -227,26 +257,32 @@ def write2text(filename, freq=10, mins=10, stopid='1003043'):
  
 {% endhighlight %}
 
-## Step 2: Process data in R
-coming soon...
+Now we can start harvesting data.  I used an old laptop and let it rip for a week by running the code below with `min`=60&#42;24&#42;7.
 
-## Step 3: Build Javascript+D3 visualization
-coming soon...
+{% highlight python %}
+
+api = Wmata('kfgpmgvfgacx98de9q3xazww')  # put your API key here
+stopid = '1003043'  # put your bus stop ID here
+buspred=api.bus_prediction(stopid) 
+write2text('data/bus64_outputData.txt', freq=10, mins=60*24*7) # start hitting API
+
+{% endhighlight %}
+
+Here's what the a snippet of the collected data (`bus64_outputData.txt`) looks like:
+
+{% highlight bash%}
+time                            Minutes  VehicleID  DirectionText                  RouteID  TripID
+2014-08-04 18:43:33.525000      17       6506       South to Federal Triangle      64       6464186
+2014-08-04 18:43:33.525000      37       7228       South to Federal Triangle      64       6464187
+2014-08-04 18:43:33.525000      56       7235       South to Federal Triangle      64       6464188
+2014-08-04 18:43:33.525000      80       7231       South to Federal Triangle      64       6464189
+2014-08-04 18:43:43.868000      17       6506       South to Federal Triangle      64       6464186
+2014-08-04 18:43:43.868000      37       7228       South to Federal Triangle      64       6464187
+{% endhighlight %}
 
 
-
-
-
-<iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="600"></iframe>
-
-### One week of Nextbus predictions
-<iframe style="border: 0px;" src="/simpleblog/assets/html/busScatter.html" width="1000" height="550"></iframe>
-
-
-
-
-
-
+So now we've collected a lot of data from Next Bus.  I got ~190,000 rows for one bus stop for just one week.  So what do we do with it all?
+Checkout the next [post](/2013-09-10-nextbus2_analyze).
 
 
 
