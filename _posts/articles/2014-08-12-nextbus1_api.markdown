@@ -17,7 +17,7 @@ and cool intereactive visualizations using JavaScript and D3.  So I sought out t
 
 
 **Disclaimer:** I use R and Python on a regular basis for scripting and data analysis.  I've worked with APIs before, but am by no means an expert.  
-This is my first real venture into JavaScript and D3, so this is much more of an experiment than an expert-guide.  Anyhow, this is what I did:
+This is my first real venture into JavaScript and D3, so this is much more of an experiment than an expert-guide.  Anyhow, this is what I did.
 
 I live in DC, so I tapped the [WMATA (Washington Metropolitan Area Transit Authority)](http://www.wmata.com/) API for my data.
 I live in a house, which is near a bus stop, so I pulled predictions for my bus stop (selfish, I know) every 10 seconds for about a week.
@@ -127,7 +127,7 @@ class Wmata(object):
 
 {% endhighlight python %}
 
-With this Wmata class, here's the fastest way to access the API:
+With this `Wmata` class, here's the fastest way to access the API:
 
 {% highlight python %}
 
@@ -161,8 +161,7 @@ u'StopName': u'New Hampshire Ave + 7th St'}
 
 {% endhighlight %}
 
-
-Here's the first function I wrote to actually process the pulled data from the API.  It's pretty simple -- it parses the .JSON object 
+Pretty fast!  Here's the first function I wrote to actually process the pulled data from the API.  It's pretty simple -- it parses the JSON object 
 pulled from the API into an array with the useful bits of information we want to save.
 
 
@@ -192,7 +191,9 @@ def extractPred(buspred):
  
 {% endhighlight %}
 
-This turns the JSON into an array of arrays.  Something like this:
+Here's what it does.  It actually transforms the JSON into an array of arrays.  Each array is a prediction for a different bus.
+This happens for the same reason that when you check Next Bus on your phone, you see predictions for the next 2 or 3 buses en route towards your stop. 
+In this example one bus is 19 minutes away while another is 41 minutes away.
 
 {% highlight python %}
 
@@ -257,7 +258,7 @@ def write2text(filename, freq=10, mins=10, stopid='1003043'):
  
 {% endhighlight %}
 
-Now we can start harvesting data.  I used an old laptop and let it rip for a week by running the code below with `min`=60&#42;24&#42;7.
+Now we can start harvesting data.  I used an old laptop and let it rip for a week by running the code below by setting `min=60*24*7`.
 
 {% highlight python %}
 
@@ -282,7 +283,7 @@ time                            Minutes  VehicleID  DirectionText               
 
 
 So now we've collected a lot of data from Next Bus.  I got ~190,000 rows for one bus stop for just one week.  So what do we do with it all?
-Checkout the next [post](/2013-09-10-nextbus2_analyze).
+Checkout the [next post](../2014-09-10-nextbus2_analyze).
 
 
 
