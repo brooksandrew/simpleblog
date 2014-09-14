@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus - Part II: Analyzing and Wrangling Data"
+title:   "How Accurate is Next Bus II: Analyzing and Wrangling Data"
 date:   2014-09-10
 categories: articles
 tags: [data science]

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus - Part III: Visualize"
+title:   "How Accurate is Next Bus III: Visualizing"
 date:   2014-09-12
 categories: articles
 tags: [data science]
@@ -11,8 +11,8 @@ share: true
 
 See the prior 2 posts for context:  
 
-* [How Accurate is Next Bus - Part III: Extracting data from API](../nextbus1_api)
-* [How Accurate is Next Bus - Part III: Analyzing and wrangling data](../nextbus2_analyze)
+* [How Accurate is Next Bus III: Extracting data from API](../nextbus1_api)
+* [How Accurate is Next Bus III: Analyzing and wrangling data](../nextbus2_analyze)
 
 
 <iframe style="border: 0px;" src="/simpleblog/assets/html/d3nextbus.html" width="1000" height="600"></iframe>
