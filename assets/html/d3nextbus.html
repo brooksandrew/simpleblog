@@ -53,9 +53,6 @@
 	  border-radius: 2px;
 	}
 	
-
-  
-
 </style>
 
 <div class="intro">
@@ -223,6 +220,24 @@ var buildhist = function(adata, cutoff){
 		  }
 		  });
 
+    // format hover over text for sentences
+    var tip2 = d3.tip()
+        .attr('class', 'd3-tip')
+        .direction("s")
+        .html(function(d) {
+            //console.log(d3.mouse())
+            return "<font size=2>Early days are defined such that there is a 10% chance the bus will arrive before the early day wait time.</font>"
+        })
+        .style("left", 300+"px")
+        .style("top", 150+"px")
+
+
+        //.style("left", d3.select(this).attr("cx") + "px")     
+        //.style("top", d3.select(this).attr("cy") + "px");
+        
+
+    //console.log(d3.select("#myintro").position())
+
     var svg = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
@@ -236,7 +251,6 @@ var buildhist = function(adata, cutoff){
         .enter().append("g")
         .attr("class", "bar")
         .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
-
         
     bar.append("rect")
         .attr("x", 0) //shifts bars
@@ -257,7 +271,6 @@ var buildhist = function(adata, cutoff){
         .attr("x", width/data.length / 2) 
         .attr("text-anchor", "middle")
         .text(function(d) { return Math.round(d.y/mydata.length*100)+'%'; });
-        //.text(function(d) { return formatCount(d.y); });
     
     svg.append("g")
         .attr("class", "x axis")
@@ -265,34 +278,39 @@ var buildhist = function(adata, cutoff){
         .call(xAxis);
 
     // xAxis label
-svg.append("text") 
-    .attr("transform", "translate(" + width + " ," + (height + margin.bottom-15) +")")
-    .style("text-anchor", "end")
-    .text("Bus is late " + parseFloat(earlyORlate(mydata, cutoff)*100).toFixed(0) + "% of the time")
-    .style("font-size", "15px")
-    .style("fill", "firebrick");
+    svg.append("text") 
+        .attr("transform", "translate(" + width + " ," + (height + margin.bottom-15) +")")
+        .style("text-anchor", "end")
+        .text("Bus is late " + parseFloat(earlyORlate(mydata, cutoff)*100).toFixed(0) + "% of the time")
+        .style("font-size", "15px")
+        .style("fill", "firebrick")
 
-svg.append("text") 
-    .attr("transform", "translate(" + 0 + " ," + (height + margin.bottom-15) +")")
-    .style("text-anchor", "left")
-    .text("Bus is early " + parseFloat((1-earlyORlate(mydata, cutoff))*100).toFixed(0) + "% of the time")
-    .style("font-size", "15px")
-    .style("fill", "forestgreen");
+    svg.append("text") 
+        .attr("transform", "translate(" + 0 + " ," + (height + margin.bottom-15) +")")
+        .style("text-anchor", "left")
+        .text("Bus is early " + parseFloat((1-earlyORlate(mydata, cutoff))*100).toFixed(0) + "% of the time")
+        .style("font-size", "15px")
+        .style("fill", "forestgreen")
 
-svg.append("text") 
-    .attr("transform", "translate(" + width/2 + " ," + (height + margin.bottom-15) +")")
-    .style("text-anchor", "middle")
-    .text("Minutes until bus arrival")
-    .style("font-size", "18px");
-    
+    svg.append("text") 
+        .attr("transform", "translate(" + width/2 + " ," + (height + margin.bottom-15) +")")
+        .style("text-anchor", "middle")
+        .text("Minutes until bus arrival")
+        .style("font-size", "18px");
+
 
 
 //printing sentences
-$(".intro h2").html("Nextbus prediction of " + "<font size=5>" + cutoff + "</font>" + " minutes really means:");
-$(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ10 + "</font>" + " minutes on an early day.");
-$(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busMedian + "</font>" +" minutes on an average day.");
-$(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ90 + "</font>" +" minutes on a late day.");
+$(".intro h2").html("Nextbus prediction of " + "<font size=5>" + cutoff + "</font>" + " minutes really means:")
+.on('mouseover', tip2.show)
+.on('mouseout', tip2.hide);
 
+
+$(".headQ10 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ10 + "</font>" + " minutes on an early day.").on('mouseover', tip2.show).on('mouseout', tip2.hide);
+$(".headMed h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busMedian + "</font>" +" minutes on an average day.").on('mouseover', tip2.show).on('mouseout', tip2.hide);
+$(".headQ90 h2").html("&nbsp&nbsp&nbsp&nbsp&nbsp" + "<font size=5>" + busQ90 + "</font>" +" minutes on a late day.").on('mouseover', tip2.show).on('mouseout', tip2.hide);
+
+svg.call(tip2);
 
 };
 
