@@ -101,7 +101,7 @@ ggsave(filename="/png/ggconf.png", plot=plt1, width=5, height=5, dpi=200)
 
 {% endhighlight %}
 
-<img src="/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
+<img src="/simpleblog/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
 
 First note from the red waves above that **predictions are consistently biased conservatively.**  That is, buses usually (~80% of the time) arrive after their predicted time.
 
@@ -123,7 +123,7 @@ consistency.  The balance of which is tricky -- there is usually a tradeoff.
 This revision behavior explains why the Next Bus errors trend downward as predictions decrease from 10 to 0 minutes.  But why the spike in 
 errors 11-13 minutes out?  My second thought led me to create the visualization below which allows for an investigation of individual buses and their predictions throughout the week.  Possibly a forecast bug? An idiosyncrasy of this particular bus route? 
 
-<iframe style="border: 0px;" src="/assets/html/busScatter.html" width="1000" height="550"></iframe>
+<iframe style="border: 0px;" src="/simpleblog/assets/html/busScatter.html" width="1000" height="550"></iframe>
 
 Surprisingly, the revision hypothesis appears to be dead wrong (or at least very poorly implemented).
 Predictions often follow a consistent trend (straight diagonal line) until some point where predictions 
@@ -143,7 +143,7 @@ plt2 <- ggplot(data=estvar[estvar$Minutes<=60,], aes(x=Minutes,y=err, label=Minu
 ggsave(filename="/png/ggstddev.png", plot=plt2, width=5, height=5, dpi=200) 
 {% endhighlight %}
 
-<img src="/assets/png/ggstddev.png" alt="standard deviations for Next Bus prediction errors">
+<img src="/simpleblog/assets/png/ggstddev.png" alt="standard deviations for Next Bus prediction errors">
 
 
 
