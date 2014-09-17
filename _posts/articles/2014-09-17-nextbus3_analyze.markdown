@@ -1,7 +1,7 @@
 ---
 layout: post
 title:   "How Accurate is Next Bus III: Getting the Answers"
-date:   2014-09-12
+date:   2014-09-17
 categories: articles
 tags: [data science]
 comments: true
