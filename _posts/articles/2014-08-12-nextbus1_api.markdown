@@ -283,7 +283,7 @@ time                            Minutes  VehicleID  DirectionText               
 
 
 So now we've collected a lot of data from Next Bus.  I got ~190,000 rows for one bus stop for just one week.  So what do we do with it all?
-Checkout the [next post](../nextbus2_analyze).
+Checkout the [next post](../nextbus2_wrangle).
 
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus II: Analyzing and Wrangling Data"
+title:   "How Accurate is Next Bus II: Wrangling Data"
 date:   2014-09-10
 categories: articles
 tags: [data science]
@@ -124,15 +124,12 @@ df$err <- df$est - df$Minutes
 
 ## Step 4: Write out data to csv
 
-Easy enough.  This is the data that will feed the d3 visualizations built in the [next post](../nextbus3_viz).
+Easy enough.  This is the data that will feed the d3 visualizations built in the [next post](../nextbus4_viz).
 
 {% highlight R %}
 write.table(df, file='/Users/ajb/Documents/github/nextbus/data/cleanTrips.csv', row.names=F, sep=',')
 {% endhighlight %}
 
-## Step 5: Non D3 analysis
-
-coming soon...
 
 
 
