@@ -146,7 +146,104 @@ ggsave(filename="/png/ggstddev.png", plot=plt2, width=5, height=5, dpi=200)
 <img src="/simpleblog/assets/png/ggstddev.png" alt="standard deviations for Next Bus prediction errors">
 
 
+**Are Next Bus predictions less reliable during certain parts of the day, like rush hour?**
+Short answer, yes - predictions off the mark (late) most in the morning between 8am and 10am.
+Note this analysis is for the 64 bus heading from a residential neighborhood (Petworth) south to Federal Triangle (downtown DC), so 
+peak ridership and traffic along the bus route would likely be in the morning.
 
+I'm particularly interested in assessing relative accuracy of rush hour predictions, so I'm only looking at predictions on the weekdays.  The `lubridate` R package makes working with POSIXct dates easy: creating dummies for weekday and extracting hour.
+
+{% highlight R %}
+require('lubridate')
+df$day <- weekdays(df$time)
+df$weekday <- ifelse(df$day %in% c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'), 1, 0)
+df$hour <- hour(df$time)
+{% endhighlight %}
+
+Calculating the median prediction error for each combination of hour prediction was made and prediction in minutes.
+
+{% highlight R %}
+agg <- with(df[df$weekday==1,], aggregate(err, by=list(hour, Minutes), median))
+names(agg) <- c('hour', 'Minutes', 'err')
+{% endhighlight %}
+
+which returns like this (sample below).  So the average error for predictions made between 20:00 (8pm) 21:00 (9pm) when Next Bus predicts 3 minutes is 0.60 minutes or 36 seconds (late).
+
+{% highlight R%}
+#print(agg)
+hour     Minutes    err
+20       3          0.59874167
+21       3          0.26386667
+22       3         -0.04255000
+23       3         -0.25696667
+ 0       4          1.82138333
+ 5       4          0.62696667
+ 6       4         -0.06708333
+ 7       4          0.80045000
+ 8       4          0.96903333
+ 9       4          0.80225000
+{% endhighlight %}
+
+
+To make this easier to interpret and analyze, I want to reshape the results from long to wide format, like so:
+
+{% highlight R%}
+agg2 <- reshape(agg[agg$Minutes<=60,], timevar='Minutes', idvar='hour', direction='wide')
+agg2 <- agg2[agg2$hour>=5,]
+{% endhighlight %}
+
+which creates something like this (sample):
+
+{% highlight R%}
+#print(agg2)
+hour     err.0     err.1      err.2      err.3       err.4     err.5     err.6     err.7      err.8
+    5 0.5116583 0.5411750 0.73470833  0.7683667  0.62696667 0.3133833 0.5913083 0.8793417 1.04840000
+    6 0.3423917 0.1991000 0.05491667 -0.0438500 -0.06708333 0.1321667 0.1897833 0.3459500 0.07853334
+    7 0.5158500 0.8785333 0.91016666  1.0939833  0.80045000 0.9994833 0.8455833 0.9087167 0.77608333
+    8 0.5109667 0.7079833 0.90148333  1.1051333  0.96903333 1.1482167 1.1714500 1.0322583 1.39443333
+    9 0.5126917 0.7099667 0.91218333  0.5982667  0.80225000 0.9846500 1.2013000 1.8911333 2.78528333
+   10 0.3447833 0.3663167 0.43183333  0.3377000  0.50693334 0.5863583 0.8441750 0.7526417 1.30873333
+{% endhighlight %}
+
+
+Now creating the graphic that puts it all together.  I chose to not show average errors when predictions are 1,2,3 ... 60 minutes separately.
+1. because the trend is the same and 2. it's messy.  So I averaged together the median errors for predictions of 5,6,7,8,9 minutes in one
+goup and 10,11,12,13,14 minutes in a separate group.
+
+
+{% highlight R%}
+require('ggplot2')
+
+cols <- c('firebrick', 'forestgreen')
+agg2$err.5.9 <- rowMeans(agg2[,paste('err.', 5:9, sep='')])
+agg2$err.10.14 <- rowMeans(agg2[,paste('err.', 10:14, sep='')])
+
+plt3 <- ggplot(agg2, aes(x=hour)) +
+  geom_line(aes(y=err.5.9, color=cols[1]), lwd=1.5) +
+  geom_line(aes(y=err.10.14, color=cols[2]), lwd=1.5) +
+  geom_text(aes(y=err.10.14+.1, label=military2std(hour)), size=4) +
+  scale_x_continuous(breaks=seq(min(agg2$hour), max(agg2$hour), 2), labels=military2std(seq(min(agg2$hour), max(agg2$hour), 2))) +
+  ylab('Average prediction error (minutes)') + xlab('Time of prediction') + 
+  scale_colour_manual(values=cols[1:2], labels=c('average error when prediction is 5-9 minutes','average error when prediction is 10-14 minutes')) + 
+  theme(legend.title=element_blank()) +
+  theme(legend.position=c(.5,.1)) +
+  theme(legend.text=element_text(size=12)) + 
+  theme(legend.background = element_rect(fill=alpha('white', 0.5)))
+  
+ggsave(filename="png/gghourmedian.png", plot=plt3, width=5, height=5, dpi=200, scale=1.3) 
+{% endhighlight %}
+
+<img src="/simpleblog/assets/png/gghourmedian.png" alt="average prediction error by hour">
+
+So predictions are wrong (late) the most between 8am and 10am on the weekdays.
+
+<!-- **Analysis for another day: possible extensions**
+
+ * **Interpolation:**  One question that is still not fully answered is when does Next Bus swallow their pride and revise forecasts.
+ There is a lot of jumbling and flat lining around predictions of 8-13 minutes if you play with the scrolly d3 scatter plot app above.
+ I was thinking one could use some interpolation methods (revisiting my Numerical Methods class in grad school) to fit a curve (some n-degree polynomial)
+ to these data points.  The slope of the curve at the various prediction increments would determine how Next Bus revises their forecasts  
+ -->
 
 <!-- The graphic below shows confidence intervals for Next Bus predictions ranging from 0-60 minutes.
 So when the Next Bus app reads 10 minutes:  
