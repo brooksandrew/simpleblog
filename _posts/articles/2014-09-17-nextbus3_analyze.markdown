@@ -147,11 +147,10 @@ ggsave(filename="/png/ggstddev.png", plot=plt2, width=5, height=5, dpi=200)
 
 
 **Are Next Bus predictions less reliable during certain parts of the day, like rush hour?**
-Short answer, yes - predictions off the mark (late) most in the morning between 8am and 10am.
-Note this analysis is for the 64 bus heading from a residential neighborhood (Petworth) south to Federal Triangle (downtown DC), so 
-peak ridership and traffic along the bus route would likely be in the morning.
+Short answer, yes - predictions are off the mark (late) most in the morning between 8am and 10am.
+Note this analysis is for the [64 bus](http://www.wmata.com/bus/timetables/dc/60-64.pdf) heading from a residential neighborhood (Petworth) south to Federal Triangle (downtown DC). So peak ridership and traffic and thus prediction errors along the bus route would likely be in the morning.
 
-I'm particularly interested in assessing relative accuracy of rush hour predictions, so I'm only looking at predictions on the weekdays.  The `lubridate` R package makes working with POSIXct dates easy: creating dummies for weekday and extracting hour.
+I'm particularly interested in assessing relative accuracy of rush hour predictions, so I'm only looking at predictions on the weekdays.  The `lubridate` R package makes working with POSIXct dates easy. First creating dummies for weekday and extracting hour.
 
 {% highlight R %}
 require('lubridate')
@@ -160,14 +159,14 @@ df$weekday <- ifelse(df$day %in% c('Monday', 'Tuesday', 'Wednesday', 'Thursday',
 df$hour <- hour(df$time)
 {% endhighlight %}
 
-Calculating the median prediction error for each combination of hour prediction was made and prediction in minutes.
+Calculating the median prediction error for each prediction increment (1,2,3 ... 60 minutes) by hour of day the prediction was made.
 
 {% highlight R %}
 agg <- with(df[df$weekday==1,], aggregate(err, by=list(hour, Minutes), median))
 names(agg) <- c('hour', 'Minutes', 'err')
 {% endhighlight %}
 
-which returns like this (sample below).  So the average error for predictions made between 20:00 (8pm) 21:00 (9pm) when Next Bus predicts 3 minutes is 0.60 minutes or 36 seconds (late).
+which returns something like this (sample below).  So the average error for predictions made between 20:00 (8pm) 21:00 (9pm) when Next Bus predicts 3 minutes is 0.59874 minutes or 36 seconds (late).
 
 {% highlight R%}
 #print(agg)
@@ -185,7 +184,7 @@ hour     Minutes    err
 {% endhighlight %}
 
 
-To make this easier to interpret and analyze, I want to reshape the results from long to wide format, like so:
+To make this easier to interpret and analyze, I want to reshape the results from long to wide format.
 
 {% highlight R%}
 agg2 <- reshape(agg[agg$Minutes<=60,], timevar='Minutes', idvar='hour', direction='wide')
@@ -207,7 +206,7 @@ hour     err.0     err.1      err.2      err.3       err.4     err.5     err.6  
 
 
 Now creating the graphic that puts it all together.  I chose to not show average errors when predictions are 1,2,3 ... 60 minutes separately.
-1. because the trend is the same and 2. it's messy.  So I averaged together the median errors for predictions of 5,6,7,8,9 minutes in one
+Firstly because the trend is the same and secondly because it's messy.  So I averaged together the median errors for predictions of 5,6,7,8,9 minutes in one
 goup and 10,11,12,13,14 minutes in a separate group.
 
 
@@ -235,7 +234,9 @@ ggsave(filename="png/gghourmedian.png", plot=plt3, width=5, height=5, dpi=200, s
 
 <img src="/simpleblog/assets/png/gghourmedian.png" alt="average prediction error by hour">
 
-So predictions are wrong (late) the most between 8am and 10am on the weekdays.
+So predictions are wrong (late) the most between 8am and 10am on the weekdays.  The errors jump around a bit throughout the day.  Some of this could be the chosen frequency (hours)... it would likely be smoother if I chose 4 or 5 periods of the day spanning several hours each.  Some of this could be the fact that I'm only analyzing one week of data for one bus line.  Perhaps there was anomalous behavior around predictions made at 9pm for a couple buses that is driving the spike in prediction errors between 9pm and 10pm.
+
+Analysis for next time!
 
 <!-- **Analysis for another day: possible extensions**
 
