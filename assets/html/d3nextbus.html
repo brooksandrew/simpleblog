@@ -139,7 +139,7 @@ var fmtNumHover = function(x, earlyORlate){
 }
 
 var dataset2 =
-    d3.csv("../csv/cleanTrips.csv", function(d) {
+    d3.csv("../csv/cleanTripsOpt.csv", function(d) {
         dataset2=d;
         buildhist(dataset2, 5);
     });
