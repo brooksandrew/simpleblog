@@ -50,7 +50,7 @@ plt4 <- ggplot(data=mape60, aes(x=Minutes, y=err)) + geom_bar(stat='identity', f
   
 ggsave(filename="/png/ggmapebar.png", plot=plt4, width=5, height=5, dpi=200, scale=1.3) 
 {% endhighlight %}
-<img src="simpleblog/assets/png/ggmapebar.png" alt="average prediction error by minute">
+<img src="/simpleblog/assets/png/ggmapebar.png" alt="average prediction error by minute">
 
 
 Then I calculated the quantiles of actual arrival times (`df$est`) for each possible prediction (0, 1, 2, 3...100 minutes) using .05 increments for flexibilibity.
@@ -114,7 +114,7 @@ ggsave(filename="/png/ggconf.png", plot=plt1, width=5, height=5, dpi=200)
 
 {% endhighlight %}
 
-<img src="simpleblog/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
+<img src="/simpleblog/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
 
 First note from the red waves above that **predictions are consistently biased conservatively.**  That is, buses usually (~80% of the time) arrive after their predicted time.
 
