@@ -38,16 +38,29 @@ time                Minutes      VehicleID DirectionText              RouteID   
 
 Next Bus predictions are discrete, that is they are made in whole numbers such as 1, 2, 3 ... up to 99 minutes --- no decimals or seconds.
 Each prediction (5 minutes, 10 minutes, etc) is made many times. So we can calculate some statistics around each prediction.
-I calculated the quantiles of actual arrival times (`df$est`) for each possible prediction (0, 1, 2, 3...100 minutes) using .05 increments for flexibilibity.
+First I simply calculated the average prediction error.
+
+{% highlight R %} 
+mape <- aggregate(err~Minutes, df, function(x) mean(abs(x)))
+mape60 <- mape[mape$Minutes<=60,]
+
+plt4 <- ggplot(data=mape60, aes(x=Minutes, y=err)) + geom_bar(stat='identity', fill='darkblue') + 
+  xlab('Prediction (minutes)') + ylab('Average prediction error (minutes)') +
+  scale_x_continuous(breaks=seq(floor(min(mape60$Minutes)), ceiling(max(mape60$Minutes)), 2))
+  
+ggsave(filename="/png/ggmapebar.png", plot=plt4, width=5, height=5, dpi=200, scale=1.3) 
+{% endhighlight %}
+<img src="simpleblog/assets/png/ggmapebar.png" alt="average prediction error by minute">
+
+
+Then I calculated the quantiles of actual arrival times (`df$est`) for each possible prediction (0, 1, 2, 3...100 minutes) using .05 increments for flexibilibity.
 
 {% highlight R %} 
 
 estq <- data.frame(as.matrix(aggregate(
 		est~Minutes, df, function(x) quantile(x, seq(0,1,.05)))
 	))
-
 {% endhighlight %}
-
 
 which turns out to be this (only showing predictions 0-5 minutes):
 
@@ -62,7 +75,7 @@ which turns out to be this (only showing predictions 0-5 minutes):
 
 {% endhighlight %}
 
-So when the Next Bus app reads 5 minutes:  
+So when the Next Bus app predicts 5 minutes:  
 50% of the time the bus arrives between 5.1 and 6.5 minutes.  
 70% of the time the bus arrives between 4.7 and 6.9 minutes.  
 90% of the time the bus arrives between 4.1 and 7.7 minutes.
@@ -101,7 +114,7 @@ ggsave(filename="/png/ggconf.png", plot=plt1, width=5, height=5, dpi=200)
 
 {% endhighlight %}
 
-<img src="/simpleblog/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
+<img src="simpleblog/assets/png/ggconf.png" alt="confidence intervals for Next Bus predictions">
 
 First note from the red waves above that **predictions are consistently biased conservatively.**  That is, buses usually (~80% of the time) arrive after their predicted time.
 
