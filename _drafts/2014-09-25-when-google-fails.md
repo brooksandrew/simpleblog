@@ -66,6 +66,7 @@ https://productforums.google.com/forum/#!topic/websearch/JJZ35b1ShFg
 
 For code specific queries, the Stack Overflow community seems to favor [SymbolHound](http://symbolhound.com/).  For the few queries I tested with special characters, it returned some honest results with my exact string of special characters, but only a few (sometimes 2, sometimes 0).
 
+Slightly unrelated direction... but when you find a special character that you can't identify in a paper, or want to copy that special character somewhere, you can search for it on [amp-what.com](http://www.amp-what.com/unicode/search/
 http://stackoverflow.com/questions/4685615/search-engine-for-special-characters
 
 http://blekko.com/link
