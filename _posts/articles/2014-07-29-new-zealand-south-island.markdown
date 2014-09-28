@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "New Zealand Days 6-16: South Island"
+title:  "New Zealand days 6-16: south island"
 date:   2014-07-29
 categories: articles
 tags: [travel, new zealand]

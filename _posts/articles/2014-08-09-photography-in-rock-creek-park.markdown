@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "Chasing Owls in Rock Creek Park"
+title:   "Chasing owls in Rock Creek Park"
 date:   2014-08-10
 categories: articles
 tags: [photography]

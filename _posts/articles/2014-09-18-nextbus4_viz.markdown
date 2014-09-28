@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus IV: Visualizing"
+title:   "How accurate is Next Bus IV: visualizing"
 date:   2014-09-18
 categories: articles
 tags: [data science]

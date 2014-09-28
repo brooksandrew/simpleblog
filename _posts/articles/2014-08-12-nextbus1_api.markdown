@@ -1,6 +1,6 @@
 ---
 layout: post
-title:   "How Accurate is Next Bus I: Extracting Data from API"
+title:   "How accurate is Next Bus I: extracting data from API"
 date:   2014-08-28
 categories: articles
 tags: [data science]

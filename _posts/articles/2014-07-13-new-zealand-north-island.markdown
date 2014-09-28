@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "New Zealand Days 1-5: North Island"
+title:  "New Zealand days 1-5: north island"
 date:   2014-07-18
 categories: articles
 tags: [travel, new zealand]
