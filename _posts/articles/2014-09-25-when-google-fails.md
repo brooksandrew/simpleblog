@@ -24,7 +24,7 @@ I find myself trying to search for special characters in two common situations:
 
 ### What special characters Google can do
 
-Google claims to provide search support for [some special characters](https://support.google.com/websearch/answer/2466433):`.  
+Google claims to provide search support for [some special characters](https://support.google.com/websearch/answer/2466433):  
 
 * `+`
 * `@`
