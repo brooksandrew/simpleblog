@@ -85,6 +85,7 @@ git push origin master
 
 * documentation in function.  initialize with roxygen2 document().  prevents editing .Rd files
 * unit tests
-
+* remember to configure RStudio Configure Build Tools.  I forgot to check click "Configure" and "NAMESPACE" file which was pretty important.
+if that your NAMESPACE isn't updating and you dont want to use RStudio, try devtools::document()
 
 
