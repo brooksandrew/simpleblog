@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Deploying Shiny apps with shinyapps.io"
-date:   2014-10-10
+date:   2014-10-11
 categories: articles
 tags: [data science]
 ---
