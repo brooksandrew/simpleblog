@@ -12,8 +12,8 @@ felt like you're playing Simon Says with mouse clicks when repeatedly extracting
 front-end interface to a database on the web in chunks, well, you probably are.
 There's probably a better solution.  You can probably use [Selenium].
 
-ever used XML or httr in R or Scrapy or urllib2 in Python, you've probably encountered the situation where 
-the source code you've scraped for a website doesn't contain all the information you see in your browser.  Maybe 
+ever used XML or httr in R or urllib2 in Python, you've probably encountered the situation where 
+the source code you've scraped for a website doesn't contain all the information you desire and see in your browser.
 
 ### How it all works
 Selenium is a web automation tool.
