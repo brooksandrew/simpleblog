@@ -36,7 +36,7 @@ exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.
 owner:
   name: andrew brooks
   avatar: bio-photo.jpg
-  email: andrewbrooks@gmail.com
+  email: andrewbrooksct@gmail.com
   disqus-shortname:
   twitter: #username
   facebook: #username
@@ -53,3 +53,4 @@ owner:
     ad-client:
     ad-slot: 
   bing-verify:
+

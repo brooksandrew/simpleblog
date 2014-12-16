@@ -3,7 +3,7 @@ layout: post
 title:   "DIY building an R package"
 date:   2014-11-20
 categories: articles
-tags: [data science]
+tags: [data science, R]
 comments: true
 share: true
 ---

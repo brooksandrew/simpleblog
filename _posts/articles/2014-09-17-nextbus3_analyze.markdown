@@ -3,7 +3,7 @@ layout: post
 title:   "How accurate is Next Bus III: getting the answers"
 date:   2014-09-17
 categories: articles
-tags: [data science]
+tags: [data science, R]
 comments: true
 share: true
 ---
