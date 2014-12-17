@@ -3,7 +3,7 @@ layout: post
 title:   "When Google Search fails, and when it doesn't"
 date:   2014-09-28
 categories: articles
-tags: [data science]
+tags: [data-science]
 comments: true
 share: true
 ---
