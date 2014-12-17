@@ -5,18 +5,14 @@ sitemap: false
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>{{ site.name | xml_escape }} - data science</title>
-		<description>Posts categorized as 'data science22'</description>
+		<description>Posts categorized as 'data science'</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.tags.xml" rel="selfs" type="application/rss+xml" />
 		{% for post in site.tags.data-science %}
 
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
-				{% if post.excerpt %}
-					<description>{{ post.excerpt | xml_escape }}</description>
-				{% else %}
-					<description>{{ post.content | xml_escape }}</description>
-				{% endif %}
+				<description>{{ post.content | xml_escape }}</description>
 				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
 				<content type="html">{{ post.content | xml_escape }}
