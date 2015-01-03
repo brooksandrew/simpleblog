@@ -16,7 +16,7 @@ options(stringsAsFactors = FALSE)
 # http://gtog.github.io/workflow/2013/06/12/rmarkdown-to-rbloggers/
 
 
-KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', overwrite=FALSE) {
+KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', overwriteAll=FALSE, overwriteOne=NULL) {
   library('knitr')
   # convert all Rmd files in _Rmd/* to markdown files
   
@@ -61,21 +61,17 @@ KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', ov
                                 full.names = TRUE,
                                 pattern = "\\.Rmd$",
                                 ignore.case = TRUE,
-                                recursive = FALSE))
-  files.rmd$corresponding.md.file <- 
-    paste0(posts.path, "/",
-           basename(gsub(pattern = "\\.Rmd$", 
-                         replacement = ".md", 
-                         x = files.rmd$rmd)))
+                                recursive = FALSE), stringsAsFactors=F)
+  files.rmd$corresponding.md.file <- paste0(posts.path, "/", basename(gsub(pattern = "\\.Rmd$", replacement = ".md", x = files.rmd$rmd)))
   files.rmd$corresponding.md.exists <- file.exists(files.rmd$corresponding.md.file)
-  files.rmd$md.overwrite <- overwrite
+  files.rmd$md.overwriteAll <- overwriteAll
+  if(is.null(overwriteOne)==F) files.rmd$md.overwriteAll[grep(overwriteOne, files.rmd[,'rmd'], ignore.case=T)] <- TRUE
   files.rmd$md.render <- FALSE
   for (i in 1:dim(files.rmd)[1]) {
     if (files.rmd$corresponding.md.exists[i] == FALSE) {
       files.rmd$md.render[i] <- TRUE
     }
-    if ((files.rmd$corresponding.md.exists[i] == TRUE) && 
-          (files.rmd$md.overwrite[i] == TRUE)) {
+    if ((files.rmd$corresponding.md.exists[i] == TRUE) && (files.rmd$md.overwriteAll[i] == TRUE)) {
       files.rmd$md.render[i] <- TRUE
     }
   }
@@ -83,15 +79,14 @@ KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', ov
   
   # For each Rmd file, render markdown (contingent on the flags set above)
   for (i in 1:dim(files.rmd)[1]) {
-    # if clause to make sure we only re-knit if overwrite==TRUE or .md not already existing
+    # if clause to make sure we only re-knit if overwriteAll==TRUE or .md not already existing
     if (files.rmd$md.render[i] == TRUE) {
       # KNITTING ----
       #out.file <- basename(knit(files.rmd$rmd[i], envir = parent.frame(), quiet = TRUE))
-      out.file <- 
-        knit(as.character(files.rmd$rmd[i]), 
-             output = as.character(files.rmd$corresponding.md.file[i]),
-             envir = parent.frame(), 
-             quiet = TRUE)
+      out.file <- knit(as.character(files.rmd$rmd[i]), 
+                      output = as.character(files.rmd$corresponding.md.file[i]),
+                      envir = parent.frame(), 
+                      quiet = TRUE)
       message(paste0("KnitPost(): ", basename(files.rmd$rmd[i])))
     }     
   }
@@ -100,4 +95,4 @@ KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', ov
 
 
 ## actually using function
-KnitPost(overwrite=T)
+if(1==0) KnitPost(overwriteOne='new-york-times')
