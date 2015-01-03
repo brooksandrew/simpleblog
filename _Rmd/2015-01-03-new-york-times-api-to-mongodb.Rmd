@@ -1,0 +1,92 @@
+---
+layout: post
+title: New York Times API to MongoDB
+date: 2015-01-03
+categories: articles
+tags: [data-science, R]
+comments: true
+share: true
+---
+
+* Table of Contents
+{:toc}
+
+## Motivation
+
+I've learned a little about a lot of the different corners of the text mining and NLP world over the last few years.  However, I somehow have managed to not get my hands dirty with a real full-scale project beyond some web scraping, processing HTML and parsing text.  I decided to start with some topic modeling using Latent Dirichlet Allocation and document clustering.   Unsupervised learning techniques requiring minimal upfront work beyond the text processing seemed like a good place to get started.
+
+After surveying APIs for a few news sources, the New York Times seemed to be the most robust.  I wanted the flexibility to acquire new documents in the future for testing models and from the past to build a big enough corpus.  I also wanted to have some fun and scrape the documents myself, experiment with a NoSQL database pipeline and process the HTML from the rawest form.
+
+## Accessing NYT API
+
+The New York Times API is well documented and user-friendly.  I didn't experiment too much with targeted querying since I was pulling all articles over a period of time.  However the `q` and `fq` arguments seemed to work fairly well when I tried.
+
+##### Generate URL
+
+This is the easy part.  I did find an R package [rtimes] for accessing the API which worked for the few queries I tried.  However, I had already started building my own pipeline, so I stuck with it.  [rtimes] generates the URL and makes the GET request at once.  I separated the steps.
+
+```{r}
+makeURL <- function(q=NULL, fq=NULL, begin_date=NULL, end_date=NULL, key=getOption("nyt_as_key"), page=0){
+  arglist <- list(q=q, fq=fq, begin_date=begin_date, end_date=end_date, 'api-key'=key, page=page)
+  url <- 'http://api.nytimes.com/svc/search/v2/articlesearch.json?'
+  for(i in 1:length(arglist)){
+    if(is.null(unlist(arglist[i]))==F){
+      url <- paste0(url, '&', names(arglist[i]), '=', arglist[i])
+    }
+  }
+  return(url)
+}
+
+## example output for one day.
+url <- makeURL(begin_date='20130101', end_date='20130630')
+```
+
+##### Scrape NYT metadata
+
+```{r}
+library('httr')
+getMeta <- function(url, pages=Inf, sleep=0.1, tryn=3) {
+  art <- list()
+  i <- 1
+  e <- seq(-tryn, -tryn/2, length.out=tryn)
+  while(i<=pages){
+    if(length(unique(e[(length(e)-(tryn-1)):length(e)]))==1) i <- i+1 ## attempt tryn times before moving on
+    tryget <- try({
+      urlp <- gsub('page=\\d+', paste0('page=', i), url)
+      p <- GET(urlp)
+      pt <- content(p, 'parsed')
+      if(length(pt$response$docs)>0) art <- append(art, pt$response$docs)
+      else {print(paste0(i, ' pages collected')); break}
+      if(i %% 10 ==0) print(paste0(i, ' pages of metadata collected'))
+      i <- i+1
+    })
+    
+    if(class(tryget)=='try-error') {
+      print(paste0(i, ' error - metadata page not scraped'))
+      e <- c(e, i)
+      e <- e[(length(e)-(tryn-1)):length(e)]
+      Sys.sleep(0.5) ## probably scraping too fast -- slowing down
+    }
+    Sys.sleep(sleep)
+  }
+  return(art)
+}
+
+meta <- getMeta(url, pages=5)
+```
+
+
+
+## Getting Article Body
+
+## Inserting into MongoDB
+
+## NLP in Python (nltk next post)
+
+
+
+[rtimes]:https://github.com/ropengov/rtimes
+
+
+
+

@@ -3,7 +3,7 @@ layout: post
 title:   "Scraping with Selenium"
 date:   2014-12-11
 categories: articles
-tags: [data science]
+tags: [data-science]
 comments: true
 share: true
 ---
