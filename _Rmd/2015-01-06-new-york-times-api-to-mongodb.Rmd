@@ -1,7 +1,7 @@
 ---
 layout: post
-title: New York Times API to MongoDB
-date: 2015-01-03
+title: New York Times Article Search API to MongoDB
+date: 2015-01-06
 categories: articles
 tags: [data-science, R]
 comments: true
@@ -13,31 +13,71 @@ share: true
 
 ## Motivation
 
-I've learned a little about a lot of the different corners of the text mining and NLP world over the last few years.  However, I somehow have managed to not get my hands dirty with a real full-scale project beyond some web scraping, processing HTML and parsing text.  I decided to start with some topic modeling using Latent Dirichlet Allocation and document clustering.   Unsupervised learning techniques requiring minimal upfront work beyond the text processing seemed like a good place to get started.
+I've learned a little about a lot of different corners of the text mining and NLP world over the last few years... which sometimes makes me feel like I know nothing for certain.  I've done a decent amount web scraping, processing HTML and parsing text recently, but never a full blown text mining project.  I decided to start with some topic modeling using Latent Dirichlet Allocation and document clustering.   Unsupervised learning techniques requiring minimal upfront work beyond the text pre-processing seemed like a good (and interesting) place to get started.
 
-After surveying APIs for a few news sources, the New York Times seemed to be the most robust.  I wanted the flexibility to acquire new documents in the future for testing models and from the past to build a big enough corpus.  I also wanted to have some fun and scrape the documents myself, experiment with a NoSQL database pipeline and process the HTML from the rawest form.
+After surveying APIs for a few news sources, the New York Times seemed to be the most robust.  I wanted the flexibility to acquire new documents in the future for testing models and from far enough in the past to build a hefty corpus.  I also wanted to have some fun and scrape the documents myself, experiment with a NoSQL database pipeline and process the HTML from the rawest form.
 
 ## Accessing NYT API
 
 ##### API Documentation and keys
-The [New York Times API] is well documented and user-friendly.  I didn't experiment too much with targeted querying since I was pulling all articles over a period of time.  However the `q` and `fq` arguments seem to provide a lot of functionality.  
+The [New York Times API] is well documented and user-friendly.  I didn't experiment too much with targeted querying since I was pulling all articles over a period of time.  However the `q` and `fq` parameters seem to provide a lot of functionality for filtered searches.  
 
 Requesting an a key for the Article Search API was easy and instantaneous.  I saved my key as a global parameter using R options.  I'm using `sample-key` here simply for illustrative purposes, but I found that this key (provided by default in the [NYT API Console]) actually works.  
-
-The API console is also a nifty way to kick the tires and understand the parameters at your disposal for constructing queries.  It's basically a GUI around the API which gives you everything you need on one page to quickly formulate a query, submit it and inspect the response.  It also allowed me to quickly determine that is a well developed and documented API worthy of pursuing further.  I wish all APIs were like this... sigh 
 
 ```{r}
 options(nyt_as_key = 'sample-key')  ## copy and paste your API key here.
 options()$nyt_as_key
 ```
 
+The [NYT API Console] is also a nifty way to kick the tires and understand the parameters at your disposal for constructing queries.  It's basically a GUI around the API which gives you everything you need on one page to quickly formulate a query, submit it and inspect the response.  It also allowed me to quickly determine that this is a well developed and documented API worthy of pursuing further.  I wish all APIs were like this... sigh.
+
+
+
 ##### Generate URL
 
 This is the easy part.  I did find an R package [rtimes] for accessing the API which worked for the few queries I tried.  However, I had already started building my own pipeline, so I stuck with it.
 
-The NYT API returns only 10 articles per request.  Which 10 are dictated by the `page` parameter.  `page=0` returns articles 1-10, `page=1` returns articles 11-20, etc.  The tricky part is knowing how many pages to iterate through.  I tried (to no avail) to query the API for the total number of articles matching my query, so I knew how many pages and API requests I would need to collect all matching articles.  So instead, I simply started my requests with `page=0` and incrementally added 1 to `page` until the response stopped yielding articles.
+The NYT API returns only 10 articles per request.  Which 10 are dictated by the `page` parameter.  `page=0` returns articles 1-10, `page=1` returns articles 11-20, etc.  The tricky part is knowing how many pages to iterate through.  On my first pass, I failed to find a way to figure out the total number of articles matching my query to tell me how many pages and API requests I would need.  So instead, I simply started my requests with `page=0` and incrementally added 1 to `page` until the response stopped yielding articles.
 
-Another rub is that "pagination beyond page 100 is not allowed at this time." So if you're extracting large quantities of articles, best do it chunks.  I chunked my queries into single days -- usually returning about 700-800 articles.  Without using any facets or query terms, I ran the risk of only collecting 1000 articles for a day when there were more than 1000.  This occured 12 days out of 120 for me.
+However, after I already maxed out my database, I found a way to do this using the `facet_field` and `facet_filter` parameters.  These can be used to count the number of articles matching a filtered query by simply adding `&facet_field=source&facet_filter=true` to your query URL.
+
+And you get something like this:
+```{r, eval=F}
+{  
+   "facets":{  
+      "source":{  
+         "terms":[  
+            {  
+               "term":"The New York Times",
+               "count":159
+            },
+            {  
+               "term":"International Herald Tribune",
+               "count":7
+            },
+            {  
+               "term":"",
+               "count":1
+            }
+         ]
+      }
+   },
+   "status":"OK",
+   "copyright":"Copyright (c) 2013 The New York Times Company.  All Rights Reserved."
+}
+```
+
+Here's an example using R and httr to get the same result[^1].  These counts almost perfectly match the counts I've calculated from my collection for the New York Times and International Herald Tribune.  However, I've collected a lot of Reuters and AP articles from the Article Search API that interestingly don't appear here. 
+
+```{r}
+library('httr')
+resp <- GET('http://api.nytimes.com/svc/search/v2/articlesearch.json?facet_field=source&facet_filter=true&begin_date=20130105&end_date=20130105&api-key=sample-key')
+print(content(resp, 'parsed')$response$facets)
+```
+
+Another rub is that "pagination beyond page 100 is not allowed at this time." So if you're extracting large quantities of articles, best do it chunks.  I chunked my queries into single days -- usually returning about 700-800 articles.  Without using any facets or query terms, I ran the risk of only collecting 1000 articles for a day when there were more than 1000.  This occurred 12 days out of 120 for me.
+
+`makeURL` is a pretty trivial function that generates the URL to make the GET request from a collection of NYT API parameters.  However, I found encapsulating this step in a function which gets called in subsequent functions kept things clean.
 
 ```{r}
 makeURL <- function(q=NULL, fq=NULL, begin_date=NULL, end_date=NULL, key=getOption("nyt_as_key"), page=0, 
@@ -108,11 +148,11 @@ str(meta[[1]]) ## look at just one article
 
 ## Extracting and parsing the article body text
 
-So now we have a lot of information about NYT articles including URL, abstract, headline, publication date, section, author, type of material, etc.  However notably absent is the article text itself.  The process for collecting article body text is much more manual.  We've used the API road as much as we can, but now we have to off-road a little bit and collect each article's body text from its individual URL provided from the metadata field `web_url`. 
+So now we have a lot of information about NYT articles including URL, abstract, headline, publication date, section, author, type of material, etc.  However, notably absent is the article text itself.  The process for collecting article body text is much more manual.  We've used the API road as much as we can, but now we have to go off-road a little bit and collect each article's body text from its individual URL provided from the metadata field `web_url`. 
 
 After a while of trial-and-error and guessing and checking, I developed a basic utility function `parseArticleBody` to strip just the article body text from the raw HTML. At least one of three simple XPath queries seemed to work reasonably well for the normal plain vanilla articles.  Most of the video and photography pages contain little to no text, so these often come up empty.  Some of the more modern pages like this [one](http://www.nytimes.com/roomfordebate/2013/01/02/should-social-security-cuts-be-considered) which utilize multimedia and spread content over several pages usually fail too.
 
-However, there's enough NYT articles in the world to sink a small ship[^1], so I'm more concerned with precision than recall -- I'm willing to let some articles slip through the cracks if it boosts the quality of the articles I am able to extract body text for.  In most cases the gains from nailing the XPath query were marginal as the most common cause for missing article body text was out-of-date URLs provided by the NYT API.  
+However, there's enough NYT articles in the world to sink a small ship[^2], so I'm more concerned with precision than recall -- I'm willing to let some articles slip through the cracks if it boosts the quality of text for the articles I am able to extract it for.  In most cases the gains from nailing the XPath query were marginal as the most common cause for missing article body text was out-of-date URLs provided by the NYT API.  
 
 
 ```{r}
@@ -138,33 +178,33 @@ artBody <- parseArticleBody(html)
 print(artBody)
 ```
 
-## Inserting into MongoDB
+## Writing to MongoDB
 
-###### Choosing MongoDB
+##### Choosing MongoDB
 
-Github was a logical place to store code for this project -- my blog is already hosted there and integrates well with my workflow allowing me to work from my home, office or villa on a remote island[^2].  Where to store the data was less obvious.  I wanted something more robust than a directory full of text files, some sort of NoSQL database.  I also wanted to make the data accessible via the web. And I wanted it all for free.  
+Github was a logical place to store code for this project -- my blog is already hosted there and integrates well with my workflow allowing me to work from my home, office or villa on a remote island[^3].  Where to store the data was less obvious.  I wanted something more robust than a directory full of text files... some sort of NoSQL database that I could access from Python and R.  I also wanted to make the data accessible via the web. And I wanted it all for free.  
 
-[mongolab] (MongoDB's cloud database-as-a-service) fit the bill, for 500MB at least. I don't have much experience with NoSQL databases and haven't worked with Mongo in the past, but I had a lot of fun learning and working with Mongo.  I still don't have a great grasp on the Mongo querying language, but I was able make it do everything I wanted it to do.
+[mongolab] (MongoDB's cloud database-as-a-service) fit the bill, for 500MB at least. I don't have much experience with NoSQL databases and haven't worked with Mongo in the past, but I had a lot of fun learning and working with Mongo.  My grasp of the Mongo querying language is still tenuous, but I was able make it do everything I needed it to do.
 
 I found the web interface intuitive and useful for testing queries or other Mongo command line operations when I was getting started.  From here you can also create database users with read-only or full access -- useful for sharing your work with the world while holding the keys to the kingdom to yourself.
 
-###### Working with MongoDB in Python and R
+##### Working with MongoDB in Python and R
 
-I used the [RMongo] R package and the [pymongo] Python package for interacting with database.  No complaints on either.  I like how the usage inside Python and R using these packages seems to mirror pretty closely usage at the command line which I tested out first.
+I used the [RMongo] R package and the [pymongo] Python package for interacting with the database.  No complaints on either.  I like how the usage inside Python and R using these packages seems to mirror pretty closely usage at the command line.
 
-###### When the cloud can bring you down
+##### When the cloud can bring you down
 
-So high, yet so low.  I did experience a period of down-time where I was unable to access my database.  Although mongolab does a decent job of documenting issues on their [status page], the list doesn't appear to be short... As is life sometimes, I suppose, when you're on the free-tier of a cloud service.
+So high, yet so low.  I did experience a period of down-time where I was unable to access my database for an hour or so.  Although mongolab does a decent job of documenting issues on their [status page], the list doesn't appear to be short... As is life sometimes, I suppose, when you're on the free-tier of a cloud service.
 
-###### Pulling it all together
+##### Pulling it all together
  
 `getArticles` does most of the heaviest lifting -- extracts, parses and adds the article body text to the `meta` object and inserts to MongoDB after scraping each article.
 
 `getArticles`:
 
-*  DOES use the list of metadata as a starting point (the `meta` argument).  Then scrapes, parses and adds the body as an attribute (text string) to the article's metadata.  Only adds to `meta`
+*  DOES use the list of metadata as a starting point (the `meta` argument).  Then scrapes, parses and adds the body as an attribute (text string) to the article's metadata.  Only adds to the `meta` object.
 *  DOES cache -- writes to MongoDB after extracting each article.  I didn't bump into any rate-limits from MongoDB and I had to wait a decisecond or two after each article anyway, so insert speed was not an issue for me.  Had all the articles been pulled into memory first, I imagine a bulk insert would be more efficient.
-*  DOES convert the R list of metadata for each article to JSON on the fly using the `toJSON` function which is conveniently inserted to MongoDB as-is.  MongoDB likes JSON.
+*  DOES convert the R list of metadata for each article to JSON on the fly using the `toJSON` function which is then conveniently inserted to MongoDB as-is.  MongoDB likes JSON.
 *  DOES re-attempt failed article extraction, parsing and MongoDB inserts -- If there was an error in one of these steps, I tried another 2 times before moving on to the next article.
 *  DOES include parameters: 
     +  `meta` is created from the function `getMeta`.  
@@ -225,7 +265,7 @@ print(art[[1]]['body']) ## full body text of the article.
 
 ## Pipeline
 
-So when putting it all together, the pipeline looks like this.
+So putting it all together, the pipeline looks like this:
 
 ```{r, eval=F}
 
@@ -254,7 +294,7 @@ for(d in days) {
 ## Results
 It took me about 1 full day to max out the 500MB in my free mongolab database.  I ended up with 85,000 articles covering roughly 4 months of NYT articles.  Since I'm specifically interested in text mining the article text, my next step will likely be to delete the documents where the article body could not be extracted. 
 
-A lot of the URLs provided from the NYT API were stale -- only ~35% of URLs contained a real article with real text.  It wasn't until I was doing some preliminary analysis poking around on the full corpus that I realized links to historic AP and International Herald Tribune articles (of which there are many) were included and not fruitful.  These could easily be filtered out using the `fq` parameter in the NYT API: `fq=source:("The New York Times")`.
+A lot of the URLs provided from the NYT API were stale -- only ~35% of URLs contained a real article with text.  It wasn't until I was doing some preliminary analysis poking around on the full corpus that I realized links to historic AP and Reuters articles (of which there are many) were included and almost universally not fruitful.  These could easily be filtered out using the `fq` parameter in the NYT API: `fq=source:("The New York Times")`.
 
 ```{r, eval=F}
 ## Crosstab of article source vs. whether article was successfully scraped 
@@ -272,12 +312,9 @@ A lot of the URLs provided from the NYT API were stale -- only ~35% of URLs cont
   ADAM                             1     0
 ```
 
-I decided to use gensim and nltk in Python for the text processing 
+I decided to use [gensim] and [nltk] in Python for the text pre-processing and topic modeling.  More to come on that analysis and visualization.
 
-
-
-
-
+##### Footnotes
 
 [rtimes]:https://github.com/ropengov/rtimes
 [New York Times API]:http://developer.nytimes.com/docs/read/article_search_api_v2
@@ -287,6 +324,9 @@ I decided to use gensim and nltk in Python for the text processing
 [RMongo]:http://cran.r-project.org/web/packages/RMongo/index.html
 [pymongo]:https://pypi.python.org/pypi/pymongo/
 [status page]:http://status.mongolab.com/
+[gensim]:https://radimrehurek.com/gensim/
+[nltk]:http://www.nltk.org/
 
-[^1]: In fact there are over 1000 articles alone matching the query parameters "ship+sink" 
-[^2]: Still working on the villa ...
+[^1]: Note the use of the `content` function from the httr package with `as='parsed'` is not recommended by the authors for use in other R packages or production systems.  It's provided as a convenience function... which I found, well, convenient... so I used it.
+[^2]: In fact there are over 1000 articles alone matching the query parameters "ship+sink" 
+[^3]: Still working on the villa ...

@@ -95,4 +95,4 @@ KnitPost <- function(site.path='/Users/abrooks/Documents/github/simpleblog/', ov
 
 
 ## actually using function
-if(1==0) KnitPost(overwriteOne='new-york-times')
+KnitPost(overwriteOne='new-york-times')
