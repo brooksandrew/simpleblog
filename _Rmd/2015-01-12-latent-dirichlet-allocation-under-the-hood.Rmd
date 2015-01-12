@@ -1,0 +1,29 @@
+---
+layout: post
+title: "Latent Dirichlet Allocation - under the hood"
+date:   2015-01-12
+categories: articles
+tags: [data-science]
+comments: true
+share: true
+---
+
+## Why
+
+I like the distinction characterization of humanists vs scientists made by [Ted Underwood] in his explanation of LDA (among other posts).  For starters, it admits that humanists exist -- those solve human problems by applying powerful algorithms to data, but who are perhaps not mathy (or interested) enough to undertand the mathematical nuances and proofs that make it work.
+
+I consider myself to be somewhere in the middle of the spectrum -- a scientific humanist of sorts.  As a data scientist working in consulting, my job is to provide answers to human problems to clients.  However, knowing which algorithms to apply, when, why, how, and being able to discuss the methods I use intelligently when the technical questions arise is important.  And I'm selfishly curious myself.  If I'm going to use a new algorithm, I want to figure out how it works.
+
+So maybe I did this backwards. First I collected my corpus ([described in this post]) and trained an LDA model.  Then I did some reverse engineering to interpret my results.  Then I decided I wanted to figure out exactly how LDA works.  I was impressed with my initial results which I was able to attain with little more than the minimum theoretical knowledge needed to operate the [gensim LDA] implementation in Python.
+
+## Approach
+
+I read a lot of academic papers, a lot of blogs and watched two of David Blei's video lectures at Princeton.   
+
+## How it's done
+
+
+
+[Ted Underwood]:http://tedunderwood.com/2012/04/07/topic-modeling-made-just-simple-enough/
+[described in this post]:http://brooksandrew.github.io/simpleblog/articles/new-york-times-api-to-mongodb/
+[gensim LDA]:http://radimrehurek.com/gensim/models/ldamodel.html
