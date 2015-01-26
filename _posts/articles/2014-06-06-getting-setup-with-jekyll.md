@@ -2,7 +2,7 @@
 layout: post
 title: How I got here
 categories: articles
-tags: [jekyll]
+tags: [jekyll, blogging]
 ---
 
 

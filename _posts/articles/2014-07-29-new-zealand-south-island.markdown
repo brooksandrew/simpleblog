@@ -3,7 +3,7 @@ layout: post
 title:  "New Zealand days 6-16: south island"
 date:   2014-07-29
 categories: articles
-tags: [travel, new zealand]
+tags: [travel, new zealand, south island]
 ---
 
 ## Day 6 & 7: Abel Tasman 

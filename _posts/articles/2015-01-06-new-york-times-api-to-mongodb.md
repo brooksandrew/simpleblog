@@ -3,7 +3,7 @@ layout: post
 title: New York Times Article Search API to MongoDB
 date: 2015-01-06
 categories: articles
-tags: [data-science, R]
+tags: [data science, R, api, web scraping, New York Times, mongoDB]
 comments: true
 share: true
 ---

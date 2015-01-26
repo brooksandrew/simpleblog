@@ -3,7 +3,7 @@ layout: post
 title:   "How accurate is Next Bus II: wrangling data"
 date:   2014-09-10
 categories: articles
-tags: [data-science, R]
+tags: [data science, R, data wrangling, nextbus]
 comments: true
 share: true
 ---

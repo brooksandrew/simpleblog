@@ -4,7 +4,7 @@ title: Latent Dirichlet Allocation - under the hood
 description: Understanding LDA (Latent Dirichlet Allocation).  Building LDA model from scratch using R code.  
 date:   2015-01-17
 categories: articles
-tags: [data-science, LDA, latent-dirichlet-allocation, topic-modeling, text-mining, R]
+tags: [data science, latent dirichlet allocation, topic modeling, text mining, R]
 comments: true
 share: true
 ---
