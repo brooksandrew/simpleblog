@@ -125,7 +125,7 @@ cat("#' `r rf$confusion[2,1]` cars are misclassified as 0. ")
 #+ results='asis'
 for (i in 1:10) {
   rf <- randomForest(am~., ntree=100, data=mtcars)
-  cat("iteraction ",i, ": ", rf$confusion[1,1], "cars are correctly classified as 0", "\n")
+  cat("iteration ",i, ": ", rf$confusion[1,1], "cars are correctly classified as 0", "\n")
   cat('\n')
 }
 
@@ -164,6 +164,3 @@ cat('third thing to evaluate')
 
 #' `rmarkdown::render('/Users/you/Documents/yourscript.R')`
 
-# rmarkdown::render('/Users/ajb/Documents/test.R')
- 
-#http://rmarkdown.rstudio.com/RMarkdownReferenceGuide.pdf

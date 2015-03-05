@@ -299,19 +299,19 @@ rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(am~., <spa
 <p>This is useful if you want to generate lots of text without writing it manually.<br /><code>#+ results='asis'</code></p>
 <pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">10</span>) {
   rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(am~., <span class="dt">ntree=</span><span class="dv">100</span>, <span class="dt">data=</span>mtcars)
-  <span class="kw">cat</span>(<span class="st">&quot;iteraction &quot;</span>,i, <span class="st">&quot;: &quot;</span>, rf$confusion[<span class="dv">1</span>,<span class="dv">1</span>], <span class="st">&quot;cars are correctly classified as 0&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+  <span class="kw">cat</span>(<span class="st">&quot;iteration &quot;</span>,i, <span class="st">&quot;: &quot;</span>, rf$confusion[<span class="dv">1</span>,<span class="dv">1</span>], <span class="st">&quot;cars are correctly classified as 0&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   <span class="kw">cat</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)
 }</code></pre>
-<p>iteraction 1 : 17 cars are correctly classified as 0</p>
-<p>iteraction 2 : 17 cars are correctly classified as 0</p>
-<p>iteraction 3 : 18 cars are correctly classified as 0</p>
-<p>iteraction 4 : 17 cars are correctly classified as 0</p>
-<p>iteraction 5 : 17 cars are correctly classified as 0</p>
-<p>iteraction 6 : 17 cars are correctly classified as 0</p>
-<p>iteraction 7 : 18 cars are correctly classified as 0</p>
-<p>iteraction 8 : 17 cars are correctly classified as 0</p>
-<p>iteraction 9 : 17 cars are correctly classified as 0</p>
-<p>iteraction 10 : 18 cars are correctly classified as 0</p>
+<p>iteration 1 : 16 cars are correctly classified as 0</p>
+<p>iteration 2 : 17 cars are correctly classified as 0</p>
+<p>iteration 3 : 16 cars are correctly classified as 0</p>
+<p>iteration 4 : 17 cars are correctly classified as 0</p>
+<p>iteration 5 : 17 cars are correctly classified as 0</p>
+<p>iteration 6 : 18 cars are correctly classified as 0</p>
+<p>iteration 7 : 16 cars are correctly classified as 0</p>
+<p>iteration 8 : 17 cars are correctly classified as 0</p>
+<p>iteration 9 : 17 cars are correctly classified as 0</p>
+<p>iteration 10 : 17 cars are correctly classified as 0</p>
 </div>
 </div>
 <div id="toggle-chunk-settings-globally-by-r-variables" class="section level2">
@@ -333,9 +333,6 @@ rf &lt;-<span class="st"> </span><span class="kw">randomForest</span>(am~., <spa
 <div id="converting-r-script-to-htmlpdf" class="section level2">
 <h2>Converting R Script to HTML/PDF</h2>
 <p>If you did everyhing right, above this is the easy part. Simply render the script as desired with the <code>render</code> function from <code>rmarkdown</code>.<br /><code>rmarkdown::render('/Users/you/Documents/yourscript.R')</code></p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># rmarkdown::render('/Users/ajb/Documents/test.R')</span>
- 
-<span class="co">#http://rmarkdown.rstudio.com/RMarkdownReferenceGuide.pdf</span></code></pre>
 </div>
 
 
