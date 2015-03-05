@@ -9,51 +9,57 @@ comments: true
 share: true
 ---
 
-## Rmarkdown vs. Rscripts
+#### Workflow
 
-This post is really about workflow.  Specifically a data-science workflow, although I imagine it extends similarly to others as well.  It will probably resonate most (if at all) with those who have some experience (mostly positive) generating reports from Rmarkdown files with knitr, but might have some gripes.  Maybe not gripes, maybe just feelings of uncertainty over whether it makes sense to contain your hard work in an Rmarkdown file or an R script, or both.
+This post is really about workflow.  Specifically a data-science workflow, although it should be relevant for others.  It will probably resonate most (if at all) with those who have some experience (mostly positive) generating reports from Rmarkdown files with knitr, but might have some gripes.  Maybe not gripes, maybe just feelings of uncertainty over whether it makes sense to contain your hard work in an Rmarkdown file or an R script, or both.
 
-#### .Rmd (Rmarkdown)
+#### Generate reports with Rmarkdown (Rmd) files
 
-With Rmarkdown, you can generate these stylish reports with code like [this](http://rmarkdown.rstudio.com/).  
+With Rmarkdown, you can generate these stylish reports with [code like this](http://rmarkdown.rstudio.com/).  
 
-#### .R (native R scripts)
+#### Generate reports directly from R scripts
 
-One can generate the exact same HTML, PDF and Word reports using Native R scripts.  This was news to me until this week.  It's a suddle difference, but one that I've found nimble and powerful in all the right places.  
+One can also cut out the middle-man (Rmd) and generate the exact same HTML, PDF and Word reports using native R scripts.  This was news to me until this week.  It's a subtle difference, but one that I've found nimble and powerful in all the right places. [Check this out](http://rmarkdown.rstudio.com/r_notebook_format.html) for a quick intro.
  
-**How it works:** Code as normal.  Tweak the comments in your code render the text, headers, format, style, etc. of your report however you like.  You can compile any old R script, regardless of it's structure, but there are a lot of options at your disposal for formatting, if that's your thing.  Then it's a one liner to compile into a report
-
-The example
+**How it works:** Code as normal.  Tweak the comments in your code to render the document text, headers, format, style, etc. of your report however you like.  You can compile any old R script, regardless of it's structure, but there are a lot of options at your disposal for formatting and prettifying, if that's your thing.  Then it's a one liner to compile into a report:
 
 {% highlight r %}
 library('rmarkdown')
 rmarkdown::render('/Users/you/Documents/yourscript.R')
 {% endhighlight %}
 
-#### .Rmd vs .R
+#### Rmarkdown vs R
 
 * **Rmd != R:** You can't `source` an Rmarkdown file like you would an R script.  I have no doubt there are tools that exist (or can be easily developed) to strip the code chunks from an Rmarkdown file, but this seems cumbersome.
 
-* **Competing incentives: presentation vs. workflow:** When you've got tons of code chunks with just a few lines each, it can be annoying to test your code without knitting (compiling) your entire document.  I often purposely keep chunks big to facilitate running blocks of selected code interactively.  This makes for smooth coding, but slightly more obtuse documents.  One strategy I've tried is to "Rmarkdownify" my code only after I've thoroughly developed and tested it... but then when it comes time to re-examine, change or pipe code someplace else, you've got this Rmarkdown document to wrangle with.  And in my work (many more parts analysis than development), I'm rarely ever done or know when I'm done...The quest for knowledge is never-ending, or so it seems.
+* **Competing incentives: presentation vs. workflow:** When you've got tons of code chunks with just a few lines each, it can be annoying to test your code without knitting (compiling) your entire document.  I often purposely keep chunks big to facilitate running blocks of selected code interactively.  This makes for smooth coding, but slightly more obtuse documents.  One strategy I've tried is to "Rmarkdownify" my code only after I've thoroughly developed and tested it... but then when it comes time to re-examine, change or pipe code someplace else, you've got this Rmarkdown document to overhaul.  And in my work (many more parts analysis than development), I'm rarely ever done or know when I'm done.
 
-* **.Rmd, .R, or both?:** Say you're writing some data wrangling code that pulls from a handful of data sources, merges them all together, aggregates, scales and transforms them into an analytics ready dataset.  You want to document this process... but you also want to be able to pipe this piece of ETL code elsewhere.  I've been tempted in the past to maintain both a bare-bones R script and flowerly verbose Rmd file documenting the process.  This keeps both the developers (on our team or within ourselves) happy and the consumers our analysis happy... but it will probably drive you crazy maintaining two versions of more-or-less the same thing.  With an R script formatted with markdown-style comments, you might be able to get the two birds with one stone. 
+* **No need to duplicate Rmd and R scripts:** Say you're writing some data wrangling code that pulls from a handful of data sources, merges them all together, aggregates, scales and transforms them into an analytics ready dataset.  You want to document this process... but you also want to be able to pipe this piece of ETL code elsewhere.  I've been tempted in the past to maintain both a bare-bones R script and a verbose flowery Rmd file describing the process.  This keeps both the developers (on your team or within yourself) happy and the consumers of your analysis happy... but it will probably drive you crazy maintaining two versions of more-or-less the same thing.  With an R script formatted with markdown-style comments, you might be able to get the two birds with one stone. 
 
-* **Run-time:** This isn't very well addressed by either method, but I certainly find it easier to work with bigger datasets and code that takes longer than a minute or two using native R scripts.  When I knit a big Rmarkdown script together, I often cross my fingers and hope it doesn't bug 95% through and I have to start over.  By default, knitting .Rmd files does not persist objects to the Global Environment, although I'd be surprised if there wasn't a way to change this.
+* **Run-time:** This isn't very well addressed by either method, but I certainly find it easier to work with bigger data anything computationally intensive using native R scripts.  When I knit a big Rmarkdown script, I often cross my fingers and hope it doesn't bug 95% through and I have to start over.  By default, knitting .Rmd files does not persist objects to the Global Environment, although I'd be surprised if there wasn't a way to change this.
 
-* **All pros, no cons:**  If you're working on a team that doesn't want to use knitr and Rmarkdown, no matter.  Your team members might gaze at seemingly strange comments in your R scripts, but they can run, read, edit and pipe your code as if it was their own.  You can even compile their code into reports.  This will essentially just separate code from output and plots printed to the console.  It might not be pretty, but I find it useful as a personal reference.  It's easier to find your chart, finding, or what have you in a compiled document than within a script where you have to run code, dependencies and likely muddle up the current environment in which you're working.
+* **All pros, no cons:**  If you're working on a team that doesn't want to use knitr and Rmarkdown, no matter.  Your team members might gaze at seemingly strange comments in your R scripts, but they can run, read, edit and pipe your code as if it was their own.  You can even compile their code into reports.  This will essentially just separate code from output and plots printed to the console.  It might not be the prettiest, but it sure beats saving off graphics and results and copying and pasting into slides somewhere.  And I find it's easier to find your chart, finding, or what-have-you in a compiled document than within a script where you have to run code, dependencies and likely muddle up the current environment in which you're working.
 
 
-## But does it really work
+#### Rendered report in the flesh
 
 All the features I'm used to using with Rmarkdown documents worked when embedded in native R scripts.
 
-The script below ([also here](https://github.com/brooksandrew/simpleblog/blob/gh-pages/assets/R/renderRscript2markdown_sample.R)) generates [this html document](https://github.com/brooksandrew/simpleblog/blob/gh-pages/assets/R/renderRscript2markdown_sample.html) (also included below this R script).
+The script below ([also here](https://github.com/brooksandrew/simpleblog/blob/gh-pages/assets/R/renderRscript2markdown_sample.R)) generates [this html document](http://htmlpreview.github.io/?https://raw.githubusercontent.com/brooksandrew/simpleblog/gh-pages/assets/R/renderRscript2markdown_sample.html) (below).
+
+#### HTML report generated by R script below
+<iframe src="http://htmlpreview.github.io/?https://raw.githubusercontent.com/brooksandrew/simpleblog/gh-pages/assets/R/renderRscript2markdown_sample.html" width="700" height="800"></iframe>
+
+
+#### R script that generates the html report above
+
+This is perhaps not a great example of how a typical R script would look.  A typical R script/document would probably have significantly more code and less comments.  However, I know how code appears in a report -- my purpose is really to test the markdown functionality.
 
 {% highlight r %}
 #' ---
 #' title: Sample HTML report generated from R script
 #' author: Andrew Brooks
-#' date: March 4, 2015
+#' date: March 5, 2015
 #' output:
 #'    html_document:
 #'      toc: true
@@ -217,7 +223,5 @@ cat('third thing to evaluate')
 #' `rmarkdown::render('/Users/you/Documents/yourscript.R')`
 
 {% endhighlight %}
-
-<iframe src="https://github.com/brooksandrew/simpleblog/blob/gh-pages/assets/R/renderRscript2markdown_sample.html" width="600" height="800"></iframe>
 
 
