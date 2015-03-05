@@ -3,7 +3,7 @@ layout: post
 title:  "Deploying Shiny apps with shinyapps.io"
 date:   2014-10-11
 categories: articles
-tags: [data-science, R]
+tags: [data science, R, RStudio, shiny, shinyapps.io]
 ---
 
 So I've been messing around with Shiny for a year or so now.  It's great tool and getting greater.

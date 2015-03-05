@@ -4,7 +4,7 @@ title: Blogging with Jekyll and R Markdown using knitr
 description: 
 date: 2015-01-25
 categories: articles
-tags: [data-science, jekyll, knitr, blogging, R-Markdown]
+tags: [data science, jekyll, knitr, blogging, R, RMarkdown, markdown]
 comments: true
 share: true
 ---

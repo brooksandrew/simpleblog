@@ -3,7 +3,7 @@ layout: post
 title:   "How accurate is Next Bus IV: visualizing"
 date:   2014-09-18
 categories: articles
-tags: [data-science]
+tags: [data science, dataviz, nextbus, javascript, d3]
 comments: true
 share: true
 ---
