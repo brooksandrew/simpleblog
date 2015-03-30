@@ -41,13 +41,13 @@ So the goal of LDA is to compute the 2 hidden parameters often commonly denoted 
 However, when you do some fancy math, it becomes clear that the posterior distribution for these parameters is intractable.  That is, we're left with integrals that we cannot compute analytically in high dimensional space where numerical approximation gets hairy.  How to handle this issue is the topic of a large swath of the LDA literature.  It seems that most advocate one of two methods:
 
 -  **Variational inference** seems to be the preferred method for getting fast and accurate results in most software implementations.
--  **Markov chain Monte Carlo (sampling)** methods have the benefit of being unbiased and easy understand.  However, it seems MCMCs are handicapped by being less computationally inefficient when working with large corpora.
+-  **Markov chain Monte Carlo (sampling)** methods have the benefit of being unbiased and easy understand.  However, it seems MCMCs are handicapped by being computationally inefficient when working with large corpora.
 
 ### Building LDA from scratch
 
 ###### Purpose
 
-I have no intention for anyone (including myself) to use this code for anything beyond pedagogical purposes.  There are countless ways to optimize the following code.  I simply wanted to put the theory into action as clearly as possible and dispel any myths in my head that LDA is black magic.  I leave the implementation and optimization to the experts.
+I have no intention for anyone (including myself) to use this code for anything beyond pedagogical purposes.  There are countless ways to optimize the following approach.  I simply wanted to put the theory into action as clearly as possible and dispel any myths in my head that LDA is black magic.  I leave the implementation and optimization to the experts.
 
 ###### Getting started
 
