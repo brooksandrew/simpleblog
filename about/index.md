@@ -9,11 +9,10 @@ image:
 
 ---
 
-I'm a Data Scientist at a small data mining consulting company in DC called [Elder Research].  I turn data into numbers, numbers into words, 
-words into stories and stories into action for my clients.  
+I'm a Data Scientist at a smallish data mining consulting company in DC called [Elder Research].  I work on array of projects which have so far included the financial, tech and government oversight sectors.  Being a consultant and all, my work spans the full analytics life-cycle, which is broad, very broad. However, hacking code, machine learning and data visualization are where I feel most at home.
 
-I'm interested in a wide range of things from machine learning to international issues to diy woodworking to long-distance running.  My aim is to write
-about interesting things throughout this spectrum in a pseudo organized fashion.
+I write about data science side projects with occasional tangents for travel and photographs.
+
 
 Personal website: [brooksandrew.github.io]
 
