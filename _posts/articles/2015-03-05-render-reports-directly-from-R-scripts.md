@@ -59,7 +59,7 @@ This is perhaps not a great example of how a typical R script would look.  A typ
 #' ---
 #' title: Sample HTML report generated from R script
 #' author: Andrew Brooks
-#' date: March 5, 2015
+#' date: March 4, 2015
 #' output:
 #'    html_document:
 #'      toc: true
@@ -124,6 +124,18 @@ plot(mtcars$mpg, mtcars$disp, col=mtcars$cyl, pch=19)
 #+ fig.width=4, fig.height=4
 plot(mtcars$mpg, mtcars$disp, col=mtcars$cyl, pch=19)
 
+
+#' Small plots often render with strange resolution and relative sizings of labels, axes, etc.  The `dpi` chunk option can be used 
+#' to fix this.  Just be sure to adjust the fig.width and fig.height accordingly.
+#' 
+#' **Bad plot: ** `#+ fig.width=2, fig.height=2`
+#+ fig.width=2, fig.height=2
+hist(mtcars$mpg)
+
+#' **Good plot: ** `#+ fig.width=4, fig.height=4, dpi=50`
+#+ fig.width=4, fig.height=4, dpi=50
+hist(mtcars$mpg)
+
 #' Generate a series of plots from a loop
 #+ fig.width=3, fig.height=3
 for(i in 1:ncol(mtcars)) hist(mtcars[,i], breaks=40, xlab='', main=names(mtcars)[i])
@@ -183,7 +195,7 @@ cat("#' `r rf$confusion[2,1]` cars are misclassified as 0. ")
 #+ results='asis'
 for (i in 1:10) {
   rf <- randomForest(am~., ntree=100, data=mtcars)
-  cat("iteraction ",i, ": ", rf$confusion[1,1], "cars are correctly classified as 0", "\n")
+  cat("iteration ",i, ": ", rf$confusion[1,1], "cars are correctly classified as 0", "\n")
   cat('\n')
 }
 

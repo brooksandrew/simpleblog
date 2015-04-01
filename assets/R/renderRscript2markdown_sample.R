@@ -66,6 +66,18 @@ plot(mtcars$mpg, mtcars$disp, col=mtcars$cyl, pch=19)
 #+ fig.width=4, fig.height=4
 plot(mtcars$mpg, mtcars$disp, col=mtcars$cyl, pch=19)
 
+
+#' Small plots often render with strange resolution and relative sizings of labels, axes, etc.  The `dpi` chunk option can be used 
+#' to fix this.  Just be sure to adjust the fig.width and fig.height accordingly.
+#' 
+#' **Bad plot: ** `#+ fig.width=2, fig.height=2`
+#+ fig.width=2, fig.height=2
+hist(mtcars$mpg)
+
+#' **Good plot: ** `#+ fig.width=4, fig.height=4, dpi=50`
+#+ fig.width=4, fig.height=4, dpi=50
+hist(mtcars$mpg)
+
 #' Generate a series of plots from a loop
 #+ fig.width=3, fig.height=3
 for(i in 1:ncol(mtcars)) hist(mtcars[,i], breaks=40, xlab='', main=names(mtcars)[i])
