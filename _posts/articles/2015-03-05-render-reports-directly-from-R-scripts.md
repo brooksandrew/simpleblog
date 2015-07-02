@@ -4,7 +4,7 @@ title: Render reports directly from R scripts
 description: Harness knitr & rmarkdown to generate html and pdf reports directly from R scripts 
 date:   2015-03-05
 categories: articles
-tags: [data-science, R, markdown, Rmarkdown, knitr, html, pdf, report, workflow]
+tags: [data science, R, markdown, Rmarkdown, knitr, html, pdf, report, workflow]
 comments: true
 share: true
 ---
