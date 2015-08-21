@@ -11,10 +11,19 @@ share: true
 * Table of Contents
 {:toc}
 
+## Tips and tricks learned along the way 
+
+This is mostly a running list of neat `data.table` tricks that took me a while to figure out either by digging into the [official documentation], adapting StackOverflow posts, or more often than not, experimenting for hours.  I'd like to persist these discoveries somewhere with more memory than my head (hello internet) so I can reuse them after my mental memory runs out.  A messier version of DataCamp's sweet [cheat sheet](https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf).
+
+Most, if not all of these techniques were developed for real data science projects and provided some value to my data engineering.  I've generalized everything to the `mtcars` dataset which might not make this value immediately clear.  This list is not intented to be comprehensive or a representative sample of data.table's functionality as DataCamp's cheatsheet is.  OK, enough disclaimers!
+
+
+
 ## hide output from `:=` with knitr
 
 ## using lists as columns3
 
+### Way one
 ```{r}
 dt <- data.table(mtcars)
 
@@ -82,6 +91,9 @@ dt[,{
 
 ```
 
+### Way 2
+ need to split up big chunk atop
+
 ## append categories into list
 
 ```{r}
@@ -112,8 +124,17 @@ dt[,gearsL:=list(list(unique(gear))), by=.(cyl)]
 dt[,gearsLx:=lapply(gear, function(x) setdiff(gearsL[[1]], x))]
 
 
-## take highest value of column A when column B is highest by group
+## Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
+##### subset rows within by statement 
+`V1` is the standard deviation of `mpg` by `cyl`.  `V2` is the standard deviation of `mpg` for just the first half of `mpg`.
+```{r}
+dt <- data.table(mtcars)
+setkey(dt,mpg)
+dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
+```
+
+### take highest value of column A when column B is highest by group
 
 ##### max of `qsec` for each category of `cyl`
 (this is easy)
@@ -140,6 +161,9 @@ dt[,qsec[1],  by=cyl]
 ```{r}
 dt[,qsec[round(.N/2)],  by=cyl]
 ```
+
+
+[official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
 
 KnitPost(overwriteOne='advanced-data-table', site.path='/Users/ajb/Documents/github/simpleblog/') 
 
