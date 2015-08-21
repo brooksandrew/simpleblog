@@ -1,0 +1,145 @@
+---
+layout: post
+title: Advanced Tips & Tricks with data.table
+date: 2015-08-20
+categories: articles
+tags: [data-science, R, data.table]
+comments: true
+share: true
+---
+  
+* Table of Contents
+{:toc}
+
+## hide output from `:=` with knitr
+
+## using lists as columns3
+
+```{r}
+dt <- data.table(mtcars)
+
+# Add all categories of `gear` for each `cyl` to original data.table as a list
+dt[,gearsL:=list(list(unique(gear))), by=.(cyl)]
+
+# first element of list of each row
+#(this isnt that useful, but explores how to access elements of columns which are constructed of lists of lists.  `lapply` is your friend).
+dt[,gearL1:=lapply(gear, function(x) x[[1]])]
+
+# calculate all the gears for all cars of each cyl (excluding the current current row).
+# This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
+dt[,other_gear:=mapply(function(x, y) setdiff(x, y) ,x=gearsL, y=gear)]
+
+# actually calculate a group function excluding the observations of interest
+
+
+
+## METHOD 1: THIS WORKS, but should be a way with .BY
+
+# 1.a without setting key
+dt <- data.table(mtcars)
+dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased mean
+
+# 1.a without setting key longway
+uid <- unique(dt$gear)
+dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] #unbiased mean
+
+# 1.a pulling it apart with .GRP
+dt[, .GRP, by=cyl]
+dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
+dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
+
+# 1.b setting key
+setkey(dt, gear)
+uid <- unique(dt$gear)
+dt[, dt[!.(uid[.GRP]), mean(mpg), by=cyl] , by=gear] #unbiased mean
+
+mean(dt[cyl==4 & gear!=3,mpg]) # testing
+mean(dt[cyl==6 & gear!=3,mpg]) # testing
+
+dt[, mpg_biased_mean:=mean(mpg), by=cyl] # for comparison
+
+# 
+
+## METHOD 2: THIS ALSO WORKS
+dt[,  .SD[, mean(mpg)], by=gear] 
+dt[,  .SD[, mean(mpg), by=cyl], by=gear]
+dt[,  {uid=unique(cyl); .SD[, mean(mpg), by=cyl]} , by=gear]
+
+dt[,{
+  vbar = sum(mpg)
+  n = .N
+  .SD[,.(n, .N, sum_in_gear_cyl=sum(mpg), sum_in_cyl=vbar), by=gear]
+} , by=cyl]
+
+dt[,sum(mpg), by=cyl] # test
+
+dt[,{
+  vbar = mean(mpg)
+  n = .N
+  .SD[,(n*vbar-sum(mpg))/(n-.N),by=gear]
+} , by=cyl]
+
+
+```
+
+## append categories into list
+
+```{r}
+dt <- data.table(mtcars)
+```
+
+##### summary table (long and narrow)
+This could be useful, but is easily achievable using traditional methods
+```{r}
+dt[,list(unique(gear)), by=.(cyl)]
+```
+
+##### summary table (short and narrow)
+This is more nifty.  It's so simple, I find myself using this trick to quickly explore data ad hoc at the command line.
+Can also be useful for more serious data engineering.
+```{r}
+dt[,list(list(unique(gear))), by=.(cyl)]
+```
+
+##### append to original mtcars data.table
+Could be useful if you want to persist this information for further manipulation.
+```{r}
+dt[,gears_unique:=list(list(unique(gear))), by=.(cyl)]
+```
+
+#### TESTING
+dt[,gearsL:=list(list(unique(gear))), by=.(cyl)]
+dt[,gearsLx:=lapply(gear, function(x) setdiff(gearsL[[1]], x))]
+
+
+## take highest value of column A when column B is highest by group
+
+
+##### max of `qsec` for each category of `cyl`
+(this is easy)
+```{r}
+dt <- data.table(mtcars)
+dt[, max(qsec), by=cyl]
+```
+
+##### value of `qsec `when `mpg` is the highest per category of `cyl`
+(this is trickier)
+
+```{r}
+setkey(dt, mpg)
+dt[,qsec[.N],  by=cyl]
+```
+
+
+##### value of `qsec` when `mpg` is the lowest per category of `cyl`
+```{r}
+dt[,qsec[1],  by=cyl]
+```
+
+##### value of `qsec` when `mpg` is the median per category of `cyl`
+```{r}
+dt[,qsec[round(.N/2)],  by=cyl]
+```
+
+KnitPost(overwriteOne='advanced-data-table', site.path='/Users/ajb/Documents/github/simpleblog/') 
+
