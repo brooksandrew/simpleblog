@@ -67,8 +67,6 @@ mean(dt[cyl==6 & gear!=3,mpg]) # testing
 
 dt[, mpg_biased_mean:=mean(mpg), by=cyl] # for comparison
 
-# 
-
 ## METHOD 2: THIS ALSO WORKS
 dt[,  .SD[, mean(mpg)], by=gear] 
 dt[,  .SD[, mean(mpg), by=cyl], by=gear]
@@ -88,12 +86,78 @@ dt[,{
   .SD[,(n*vbar-sum(mpg))/(n-.N),by=gear]
 } , by=cyl]
 
+### METHOD 3 : Super Fast Mean calculation
+
+# non-function direct way
+dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
+dt[,`:=`(avg_mpg_cyl=mean(mpg), Ncyl=.N), by=cyl]
+dt[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(mpg)), by=.(cyl, gear)]
+dt[,unbmean:=(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
+setkey(dt, cyl, gear)  
+dt
+
+# function way
+leaveOneOutMean <- function(dt, ind, bybig, bysmall) {
+  tmp <- copy(dt)
+  tmp[,`:=`(avg_mpg_cyl=mean(get(ind)), Ncyl=.N), by=.(get(bybig))]
+  tmp[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(get(ind))), by=.(get(bybig), get(bysmall))]
+  ret <- tmp[,(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
+  print(class(ret))
+  return(ret)
+}
+
+dt <- data.table(mtcars)
+dt[,unbiased_mean:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')]
+dt[,biased_mean:=mean(mpg), by=cyl]
+
+### SPEED CHECK
+dt <- data.table(mtcars)
+dt <- dt[sample(1:.N, 100000, replace=T), ] # increase # of rows in mtcars
+dt$gear <- sample(1:300, nrow(dt), replace=T) # adding in more cateogries
+
+system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')])
+system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] )
+
+rm(list=ls())
+dat <- data.table(mtcars)
+
+
+
+
 
 ```
 
 ### Way 2
  need to split up big chunk atop
 
+## passing `data.table` column names as function arguments 
+
+## beware of scoping within data.table
+
+data.table is greedy
+
+
+When you add a column to a `data.frame` within a function that exists in the global environment
+```{r}
+df <- mtcars
+add_column_df <- function(df, addcol='') {
+  df[,addcol] <- 'Hi!'
+  print(head(df))
+  return('hello')
+}
+add_column_df(df, addcol='thing')
+head(df)
+```
+
+:= 
+
+## create multiple columns with `:=` in one statement
+
+```{r}
+dt <- data.table(mtcars)
+dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
+
+```
 ## append categories into list
 
 ```{r}
