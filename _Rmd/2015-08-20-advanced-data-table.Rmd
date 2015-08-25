@@ -17,61 +17,125 @@ This is mostly a running list of neat `data.table` tricks that took me a while t
 
 Most, if not all of these techniques were developed for real data science projects and provided some value to my data engineering.  I've generalized everything to the `mtcars` dataset which might not make this value immediately clear.  This list is not intented to be comprehensive or a representative sample of data.table's functionality as DataCamp's cheatsheet is.  OK, enough disclaimers!
 
+Some advanced functionality from `data.table` creator Matt Dowle [here](http://www.rinfinance.com/agenda/2013/workshop/MatthewDowle.pdf).
+
+## Hide output from `:=` with knitr
+
+This was actually fixed in data.table v1.5.  However this is currently not available on CRAN... only Github.  This [StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has more details.
+
+## Using lists as columns
+
+### Creating column of lists
 
 
-## hide output from `:=` with knitr
+##### summary table (long and narrow)
+This could be useful, but is easily achievable using traditional methods
 
-## using lists as columns3
+```{r}
+dt[,list(unique(gear)), by=.(cyl)]
+```
 
-### Way one
+##### summary table (short and narrow)
+Add all categories of `gear` for each `cyl` to original data.table as a list.
+
+This is more nifty.  It's so simple, I find myself using this trick to quickly explore data ad hoc at the command line.
+Can also be useful for more serious data engineering.
+
 ```{r}
 dt <- data.table(mtcars)
-
-# Add all categories of `gear` for each `cyl` to original data.table as a list
 dt[,gearsL:=list(list(unique(gear))), by=.(cyl)]
+head(dt)
+```
 
-# first element of list of each row
-#(this isnt that useful, but explores how to access elements of columns which are constructed of lists of lists.  `lapply` is your friend).
-dt[,gearL1:=lapply(gear, function(x) x[[1]])]
+### Accessing elements from a column of lists
 
-# calculate all the gears for all cars of each cyl (excluding the current current row).
-# This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
-dt[,other_gear:=mapply(function(x, y) setdiff(x, y) ,x=gearsL, y=gear)]
+Extract second element of each list in gearL1 and create row `gearL1`
+This isn't that groundbreaking, but explores how to access elements of columns which are constructed of lists of lists.  `lapply` is your friend.
 
-# actually calculate a group function excluding the observations of interest
+```{r}
+dt[,gearL1:=lapply(gearsL, function(x) x[2])]
+head(dt)
+```
 
+Calculate all the `gear`s for all cars of each `cyl` (excluding the current current row).
+This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
 
+```{r}
+dt[,other_gear:=mapply(function(x, y) setdiff(x, y), x=gearsL, y=gear)]
+head(dt)
+```
 
-## METHOD 1: THIS WORKS, but should be a way with .BY
+### Calculate a function over a group (using `by`) excluding each entity in a second category.
+This title probably doesn't immediately make much sense.  Let me explain what I'm going to calculate and why with an example.
+We want to compare the `mpg` of each car to the average `mpg` of cars in the same class (the same # of cylinders).  However, we don't want 
+to bias the group mean by including the car we want to compare to the average in that average.  
 
-# 1.a without setting key
+This is assumption doesn't make sense in this example, but assume that gear+cyl uniquely identify the cars.  In the real project where I faced this 
+problem, I was calculating an indicator related to an appraiser relative to the average of all other appraisers in that zip3. (`cyl` was really zipcode
+and `gear` was the appraiser's name).
+
+### METHOD 1: in-line
+
+##### Biased mean: simple mean by `cyl`
+However we want to know for each row, what is the mean among all the other cars with the same # of `cyl`s, excluding that car.
+
+```{r}
 dt <- data.table(mtcars)
+dt[, mpg_biased_mean:=mean(mpg), by=cyl] 
+head(dt)
+```
+
+#####  1.a Without setting key
+
+```{r}
 dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased mean
 
-# 1.a without setting key longway
+# check
+dt[gear!=4 & cyl==6, mean(mpg)]
+```
+
+##### 1.b Same as 1.a, but a little faster
+
+```{r}
 uid <- unique(dt$gear)
 dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] #unbiased mean
+```
 
+##### Why does this work?
+
+```{r}
 # 1.a pulling it apart with .GRP
 dt[, .GRP, by=cyl]
 dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
 dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
+```
 
-# 1.b setting key
+##### 1.b Setting key
+```{r}
 setkey(dt, gear)
 uid <- unique(dt$gear)
 dt[, dt[!.(uid[.GRP]), mean(mpg), by=cyl] , by=gear] #unbiased mean
 
 mean(dt[cyl==4 & gear!=3,mpg]) # testing
 mean(dt[cyl==6 & gear!=3,mpg]) # testing
+```
 
-dt[, mpg_biased_mean:=mean(mpg), by=cyl] # for comparison
+### METHOD 2: using `{}` and `.SD`
+`{}` is used for to suppress intermediate operations
 
-## METHOD 2: THIS ALSO WORKS
-dt[,  .SD[, mean(mpg)], by=gear] 
-dt[,  .SD[, mean(mpg), by=cyl], by=gear]
-dt[,  {uid=unique(cyl); .SD[, mean(mpg), by=cyl]} , by=gear]
+##### Building up
+No surpises here.
 
+```{r}
+dt[,  .SD[, mean(mpg)], by=gear] # same as `dt[, mean(mpg), by=gear]`
+dt[,  .SD[, mean(mpg), by=cyl], by=gear] # same as `dt[, mean(mpg), by=.(cyl, by=gear)]`
+```
+
+##### Nested data.tables and `by` statements
+This chunk shows what happens with 2 `by` statements nested within two different data.tables.  Explanatory purposes only - not necessary for our task.
+`n` counts the # of cars in that `cyl`.  `N` counts the number of cars by `cyl` and `gear`.
+
+```{r}
 dt[,{
   vbar = sum(mpg)
   n = .N
@@ -79,38 +143,56 @@ dt[,{
 } , by=cyl]
 
 dt[,sum(mpg), by=cyl] # test
+```
 
+##### Calculating "unbiased mean"
+This is in a summary table.  This would need to be merged back onto `dt` if that is desired.
+```{r}
 dt[,{
   vbar = mean(mpg)
   n = .N
   .SD[,(n*vbar-sum(mpg))/(n-.N),by=gear]
 } , by=cyl]
+```
 
-### METHOD 3 : Super Fast Mean calculation
 
-# non-function direct way
+### METHOD 3: Super Fast Mean calculation
+
+##### Non-function direct way
+Using a vectorized approach to calculate the unbiased mean for each combination of `gear` and `cyl`.  Mechanically,
+it calculates the "biased average" for all cars by `cyl`.  Then subtract off the share of cars with the combination of `gear` and `cyl` 
+that we want to exclude from the average and add that share.  Then extrapolate out this pared down mean.
+
+```{r}
 dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
 dt[,`:=`(avg_mpg_cyl=mean(mpg), Ncyl=.N), by=cyl]
 dt[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(mpg)), by=.(cyl, gear)]
 dt[,unbmean:=(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
 setkey(dt, cyl, gear)  
 dt
+```
 
-# function way
+##### Wrapping up code below into a function
+
+```{r}
 leaveOneOutMean <- function(dt, ind, bybig, bysmall) {
-  tmp <- copy(dt)
-  tmp[,`:=`(avg_mpg_cyl=mean(get(ind)), Ncyl=.N), by=.(get(bybig))]
-  tmp[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(get(ind))), by=.(get(bybig), get(bysmall))]
-  ret <- tmp[,(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
-  print(class(ret))
-  return(ret)
+  dtmp <- copy(dt) # copy so as not to alter original dt object w intermediate assignments
+  dtmp <- dtmp[is.na(get(ind))==F,]
+  dtmp[,`:=`(avg_ind_big=mean(get(ind)), Nbig=.N), by=.(get(bybig))]
+  dtmp[,`:=`(Nbigsmall=.N, avg_ind_big_small=mean(get(ind))), by=.(get(bybig), get(bysmall))]
+  dtmp[,unbmean:=(avg_ind_big*Nbig-(Nbigsmall*avg_ind_big_small))/(Nbig-Nbigsmall)]
+  return(dtmp[,unbmean])
 }
 
 dt <- data.table(mtcars)
 dt[,unbiased_mean:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')]
 dt[,biased_mean:=mean(mpg), by=cyl]
+head(dt)
+```
 
-### SPEED CHECK
+### Speed check
+
+```{r}
 dt <- data.table(mtcars)
 dt <- dt[sample(1:.N, 100000, replace=T), ] # increase # of rows in mtcars
 dt$gear <- sample(1:300, nrow(dt), replace=T) # adding in more cateogries
@@ -122,22 +204,16 @@ rm(list=ls())
 dat <- data.table(mtcars)
 
 
-
-
-
 ```
 
-### Way 2
- need to split up big chunk atop
+## Passing `data.table` column names as function arguments 
 
-## passing `data.table` column names as function arguments 
+## Beware of scoping within data.table
 
-## beware of scoping within data.table
+### `data.frame` way
+When you add something to a `data.frame` within a function that exists in the global environment, it does not affect that object in the 
+global environment unless you return and reassign it as such.
 
-data.table is greedy
-
-
-When you add a column to a `data.frame` within a function that exists in the global environment
 ```{r}
 df <- mtcars
 add_column_df <- function(df, addcol='') {
@@ -149,44 +225,46 @@ add_column_df(df, addcol='thing')
 head(df)
 ```
 
-:= 
+### `data.table` way.
 
-## create multiple columns with `:=` in one statement
+data.table is greedy.  I believe this was fixed in v1.5 this is fixed, but in previous versions, `dt` was permanently altered with `addcol` and `addcol2`.
+
+```{r}
+dt <- data.table(mtcars)
+add_column_df <- function(dt, addcol='') {
+  dt[,addcol] <- 'Hi!'
+  dt[,addcol2:='Hi!!!!']
+  print(head(dt))
+  return('hello')
+}
+add_column_df(dt, addcol='thing')
+head(dt)
+```
+
+
+## print data.table with `[]`
+
+Nothing groundbreaking here, but a small miscellaneous piece of functionality.
+In `data.frame` world, wrapping an expression in `()` prints the output to the console.
+In `data.table` this is achieved by appending `[]` to the end of the expression.
+
+```{r}
+# data.frame way of printing after an assignment
+df <- head(mtcars) # doesn't print
+(df <- head(mtcars)) # does print
+
+# data.table way of printing after an assignment
+dt <- data.table(head(mtcars)) # doesn't print
+dt[,hp2wt:=hp/wt][] # does print
+```
+ 
+## Create multiple columns with `:=` in one statement
 
 ```{r}
 dt <- data.table(mtcars)
 dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 
 ```
-## append categories into list
-
-```{r}
-dt <- data.table(mtcars)
-```
-
-##### summary table (long and narrow)
-This could be useful, but is easily achievable using traditional methods
-```{r}
-dt[,list(unique(gear)), by=.(cyl)]
-```
-
-##### summary table (short and narrow)
-This is more nifty.  It's so simple, I find myself using this trick to quickly explore data ad hoc at the command line.
-Can also be useful for more serious data engineering.
-```{r}
-dt[,list(list(unique(gear))), by=.(cyl)]
-```
-
-##### append to original mtcars data.table
-Could be useful if you want to persist this information for further manipulation.
-```{r}
-dt[,gears_unique:=list(list(unique(gear))), by=.(cyl)]
-```
-
-#### TESTING
-dt[,gearsL:=list(list(unique(gear))), by=.(cyl)]
-dt[,gearsLx:=lapply(gear, function(x) setdiff(gearsL[[1]], x))]
-
 
 ## Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
@@ -202,6 +280,7 @@ dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
 
 ##### max of `qsec` for each category of `cyl`
 (this is easy)
+
 ```{r}
 dt <- data.table(mtcars)
 dt[, max(qsec), by=cyl]
