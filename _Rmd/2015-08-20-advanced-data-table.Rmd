@@ -266,10 +266,33 @@ dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 
 ```
 
+## `keyby` to 
+
+##### Without `keyby`
+Categories are not sorted
+
+```{r}
+## devtools::install_github('brooksandrew/Rsenal')
+library('Rsenal')
+tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), by=depthbin(mpg, 5, labelOrder=T)]
+tmp
+tmp[,barplot(mean, names=depthbin, las=2)]
+```
+
+##### With `keyby`
+```{r}
+## devtools::install_github('brooksandrew/Rsenal')
+library('Rsenal')
+tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), keyby=depthbin(mpg, 5, labelOrder=T)]
+tmp
+tmp[,barplot(mean, names=depthbin, las=2)]
+```
+
 ## Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
 ##### subset rows within by statement 
 `V1` is the standard deviation of `mpg` by `cyl`.  `V2` is the standard deviation of `mpg` for just the first half of `mpg`.
+
 ```{r}
 dt <- data.table(mtcars)
 setkey(dt,mpg)
