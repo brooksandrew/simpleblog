@@ -216,28 +216,32 @@ global environment unless you return and reassign it as such.
 
 ```{r}
 df <- mtcars
-add_column_df <- function(df, addcol='') {
-  df[,addcol] <- 'Hi!'
+add_column_df <- function(df) {
+  df[,'addcol'] <- 'Hi!'
   print(head(df))
   return('hello')
 }
-add_column_df(df, addcol='thing')
+add_column_df(df)
 head(df)
 ```
 
 ### `data.table` way.
 
-data.table is greedy.  I believe this was fixed in v1.5 this is fixed, but in previous versions, `dt` was permanently altered with `addcol` and `addcol2`.
+data.table is greedy.  I believe this was fixed in v1.5 this is fixed, but in previous versions, `dt` was permanently altered with `addcol` and `addcol2`.  
+
+EDIT - I think has to do with the ordering of data.table 
 
 ```{r}
 dt <- data.table(mtcars)
-add_column_df <- function(dt, addcol='') {
-  dt[,addcol] <- 'Hi!'
-  dt[,addcol2:='Hi!!!!']
+add_column_df <- function(dt) {
+  print(head(dt))
+  dt[,'addcol1'] <- 'you_cant_see_me' # does not hit dt in glob env
+  print(head(dt))
+  dt[,addcol2:='sticking_to_dt!'] # hits dt in glob env
   print(head(dt))
   return('hello')
 }
-add_column_df(dt, addcol='thing')
+add_column_df(dt)
 head(dt)
 ```
 
