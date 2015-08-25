@@ -208,6 +208,10 @@ dat <- data.table(mtcars)
 
 ## Passing `data.table` column names as function arguments 
 
+## Using `shift` for to lead/lag vectors and lists
+
+Note this feature is only available in version 1.5 (currently on Github, not CRAN)
+
 ## Beware of scoping within data.table
 
 ### `data.frame` way
@@ -270,7 +274,7 @@ dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 
 ```
 
-## `keyby` to 
+## `keyby` to key resulting aggregate table
 
 ##### Without `keyby`
 Categories are not sorted
