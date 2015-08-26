@@ -212,6 +212,27 @@ dat <- data.table(mtcars)
 
 Note this feature is only available in version 1.5 (currently on Github, not CRAN)
 
+```{r}
+dt <- data.table(mtcars)[,.(mpg, cyl)]
+dt[,mpg_lag1:=shift(mpg, 1)]
+dt[,mpg_forward1:=shift(mpg, 1, type='lead')]
+dt[,mpg_lag1_bycyl:=shift(mpg, 1), keyby=cyl]
+
+
+dt <- data.table(
+  date=rep(seq(as.Date('2010-01-01'), as.Date('2015-01-01'), by='year'), 5), 
+  ind=rpois(30, 5),
+  entity=sort(rep(letters[1:5], 6))
+  )
+setkey(dt, entity, date) # important for ordering
+dt[,indpct_fast:=(ind/shift(ind, 1))-1, by=entity]
+
+lagpad <- function(x, k) c(rep(NA, k), x)[1:length(x)] 
+dt[,indpct_slow:=(ind/lagpad(ind, 1))-1, by=entity]
+
+head(dt, 15)
+```
+
 ## Beware of scoping within data.table
 
 ### `data.frame` way
