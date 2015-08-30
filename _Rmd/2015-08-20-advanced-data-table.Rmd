@@ -19,10 +19,8 @@ Most, if not all of these techniques were developed for real data science projec
 
 Some advanced functionality from `data.table` creator Matt Dowle [here](http://www.rinfinance.com/agenda/2013/workshop/MatthewDowle.pdf).
 
-## Hide output from `:=` with knitr
 
-This was actually fixed in data.table v1.5.  However this is currently not available on CRAN... only Github.  This [StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has more details.
-
+## 1. DATA STRUCTURES
 ## Using lists as columns
 
 ### Creating column of lists
@@ -65,14 +63,78 @@ dt[,other_gear:=mapply(function(x, y) setdiff(x, y), x=gearsL, y=gear)]
 head(dt)
 ```
 
-### Calculate a function over a group (using `by`) excluding each entity in a second category.
+## 3. FUNCTIONS
+
+## Passing `data.table` column names as function arguments 
+
+#### Method 1: No quotes, and `deparse` + `substitute`
+
+This way seems more data.table-ish because it maintains the practice of not using quotes on variable names in most cases.
+
+```{r}
+dt <- data.table(mtcars)
+myfunc <- function(dt, v) {
+  v=deparse(substitute(v))
+  dt[,v]
+}
+
+myfunc(dt, mpg)
+```
+
+### Method 2: quotes and `get`
+
+However I tend to pass through column names as characters (quoted) and use `get` each time I reference that column.  That can be annoying if you have a long function
+repeatedly reference column names, but I often need to write such few lines of code with data.table, it hasn't struck me as terribly unslick, yet.
+
+```{r}
+dt <- data.table(mtcars)
+myfunc <- function(dt, v) dt[,get(v)]
+
+myfunc(dt, 'mpg')
+```
+
+
+
+## Fast looping with `set`
+
+I still haven't worked much with the loop + `set` framework.  I've been able to achieve pretty much everything with `:=` which is more flexible and powerful.
+However, if you must loop, `set` is orders of magnitude faster than native R assignments within loops.  Here's a snippet from data.table news a while back:
+
+
+    New function set(DT,i,j,value) allows fast assignment to elements
+    of DT. Similar to := but avoids the overhead of [.data.table, so is
+    much faster inside a loop. Less flexible than :=, but as flexible
+    as matrix subassignment. Similar in spirit to setnames(), setcolorder(),
+    setkey() and setattr(); i.e., assigns by reference with no copy at all.
+
+    M = matrix(1,nrow=100000,ncol=100)
+    DF = as.data.frame(M)
+    DT = as.data.table(M)
+    system.time(for (i in 1:1000) DF[i,1L] <- i)   # 591.000s
+    system.time(for (i in 1:1000) DT[i,V1:=i])     #   1.158s
+    system.time(for (i in 1:1000) M[i,1L] <- i)    #   0.016s
+    system.time(for (i in 1:1000) set(DT,i,1L,i))  #   0.027s
+
+
+data.table creators do favor `set` for [some things](http://stackoverflow.com/questions/16846380/how-to-apply-same-function-to-every-specified-column-in-a-data-table), like this task which can also be done w/ `lapply` and `.SD`.  I was actually directed to this solution after I posed [this question](http://stackoverflow.com/questions/31326691/apply-function-across-subset-of-columns-in-data-table-with-sdcols) on StackOverlow.  I was also pleased to learn that the 
+functionality I was looking for -- applying a function to a subset of columns with `.SDcols` while preserving the untouched columns -- was added as a feature request. 
+
+```{r}
+dt <- data.table(mtcars)[,1:5, with=F]
+for (j in c(1L,2L,4L)) set(dt, j=j, value=-dt[[j]]) # integers using 'L' passed for efficiency
+for (j in c(3L,5L)) set(dt, j=j, value=paste0(dt[[j]],'!!'))
+head(dt)
+```
+
+
+## Calculate a function over a group (using `by`) excluding each entity in a second category.
 This title probably doesn't immediately make much sense.  Let me explain what I'm going to calculate and why with an example.
 We want to compare the `mpg` of each car to the average `mpg` of cars in the same class (the same # of cylinders).  However, we don't want 
 to bias the group mean by including the car we want to compare to the average in that average.  
 
-This is assumption doesn't make sense in this example, but assume that gear+cyl uniquely identify the cars.  In the real project where I faced this 
-problem, I was calculating an indicator related to an appraiser relative to the average of all other appraisers in that zip3. (`cyl` was really zipcode
-and `gear` was the appraiser's name).
+This assumption doesn't appear useful in this example, but assume that `gear`+`cyl` uniquely identify the cars.  In the real project where I faced this 
+problem, I was calculating an indicator related to an appraiser relative to the average of all other appraisers in their zip3. (`cyl` was really zipcode
+and `gear` was the appraiser's ID).
 
 ### METHOD 1: in-line
 
@@ -199,18 +261,13 @@ dt$gear <- sample(1:300, nrow(dt), replace=T) # adding in more cateogries
 
 system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')])
 system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] )
-
-rm(list=ls())
-dat <- data.table(mtcars)
-
-
 ```
 
-## Passing `data.table` column names as function arguments 
+
 
 ## Using `shift` for to lead/lag vectors and lists
 
-Note this feature is only available in version 1.5 (currently on Github, not CRAN)
+Note this feature is only available in version 1.9.5 (currently on Github, not CRAN)
 
 ```{r}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
@@ -237,56 +294,56 @@ head(dt, 15)
 
 ### `data.frame` way
 When you add something to a `data.frame` within a function that exists in the global environment, it does not affect that object in the 
-global environment unless you return and reassign it as such.
+global environment unless you return and reassign it as such, or you use the `<<-` operator.  
 
 ```{r}
 df <- mtcars
 add_column_df <- function(df) {
-  df[,'addcol'] <- 'Hi!'
-  print(head(df))
-  return('hello')
+  df$addcol1<- 'here in func!'
+  df$addcol2 <<- 'in glob env!'
+  return(df)
 }
-add_column_df(df)
+```
+
+When we call the function, we see `addcol1` in the output.  But not `addcol2`.  That's because it's been added to the `df` in the global environment one level up.
+```{r}
+head(add_column_df(df))
+```
+
+Here is `addcol2`, but not `addcol`.
+```{r}
 head(df)
 ```
 
 ### `data.table` way.
 
-data.table is greedy.  I believe this was fixed in v1.5 this is fixed, but in previous versions, `dt` was permanently altered with `addcol` and `addcol2`.  
-
-EDIT - I think has to do with the ordering of data.table 
+Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because data.table shaves
+computation time by not making copies unless explicity directed to.
 
 ```{r}
 dt <- data.table(mtcars)
-add_column_df <- function(dt) {
-  print(head(dt))
-  dt[,'addcol1'] <- 'you_cant_see_me' # does not hit dt in glob env
-  print(head(dt))
-  dt[,addcol2:='sticking_to_dt!'] # hits dt in glob env
-  print(head(dt))
-  return('hello')
+add_column_dt <- function(dat) {
+  dat[,addcol:='sticking_to_dt!'] # hits dt in glob env
+  return(dat)
 }
-add_column_df(dt)
-head(dt)
+head(add_column_dt(dt)) # addcol here
+head(dt) # addcol also here
 ```
 
-
-## print data.table with `[]`
-
-Nothing groundbreaking here, but a small miscellaneous piece of functionality.
-In `data.frame` world, wrapping an expression in `()` prints the output to the console.
-In `data.table` this is achieved by appending `[]` to the end of the expression.
+So something like this, bypasses this behavior, but is likely somewhat less efficient (and elegant).  I suspect there's a cleaner and/or faster way to do this: keep some variables 
+local to the function while persisting and returning other columns.
 
 ```{r}
-# data.frame way of printing after an assignment
-df <- head(mtcars) # doesn't print
-(df <- head(mtcars)) # does print
-
-# data.table way of printing after an assignment
-dt <- data.table(head(mtcars)) # doesn't print
-dt[,hp2wt:=hp/wt][] # does print
+dt <- data.table(mtcars)
+add_column_dt <- function(dat) {
+  datloc <- copy(dat)
+  datloc[,addcol:='not sticking_to_dt!'] # hits dt in glob env
+  return(datloc)
+}
+head(add_column_dt(dt)) # addcol here
+head(dt) # addcol also here
 ```
- 
+
 ## Create multiple columns with `:=` in one statement
 
 ```{r}
@@ -357,6 +414,35 @@ dt[,qsec[1],  by=cyl]
 dt[,qsec[round(.N/2)],  by=cyl]
 ```
 
+## 4. PRINTING
+
+## _ Print data.table with `[]`
+
+Nothing groundbreaking here, but a small miscellaneous piece of functionality.
+In `data.frame` world, wrapping an expression in `()` prints the output to the console.
+In `data.table` this is achieved by appending `[]` to the end of the expression.
+
+```{r}
+# data.frame way of printing after an assignment
+df <- head(mtcars) # doesn't print
+(df <- head(mtcars)) # does print
+
+# data.table way of printing after an assignment
+dt <- data.table(head(mtcars)) # doesn't print
+dt[,hp2wt:=hp/wt][] # does print
+```
+ 
+
+## => Hide output from `:=` with knitr
+
+It used to be that assignments using the `:=` operator printed the object to console when knitting documents with `knitr` and `rmarkdown`.  This is actually fixed in data.table v1.9.5.  However at the time of my writing, this currently not available on CRAN... only Github.  For 1.9.4 users, [this StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has some hacky solutions.  This least impedance approach I found was simply wrapping
+the expression in `invisible`.  Other solutions alter the way you use data.table which I didn't like.
+
+```{r}
+dt <- data.table(mtcars)
+dt[,mpg2qsec:=mpg/qsec] # will print with knitr
+invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
+```
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
 
