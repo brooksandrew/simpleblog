@@ -4,6 +4,8 @@ title:   "Chasing owls in Rock Creek Park"
 date:   2014-08-10
 categories: articles
 tags: [photography]
+comments: true
+share: true
 ---
 
 After attempting some low-light shots with the newly purchased DSLR camera, I quickly realized

@@ -4,6 +4,8 @@ title:  "Walking around DC with a camera"
 date:   2014-10-05
 categories: articles
 tags: [photography]
+comments: true
+share: true
 ---
 
 Having some fun walking around the monuments at night messing around with my new(ish) DSLR and tripod.
