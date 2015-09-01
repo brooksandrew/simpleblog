@@ -4,6 +4,7 @@ title: How I got here
 categories: articles
 tags: [jekyll, blogging]
 comments: true
+share: true
 ---
 
 

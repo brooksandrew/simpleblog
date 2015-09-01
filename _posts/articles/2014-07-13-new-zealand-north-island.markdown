@@ -5,6 +5,7 @@ date:   2014-07-18
 categories: articles
 tags: [travel, new zealand, north island,]
 comments: true
+share: true
 ---
 # Route: June 20 - July 8 (2014) 
 
