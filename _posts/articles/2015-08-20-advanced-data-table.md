@@ -28,9 +28,16 @@ Some more advanced functionality from `data.table` creator Matt Dowle [here](htt
 ##### summary table (long and narrow)
 This could be useful, but is easily achievable using traditional methods.
 
-```{r}
+
+{% highlight r %}
 dt[,unique(gear), by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: object 'gear' not found
+{% endhighlight %}
 
 ##### summary table (short and narrow)
 Add all categories of `gear` for each `cyl` to original data.table as a list.
@@ -38,34 +45,100 @@ Add all categories of `gear` for each `cyl` to original data.table as a list.
 This is more nifty.  It's so simple, I find myself using this trick to quickly explore data ad hoc at the command line.
 Can also be useful for more serious data engineering.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(gear, cyl)]
 dt[,gearsL:=list(list(unique(gear))), by=cyl]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl gearsL
+## 1:    4   6  4,3,5
+## 2:    4   6  4,3,5
+## 3:    4   4  4,3,5
+## 4:    3   6  4,3,5
+## 5:    3   8    3,5
+## 6:    3   6  4,3,5
+{% endhighlight %}
 
 ### Accessing elements from a column of lists
 
 Extract second element of each list in `gearL1` and create row `gearL1`.
 This isn't that groundbreaking, but explores how to access elements of columns which are constructed of lists of lists.  `lapply` is your friend.
 
-```{r}
+
+{% highlight r %}
 dt[,gearL1:=lapply(gearsL, function(x) x[2])]
 dt[,gearS1:=sapply(gearsL, function(x) x[2])] 
 
 head(dt)
+{% endhighlight %}
 
+
+
+{% highlight text %}
+##    gear cyl gearsL gearL1 gearS1
+## 1:    4   6  4,3,5      3      3
+## 2:    4   6  4,3,5      3      3
+## 3:    4   4  4,3,5      3      3
+## 4:    3   6  4,3,5      3      3
+## 5:    3   8    3,5      5      5
+## 6:    3   6  4,3,5      3      3
+{% endhighlight %}
+
+
+
+{% highlight r %}
 str(head(dt[,gearL1])) 
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## List of 6
+##  $ : num 3
+##  $ : num 3
+##  $ : num 3
+##  $ : num 3
+##  $ : num 5
+##  $ : num 3
+{% endhighlight %}
+
+
+
+{% highlight r %}
 str(head(dt[,gearS1]))
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  num [1:6] 3 3 3 3 5 3
+{% endhighlight %}
 
 Calculate all the `gear`s for all cars of each `cyl` (excluding the current current row).
 This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
 
-```{r}
+
+{% highlight r %}
 dt[,other_gear:=mapply(function(x, y) setdiff(x, y), x=gearsL, y=gear)]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl gearsL gearL1 gearS1 other_gear
+## 1:    4   6  4,3,5      3      3        3,5
+## 2:    4   6  4,3,5      3      3        3,5
+## 3:    4   4  4,3,5      3      3        3,5
+## 4:    3   6  4,3,5      3      3        4,5
+## 5:    3   8    3,5      5      5          5
+## 6:    3   6  4,3,5      3      3        4,5
+{% endhighlight %}
 
 ## => Suppressing intermediate output with {}
 
@@ -74,38 +147,82 @@ I've only used it within the J slot of data.table, it might be more generalizabl
 on the fly when I need to perform some multi-step vectorized operation.  It can clean up code by allowing you to reference the same temporary variable
 by a concise name rather than rewriting the code to re-compute it.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
-```
+{% endhighlight %}
 
 Defaults to just returning the last object defined in the braces unnamed.
-```{r}
+
+{% highlight r %}
 dt[,{tmp1=mean(mpg); tmp2=mean(abs(mpg-tmp1)); tmp3=round(tmp2, 2)}, by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl   V1
+## 1:   6 1.19
+## 2:   4 3.83
+## 3:   8 1.79
+{% endhighlight %}
 
 We can be more explicit by passing a named list of what we want to keep.
-```{r}
+
+{% highlight r %}
 dt[,{tmp1=mean(mpg); tmp2=mean(abs(mpg-tmp1)); tmp3=round(tmp2, 2); list(tmp2=tmp2, tmp3=tmp3)}, by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl  tmp2 tmp3
+## 1:   6 1.192 1.19
+## 2:   4 3.833 3.83
+## 3:   8 1.786 1.79
+{% endhighlight %}
 
 Can also write it like this without semicolons.
-```{r}
+
+{% highlight r %}
 dt[,{tmp1=mean(mpg)
      tmp2=mean(abs(mpg-tmp1))
      tmp3=round(tmp2, 2)
      list(tmp2=tmp2, tmp3=tmp3)},
    by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl  tmp2 tmp3
+## 1:   6 1.192 1.19
+## 2:   4 3.833 3.83
+## 3:   8 1.786 1.79
+{% endhighlight %}
 
 This is trickier with `:=` assignments... I don't think `:=` is intended to work when wrapped in `{`.  Assigning multiple columns with `:=` at once
 does not allow you to use the first columns you create to use building the ones after it, as we did with `=` inside the `{` above.  Chaining and then dropping unwanted variables is a messy workaround... still exploring this one.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(cyl, mpg)]
 
 dt[,tmp1:=mean(mpg), by=cyl][,tmp2:=mean(abs(mpg-tmp1)), by=cyl][,tmp1:=NULL]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl  mpg  tmp2
+## 1:   6 21.0 1.192
+## 2:   6 21.0 1.192
+## 3:   4 22.8 3.833
+## 4:   6 21.4 1.192
+## 5:   8 18.7 1.786
+## 6:   6 18.1 1.192
+{% endhighlight %}
 
 
 ## => Fast looping with `set`
@@ -132,12 +249,25 @@ However, if you must loop, `set` is orders of magnitude faster than native R ass
 data.table creators do favor `set` for [some things](http://stackoverflow.com/questions/16846380/how-to-apply-same-function-to-every-specified-column-in-a-data-table), like this task which can also be done w/ `lapply` and `.SD`.  I was actually directed to this solution after I posed [this question](http://stackoverflow.com/questions/31326691/apply-function-across-subset-of-columns-in-data-table-with-sdcols) on StackOverflow.  I was also pleased to learn that the 
 functionality I was looking for -- applying a function to a subset of columns with `.SDcols` while preserving the untouched columns -- was added as a feature request. 
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,1:5, with=F]
 for (j in c(1L,2L,4L)) set(dt, j=j, value=-dt[[j]]) # integers using 'L' passed for efficiency
 for (j in c(3L,5L)) set(dt, j=j, value=paste0(dt[[j]],'!!'))
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##      mpg cyl  disp   hp   drat
+## 1: -21.0  -6 160!! -110  3.9!!
+## 2: -21.0  -6 160!! -110  3.9!!
+## 3: -22.8  -4 108!!  -93 3.85!!
+## 4: -21.4  -6 258!! -110 3.08!!
+## 5: -18.7  -8 360!! -175 3.15!!
+## 6: -18.1  -6 225!! -105 2.76!!
+{% endhighlight %}
 
 
 ## => Using `shift` for to lead/lag vectors and lists
@@ -146,16 +276,30 @@ Note this feature is only available in version 1.9.5 (currently on Github, not C
 Base R surprisingly does not have great tools for dealing with leads/lags of vectors that most social science
 statistical software (Stata, SAS, even FAME which I used in my formative data years) come equipped with out of the box.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
 dt[,mpg_lag1:=shift(mpg, 1)]
 dt[,mpg_forward1:=shift(mpg, 1, type='lead')]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl mpg_lag1 mpg_forward1
+## 1: 21.0   6       NA         21.0
+## 2: 21.0   6     21.0         22.8
+## 3: 22.8   4     21.0         21.4
+## 4: 21.4   6     22.8         18.7
+## 5: 18.7   8     21.4         18.1
+## 6: 18.1   6     18.7         14.3
+{% endhighlight %}
 
 #### `shift` with `by`
 
-```{r}
+
+{% highlight r %}
 # creating some data
 n <- 30
 dt <- data.table(
@@ -171,17 +315,46 @@ lagpad <- function(x, k) c(rep(NA, k), x)[1:length(x)]
 dt[,indpct_slow:=(ind/lagpad(ind, 1))-1, by=entity]
 
 head(dt, 10)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##           date ind entity indpct_fast indpct_slow
+##  1: 2010-01-01   2      a          NA          NA
+##  2: 2011-01-01   5      a      1.5000      1.5000
+##  3: 2012-01-01   6      a      0.2000      0.2000
+##  4: 2013-01-01   6      a      0.0000      0.0000
+##  5: 2014-01-01   5      a     -0.1667     -0.1667
+##  6: 2015-01-01   4      a     -0.2000     -0.2000
+##  7: 2010-01-01   2      b          NA          NA
+##  8: 2011-01-01   8      b      3.0000      3.0000
+##  9: 2012-01-01   4      b     -0.5000     -0.5000
+## 10: 2013-01-01   5      b      0.2500      0.2500
+{% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
 
 This is useful, but note that that the columns operated on must be atomic vectors or lists.  That is they must exist before running computation.  
 Building columns referencing other columns in this set need to be done indiviually or chained.
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
 dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl   avg  med  min
+## 1: 21.0   6 19.74 19.7 17.8
+## 2: 21.0   6 19.74 19.7 17.8
+## 3: 22.8   4 26.66 26.0 21.4
+## 4: 21.4   6 19.74 19.7 17.8
+## 5: 18.7   8 15.10 15.2 10.4
+## 6: 18.1   6 19.74 19.7 17.8
+{% endhighlight %}
 
 
 
@@ -203,46 +376,182 @@ and `gear` was the appraiser's ID).
 ##### 0.a Biased mean: simple mean by `cyl`
 However we want to know for each row, what is the mean among all the other cars with the same # of `cyl`s, excluding that car.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(cyl, gear, mpg)]
 dt[, mpg_biased_mean:=mean(mpg), by=cyl] 
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl gear  mpg mpg_biased_mean
+## 1:   6    4 21.0           19.74
+## 2:   6    4 21.0           19.74
+## 3:   4    4 22.8           26.66
+## 4:   6    3 21.4           19.74
+## 5:   8    3 18.7           15.10
+## 6:   6    3 18.1           19.74
+{% endhighlight %}
 
 #####  1.a `.GRP` without setting key
 
-```{r}
-dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased mean
 
+{% highlight r %}
+dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased mean
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl    V1
+## 1:    4   6 19.73
+## 2:    4   8 15.10
+## 3:    4   4 25.97
+## 4:    3   6 19.74
+## 5:    3   4 27.18
+## 6:    3   8 15.40
+## 7:    5   6 19.75
+## 8:    5   4 26.32
+## 9:    5   8 15.05
+{% endhighlight %}
+
+
+
+{% highlight r %}
 # check
 dt[gear!=4 & cyl==6, mean(mpg)]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 19.73
+{% endhighlight %}
 
 ##### 1.b Same as 1.a, but a little faster
 
-```{r}
+
+{% highlight r %}
 uid <- unique(dt$gear)
 dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] #unbiased mean
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl    V1
+## 1:    3   4 27.18
+## 2:    4   4 25.97
+## 3:    5   4 26.32
+## 4:    3   6 19.74
+## 5:    4   6 19.73
+## 6:    5   6 19.75
+## 7:    3   8 15.40
+## 8:    4   8 15.10
+## 9:    5   8 15.05
+{% endhighlight %}
 
 ##### Why does this work?
 
-```{r}
+
+{% highlight r %}
 # 1.a pulling it apart with .GRP
 dt[, .GRP, by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl .GRP
+## 1:   6    1
+## 2:   4    2
+## 3:   8    3
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl .GRP V2
+## 1:   6    1  4
+## 2:   4    2  3
+## 3:   8    3  5
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl .GRP V2
+## 1:    4   6    1  4
+## 2:    4   4    2  3
+## 3:    4   8    3  5
+## 4:    3   6    1  4
+## 5:    3   4    2  3
+## 6:    3   8    3  5
+## 7:    5   6    1  4
+## 8:    5   4    2  3
+## 9:    5   8    3  5
+{% endhighlight %}
 
 ##### 1.b Setting key
-```{r}
+
+{% highlight r %}
 setkey(dt, gear)
 uid <- unique(dt$gear)
 dt[, dt[!.(uid[.GRP]), mean(mpg), by=cyl] , by=gear] #unbiased mean
+{% endhighlight %}
 
+
+
+{% highlight text %}
+##    gear cyl    V1
+## 1:    3   6 19.74
+## 2:    3   4 27.18
+## 3:    3   8 15.40
+## 4:    4   6 19.73
+## 5:    4   8 15.10
+## 6:    4   4 25.97
+## 7:    5   6 19.75
+## 8:    5   8 15.05
+## 9:    5   4 26.32
+{% endhighlight %}
+
+
+
+{% highlight r %}
 mean(dt[cyl==4 & gear!=3,mpg]) # testing
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 27.18
+{% endhighlight %}
+
+
+
+{% highlight r %}
 mean(dt[cyl==6 & gear!=3,mpg]) # testing
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] 19.74
+{% endhighlight %}
 
 ### METHOD 2: using `{}` and `.SD`
 `{}` is used for to suppress intermediate operations.
@@ -250,34 +559,106 @@ mean(dt[cyl==6 & gear!=3,mpg]) # testing
 ##### Building up
 No surpises here.
 
-```{r}
+
+{% highlight r %}
 dt[,  .SD[, mean(mpg)], by=gear] # same as `dt[, mean(mpg), by=gear]`
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear    V1
+## 1:    3 16.11
+## 2:    4 24.53
+## 3:    5 21.38
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,  .SD[, mean(mpg), by=cyl], by=gear] # same as `dt[, mean(mpg), by=.(cyl, by=gear)]`
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl    V1
+## 1:    3   6 19.75
+## 2:    3   8 15.05
+## 3:    3   4 21.50
+## 4:    4   6 19.75
+## 5:    4   4 26.93
+## 6:    5   4 28.20
+## 7:    5   8 15.40
+## 8:    5   6 19.70
+{% endhighlight %}
 
 ##### Nested data.tables and `by` statements
 This chunk shows what happens with two `by` statements nested within two different data.tables.  Explanatory purposes only - not necessary for our task.
 `n` counts the # of cars in that `cyl`.  `N` counts the number of cars by `cyl` and `gear`.
 
-```{r}
+
+{% highlight r %}
 dt[,{
   vbar = sum(mpg)
   n = .N
   .SD[,.(n, .N, sum_in_gear_cyl=sum(mpg), sum_in_cyl=vbar), by=gear]
 } , by=cyl]
+{% endhighlight %}
 
+
+
+{% highlight text %}
+##    cyl gear  n  N sum_in_gear_cyl sum_in_cyl
+## 1:   6    3  7  2            39.5      138.2
+## 2:   6    4  7  4            79.0      138.2
+## 3:   6    5  7  1            19.7      138.2
+## 4:   8    3 14 12           180.6      211.4
+## 5:   8    5 14  2            30.8      211.4
+## 6:   4    3 11  1            21.5      293.3
+## 7:   4    4 11  8           215.4      293.3
+## 8:   4    5 11  2            56.4      293.3
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,sum(mpg), by=cyl] # test
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl    V1
+## 1:   6 138.2
+## 2:   8 211.4
+## 3:   4 293.3
+{% endhighlight %}
 
 ##### Calculating "unbiased mean"
 This is in a summary table.  This would need to be merged back onto `dt` if that is desired.
-```{r}
+
+{% highlight r %}
 dt[,{
   vbar = mean(mpg)
   n = .N
   .SD[,(n*vbar-sum(mpg))/(n-.N),by=gear]
 } , by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl gear    V1
+## 1:   6    3 19.74
+## 2:   6    4 19.73
+## 3:   6    5 19.75
+## 4:   8    3 15.40
+## 5:   8    5 15.05
+## 6:   4    3 27.18
+## 7:   4    4 25.97
+## 8:   4    5 26.32
+{% endhighlight %}
 
 
 ### METHOD 3: Super Fast Mean calculation
@@ -287,18 +668,32 @@ Using a vectorized approach to calculate the unbiased mean for each combination 
 it calculates the "biased average" for all cars by `cyl`.  Then subtract off the share of cars with the combination of `gear` and `cyl` 
 that we want to exclude from the average and add that share.  Then extrapolate out this pared down mean.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
 dt[,`:=`(avg_mpg_cyl=mean(mpg), Ncyl=.N), by=cyl]
 dt[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(mpg)), by=.(cyl, gear)]
 dt[,unbmean:=(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
 setkey(dt, cyl, gear)  
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl gear avg_mpg_cyl Ncyl Ncylgear avg_mpg_cyl_gear unbmean
+## 1: 21.5   4    3       26.66   11        1            21.50   27.18
+## 2: 22.8   4    4       26.66   11        8            26.93   25.97
+## 3: 24.4   4    4       26.66   11        8            26.93   25.97
+## 4: 22.8   4    4       26.66   11        8            26.93   25.97
+## 5: 32.4   4    4       26.66   11        8            26.93   25.97
+## 6: 30.4   4    4       26.66   11        8            26.93   25.97
+{% endhighlight %}
 
 ##### Wrapping up code below into a function
 
-```{r}
+
+{% highlight r %}
 leaveOneOutMean <- function(dt, ind, bybig, bysmall) {
   dtmp <- copy(dt) # copy so as not to alter original dt object w intermediate assignments
   dtmp <- dtmp[is.na(get(ind))==F,]
@@ -312,97 +707,240 @@ dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
 dt[,unbiased_mean:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')]
 dt[,biased_mean:=mean(mpg), by=cyl]
 head(dt)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl gear unbiased_mean biased_mean
+## 1: 21.0   6    4         19.73       19.74
+## 2: 21.0   6    4         19.73       19.74
+## 3: 22.8   4    4         25.97       26.66
+## 4: 21.4   6    3         19.74       19.74
+## 5: 18.7   8    3         15.40       15.10
+## 6: 18.1   6    3         19.74       19.74
+{% endhighlight %}
 
 ### Speed check
 
 Method 3 is roughly 100x faster than the other two.  Great for this narrow task with the vectorization built in, 
 but less generalizable; The other two methods allow any function to be passed.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 dt <- dt[sample(1:.N, 100000, replace=T), ] # increase # of rows in mtcars
 dt$gear <- sample(1:300, nrow(dt), replace=T) # adding in more cateogries
-```
+{% endhighlight %}
 
 ##### Method 3:
 
-```{r}
+
+{% highlight r %}
 system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')])
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    user  system elapsed 
+##   0.054   0.012   0.067
+{% endhighlight %}
 
 ##### Method 2:
 
-```{r}
+
+{% highlight r %}
 system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] )
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    user  system elapsed 
+##   5.433   0.979   6.623
+{% endhighlight %}
 
 ##### Method 1:
-```{r}
+
+{% highlight r %}
 uid <- unique(dt$gear)
 system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)])
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    user  system elapsed 
+##   4.815   0.783   5.648
+{% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
 
 ##### Without `keyby`
 Categories are not sorted
 
-```{r}
+
+{% highlight r %}
 ## devtools::install_github('brooksandrew/Rsenal')
 library('Rsenal')
 tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), by=depthbin(mpg, 5, labelOrder=T)]
 tmp
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##           depthbin     N   sum      mean
+## 1:   (21,24.4] 4/5 19134 19134 5.226e-05
+## 2: (15.2,17.8] 2/5 15437  3016 1.266e-05
+## 3:   (17.8,21] 3/5 22048  6313 1.299e-05
+## 4: [10.4,15.2] 1/5 24695     0 0.000e+00
+## 5: (24.4,33.9] 5/5 18686 15545 4.452e-05
+{% endhighlight %}
+
+
+
+{% highlight r %}
 tmp[,barplot(mean, names=depthbin, las=2)]
-```
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-28](/assets/Rfig/unnamed-chunk-28.svg) 
+
+{% highlight text %}
+##      [,1]
+## [1,]  0.7
+## [2,]  1.9
+## [3,]  3.1
+## [4,]  4.3
+## [5,]  5.5
+{% endhighlight %}
 
 ##### With `keyby`
-```{r}
+
+{% highlight r %}
 ## devtools::install_github('brooksandrew/Rsenal')
 library('Rsenal')
 tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), keyby=depthbin(mpg, 5, labelOrder=T)]
 tmp
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##           depthbin     N   sum      mean
+## 1: [10.4,15.2] 1/5 24695     0 0.000e+00
+## 2: (15.2,17.8] 2/5 15437  3016 1.266e-05
+## 3:   (17.8,21] 3/5 22048  6313 1.299e-05
+## 4:   (21,24.4] 4/5 19134 19134 5.226e-05
+## 5: (24.4,33.9] 5/5 18686 15545 4.452e-05
+{% endhighlight %}
+
+
+
+{% highlight r %}
 tmp[,barplot(mean, names=depthbin, las=2)]
-```
+{% endhighlight %}
+
+![plot of chunk unnamed-chunk-29](/assets/Rfig/unnamed-chunk-29.svg) 
+
+{% highlight text %}
+##      [,1]
+## [1,]  0.7
+## [2,]  1.9
+## [3,]  3.1
+## [4,]  4.3
+## [5,]  5.5
+{% endhighlight %}
 
 ## => Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
 ##### subset rows within by statement 
 `V1` is the standard deviation of `mpg` by `cyl`.  `V2` is the standard deviation of `mpg` for just the first half of `mpg`.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 setkey(dt,mpg)
 dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl    V1     V2
+## 1:   8 2.560 2.0926
+## 2:   6 1.454 0.8981
+## 3:   4 4.510 1.7729
+{% endhighlight %}
 
 #### take highest value of column A when column B is highest by group
 
 Max of `qsec` for each category of `cyl`
 (this is easy)
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 dt[, max(qsec), by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl    V1
+## 1:   6 20.22
+## 2:   4 22.90
+## 3:   8 18.00
+{% endhighlight %}
 
 ##### value of `qsec `when `mpg` is the highest per category of `cyl`
 (this is trickier)
 
-```{r}
+
+{% highlight r %}
 setkey(dt, mpg)
 dt[,qsec[.N],  by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl    V1
+## 1:   8 17.05
+## 2:   6 19.44
+## 3:   4 19.90
+{% endhighlight %}
 
 ##### value of `qsec` when `mpg` is the lowest per category of `cyl`
-```{r}
+
+{% highlight r %}
 dt[,qsec[1],  by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl    V1
+## 1:   8 17.98
+## 2:   6 18.90
+## 3:   4 18.60
+{% endhighlight %}
 
 ##### value of `qsec` when `mpg` is the median per category of `cyl`
-```{r}
+
+{% highlight r %}
 dt[,qsec[round(.N/2)],  by=cyl]
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    cyl   V1
+## 1:   8 18.0
+## 2:   6 15.5
+## 3:   4 16.7
+{% endhighlight %}
 
 
 ## 3. FUNCTIONS
@@ -414,27 +952,57 @@ dt[,qsec[round(.N/2)],  by=cyl]
 
 This way seems more data.table-ish because it maintains the practice of not using quotes on variable names in most cases.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)[.(cyl, mpg)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: When i is a data.table (or character vector), x must be keyed (i.e.
+## sorted, and, marked as sorted) so data.table knows which columns to join
+## to and take advantage of x being sorted. Call setkey(x,...) first, see
+## ?setkey.
+{% endhighlight %}
+
+
+
+{% highlight r %}
 myfunc <- function(dt, v) {
   v=deparse(substitute(v))
   dt[,v]
 }
 
 myfunc(dt, mpg)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## [1] "mpg"
+{% endhighlight %}
 
 ### Method 2: quotes and `get`
 
 However I tend to pass through column names as characters (quoted) and use `get` each time I reference that column.  That can be annoying if you have a long function
 repeatedly reference column names, but I often need to write such few lines of code with data.table, it hasn't struck me as terribly unslick, yet.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 myfunc <- function(dt, v) dt[,get(v)]
 
 myfunc(dt, 'mpg')
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2
+## [15] 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4
+## [29] 15.8 19.7 15.0 21.4
+{% endhighlight %}
 
 ## => Beware of scoping within data.table
 
@@ -442,44 +1010,116 @@ myfunc(dt, 'mpg')
 When you add something to a `data.frame` within a function that exists in the global environment, it does not affect that object in the 
 global environment unless you return and reassign it as such, or you use the `<<-` operator.  
 
-```{r}
+
+{% highlight r %}
 df <- mtcars
 add_column_df <- function(df) {
   df$addcol1<- 'here in func!'
   df$addcol2 <<- 'in glob env!'
   return(df)
 }
-```
+{% endhighlight %}
 
 When we call the function, we see `addcol1` in the output.  But not `addcol2`.  That's because it's been added to the `df` in the global environment one level up.
-```{r}
+
+{% highlight r %}
 head(add_column_df(df))
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                         addcol1
+## Mazda RX4         here in func!
+## Mazda RX4 Wag     here in func!
+## Datsun 710        here in func!
+## Hornet 4 Drive    here in func!
+## Hornet Sportabout here in func!
+## Valiant           here in func!
+{% endhighlight %}
 
 Here is `addcol2`, but not `addcol`.
-```{r}
+
+{% highlight r %}
 head(df)
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                        addcol2
+## Mazda RX4         in glob env!
+## Mazda RX4 Wag     in glob env!
+## Datsun 710        in glob env!
+## Hornet 4 Drive    in glob env!
+## Hornet Sportabout in glob env!
+## Valiant           in glob env!
+{% endhighlight %}
 
 ### `data.table` way.
 
 Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because
 these objects are tactually the same object.  data.table shaves computation time by not making copies unless explicity directed to.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 add_column_dt <- function(dat) {
   dat[,addcol:='sticking_to_dt!'] # hits dt in glob env
   return(dat)
 }
 head(add_column_dt(dt)) # addcol here
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb          addcol
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 sticking_to_dt!
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 sticking_to_dt!
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 sticking_to_dt!
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 sticking_to_dt!
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 sticking_to_dt!
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 sticking_to_dt!
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt) # addcol also here
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb          addcol
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 sticking_to_dt!
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 sticking_to_dt!
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 sticking_to_dt!
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 sticking_to_dt!
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 sticking_to_dt!
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 sticking_to_dt!
+{% endhighlight %}
 
 So something like this renaming the local version using `copy` bypasses this behavior, but is likely somewhat less efficient (and elegant).  I suspect there's a cleaner and/or faster way to do this: keep some variables 
 local to the function while persisting and returning other columns.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 add_column_dt <- function(dat) {
   datloc <- copy(dat)
@@ -487,8 +1127,37 @@ add_column_dt <- function(dat) {
   return(datloc)
 }
 head(add_column_dt(dt)) # addcol here
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb              addcol
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 not sticking_to_dt!
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 not sticking_to_dt!
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 not sticking_to_dt!
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 not sticking_to_dt!
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 not sticking_to_dt!
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 not sticking_to_dt!
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt) # addcol not here
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+{% endhighlight %}
 
 ## 4. PRINTING
 ---
@@ -500,15 +1169,44 @@ In `data.frame` world, wrapping an expression in `()` prints the output to the c
 In `data.table` this is achieved by appending `[]` to the end of the expression.  I find this useful because when I'm exploring at the console, I 
 don't usually decide to print the output until I'm almost done and I'm already at the end of the expression I've written.
 
-```{r}
+
+{% highlight r %}
 # data.frame way of printing after an assignment
 df <- head(mtcars) # doesn't print
 (df <- head(mtcars)) # does print
+{% endhighlight %}
 
+
+
+{% highlight text %}
+##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+{% endhighlight %}
+
+
+
+{% highlight r %}
 # data.table way of printing after an assignment
 dt <- data.table(head(mtcars)) # doesn't print
 dt[,hp2wt:=hp/wt][] # does print
-```
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb hp2wt
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 41.98
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 38.26
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 40.09
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 34.21
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 50.87
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 30.35
+{% endhighlight %}
  
 
 ## => Hide output from `:=` with knitr
@@ -516,11 +1214,12 @@ dt[,hp2wt:=hp/wt][] # does print
 It used to be that assignments using the `:=` operator printed the object to console when knitting documents with `knitr` and `rmarkdown`.  This is actually fixed in data.table v1.9.5.  However at the time of my writing, this currently not available on CRAN... only Github.  For 1.9.4 users, [this StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has some hacky solutions.  This least impedance approach I found was simply wrapping
 the expression in `invisible`.  Other solutions alter the way you use data.table which I didn't like.
 
-```{r}
+
+{% highlight r %}
 dt <- data.table(mtcars)
 dt[,mpg2qsec:=mpg/qsec] # will print with knitr
 invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
-```
+{% endhighlight %}
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
 
