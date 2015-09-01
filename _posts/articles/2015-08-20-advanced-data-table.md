@@ -36,15 +36,7 @@ dt[,unique(gear), by=cyl]
 
 
 {% highlight text %}
-##    cyl V1
-## 1:   6  4
-## 2:   6  3
-## 3:   6  5
-## 4:   4  4
-## 5:   4  3
-## 6:   4  5
-## 7:   8  3
-## 8:   8  5
+## Error in unique(gear): object 'gear' not found
 {% endhighlight %}
 
 ##### summary table (short and narrow)
@@ -56,20 +48,42 @@ Can also be useful for more serious data engineering.
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(gear, cyl)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,gearsL:=list(list(unique(gear))), by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    gear cyl gearsL
-## 1:    4   6  4,3,5
-## 2:    4   6  4,3,5
-## 3:    4   4  4,3,5
-## 4:    3   6  4,3,5
-## 5:    3   8    3,5
-## 6:    3   6  4,3,5
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ### Accessing elements from a column of lists
@@ -80,21 +94,42 @@ This isn't that groundbreaking, but explores how to access elements of columns w
 
 {% highlight r %}
 dt[,gearL1:=lapply(gearsL, function(x) x[2])]
-dt[,gearS1:=sapply(gearsL, function(x) x[2])] 
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
+dt[,gearS1:=sapply(gearsL, function(x) x[2])] 
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    gear cyl gearsL gearL1 gearS1
-## 1:    4   6  4,3,5      3      3
-## 2:    4   6  4,3,5      3      3
-## 3:    4   4  4,3,5      3      3
-## 4:    3   6  4,3,5      3      3
-## 5:    3   8    3,5      5      5
-## 6:    3   6  4,3,5      3      3
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 
@@ -106,13 +141,7 @@ str(head(dt[,gearL1]))
 
 
 {% highlight text %}
-## List of 6
-##  $ : num 3
-##  $ : num 3
-##  $ : num 3
-##  $ : num 3
-##  $ : num 5
-##  $ : num 3
+## Error in head(dt[, gearL1]): object 'gearL1' not found
 {% endhighlight %}
 
 
@@ -124,7 +153,7 @@ str(head(dt[,gearS1]))
 
 
 {% highlight text %}
-##  num [1:6] 3 3 3 3 5 3
+## Error in head(dt[, gearS1]): object 'gearS1' not found
 {% endhighlight %}
 
 Calculate all the `gear`s for all cars of each `cyl` (excluding the current current row).
@@ -133,19 +162,30 @@ This can be useful for comparing observations to the mean of groups, where the g
 
 {% highlight r %}
 dt[,other_gear:=mapply(function(x, y) setdiff(x, y), x=gearsL, y=gear)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    gear cyl gearsL gearL1 gearS1 other_gear
-## 1:    4   6  4,3,5      3      3        3,5
-## 2:    4   6  4,3,5      3      3        3,5
-## 3:    4   4  4,3,5      3      3        3,5
-## 4:    3   6  4,3,5      3      3        4,5
-## 5:    3   8    3,5      5      5          5
-## 6:    3   6  4,3,5      3      3        4,5
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ## => Suppressing intermediate output with {}
@@ -160,6 +200,12 @@ by a concise name rather than rewriting the code to re-compute it.
 dt <- data.table(mtcars)
 {% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
 Defaults to just returning the last object defined in the braces unnamed.
 
 {% highlight r %}
@@ -169,10 +215,7 @@ dt[,{tmp1=mean(mpg); tmp2=mean(abs(mpg-tmp1)); tmp3=round(tmp2, 2)}, by=cyl]
 
 
 {% highlight text %}
-##    cyl   V1
-## 1:   6 1.19
-## 2:   4 3.83
-## 3:   8 1.79
+## Error in mean(mpg): object 'mpg' not found
 {% endhighlight %}
 
 We can be more explicit by passing a named list of what we want to keep.
@@ -184,10 +227,7 @@ dt[,{tmp1=mean(mpg); tmp2=mean(abs(mpg-tmp1)); tmp3=round(tmp2, 2); list(tmp2=tm
 
 
 {% highlight text %}
-##    cyl  tmp2 tmp3
-## 1:   6 1.192 1.19
-## 2:   4 3.833 3.83
-## 3:   8 1.786 1.79
+## Error in mean(mpg): object 'mpg' not found
 {% endhighlight %}
 
 Can also write it like this without semicolons.
@@ -203,10 +243,7 @@ dt[,{tmp1=mean(mpg)
 
 
 {% highlight text %}
-##    cyl  tmp2 tmp3
-## 1:   6 1.192 1.19
-## 2:   4 3.833 3.83
-## 3:   8 1.786 1.79
+## Error in mean(mpg): object 'mpg' not found
 {% endhighlight %}
 
 This is trickier with `:=` assignments... I don't think `:=` is intended to work when wrapped in `{`.  Assigning multiple columns with `:=` at once
@@ -215,21 +252,42 @@ does not allow you to use the first columns you create to use building the ones 
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(cyl, mpg)]
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,tmp1:=mean(mpg), by=cyl][,tmp2:=mean(abs(mpg-tmp1)), by=cyl][,tmp1:=NULL]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    cyl  mpg  tmp2
-## 1:   6 21.0 1.192
-## 2:   6 21.0 1.192
-## 3:   4 22.8 3.833
-## 4:   6 21.4 1.192
-## 5:   8 18.7 1.786
-## 6:   6 18.1 1.192
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 
@@ -260,21 +318,54 @@ functionality I was looking for -- applying a function to a subset of columns wi
 
 {% highlight r %}
 dt <- data.table(mtcars)[,1:5, with=F]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 for (j in c(1L,2L,4L)) set(dt, j=j, value=-dt[[j]]) # integers using 'L' passed for efficiency
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: could not find function "set"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 for (j in c(3L,5L)) set(dt, j=j, value=paste0(dt[[j]],'!!'))
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error: could not find function "set"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##      mpg cyl  disp   hp   drat
-## 1: -21.0  -6 160!! -110  3.9!!
-## 2: -21.0  -6 160!! -110  3.9!!
-## 3: -22.8  -4 108!!  -93 3.85!!
-## 4: -21.4  -6 258!! -110 3.08!!
-## 5: -18.7  -8 360!! -175 3.15!!
-## 6: -18.1  -6 225!! -105 2.76!!
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 
@@ -287,21 +378,54 @@ statistical software (Stata, SAS, even FAME which I used in my formative data ye
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,mpg_lag1:=shift(mpg, 1)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,mpg_forward1:=shift(mpg, 1, type='lead')]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     mpg cyl mpg_lag1 mpg_forward1
-## 1: 21.0   6       NA         21.0
-## 2: 21.0   6     21.0         22.8
-## 3: 22.8   4     21.0         21.4
-## 4: 21.4   6     22.8         18.7
-## 5: 18.7   8     21.4         18.1
-## 6: 18.1   6     18.7         14.3
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 #### `shift` with `by`
@@ -315,30 +439,67 @@ dt <- data.table(
   ind=rpois(n, 5),
   entity=sort(rep(letters[1:5], n/5))
   )
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 setkey(dt, entity, date) # important for ordering
-dt[,indpct_fast:=(ind/shift(ind, 1))-1, by=entity]
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "setkey"
+{% endhighlight %}
+
+
+
+{% highlight r %}
+dt[,indpct_fast:=(ind/shift(ind, 1))-1, by=entity]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 lagpad <- function(x, k) c(rep(NA, k), x)[1:length(x)] 
 dt[,indpct_slow:=(ind/lagpad(ind, 1))-1, by=entity]
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt, 10)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   5      a          NA          NA
-##  2: 2011-01-01   4      a     -0.2000     -0.2000
-##  3: 2012-01-01   9      a      1.2500      1.2500
-##  4: 2013-01-01   7      a     -0.2222     -0.2222
-##  5: 2014-01-01   3      a     -0.5714     -0.5714
-##  6: 2015-01-01   5      a      0.6667      0.6667
-##  7: 2010-01-01   5      b          NA          NA
-##  8: 2011-01-01   3      b     -0.4000     -0.4000
-##  9: 2012-01-01   5      b      0.6667      0.6667
-## 10: 2013-01-01   7      b      0.4000      0.4000
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
@@ -348,23 +509,120 @@ Building columns referencing other columns in this set need to be done indiviual
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     mpg cyl   avg  med  min
-## 1: 21.0   6 19.74 19.7 17.8
-## 2: 21.0   6 19.74 19.7 17.8
-## 3: 22.8   4 26.66 26.0 21.4
-## 4: 21.4   6 19.74 19.7 17.8
-## 5: 18.7   8 15.10 15.2 10.4
-## 6: 18.1   6 19.74 19.7 17.8
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
+{% endhighlight %}
+
+## => Assign a column with `:=` named with a character object
+
+This is the advised way to assign a new column whose name you already have determined and saved as a character.  Simply surround the character object in parentheses.  
+
+
+{% highlight r %}
+dt <- data.table(mtcars)[, .(cyl, mpg)]
 {% endhighlight %}
 
 
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
+thing2 <- 'mpgx2'
+dt[,(thing2):=mpg*2]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
+head(dt)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
+{% endhighlight %}
+
+This is old (now deprecated) way which still works for now.  Not advised.
+
+{% highlight r %}
+thing3 <- 'mpgx3'
+dt[,thing3:=mpg*3, with=F]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
+head(dt)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
+{% endhighlight %}
 
 ## 2. `BY`
 ---
@@ -387,20 +645,42 @@ However we want to know for each row, what is the mean among all the other cars 
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(cyl, gear, mpg)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, mpg_biased_mean:=mean(mpg), by=cyl] 
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    cyl gear  mpg mpg_biased_mean
-## 1:   6    4 21.0           19.74
-## 2:   6    4 21.0           19.74
-## 3:   4    4 22.8           26.66
-## 4:   6    3 21.4           19.74
-## 5:   8    3 18.7           15.10
-## 6:   6    3 18.1           19.74
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 #####  1.a `.GRP` without setting key
@@ -413,16 +693,7 @@ dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    4   6 19.73
-## 2:    4   8 15.10
-## 3:    4   4 25.97
-## 4:    3   6 19.74
-## 5:    3   4 27.18
-## 6:    3   8 15.40
-## 7:    5   6 19.75
-## 8:    5   4 26.32
-## 9:    5   8 15.05
+## Error in match(x, table, nomatch = 0L): object 'gear' not found
 {% endhighlight %}
 
 
@@ -435,7 +706,7 @@ dt[gear!=4 & cyl==6, mean(mpg)]
 
 
 {% highlight text %}
-## [1] 19.73
+## Error in eval(expr, envir, enclos): object 'gear' not found
 {% endhighlight %}
 
 ##### 1.b Same as 1.a, but a little faster
@@ -443,22 +714,24 @@ dt[gear!=4 & cyl==6, mean(mpg)]
 
 {% highlight r %}
 uid <- unique(dt$gear)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in dt$gear: object of type 'closure' is not subsettable
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] #unbiased mean
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   4 27.18
-## 2:    4   4 25.97
-## 3:    5   4 26.32
-## 4:    3   6 19.74
-## 5:    4   6 19.73
-## 6:    5   6 19.75
-## 7:    3   8 15.40
-## 8:    4   8 15.10
-## 9:    5   8 15.05
+## Error in match(x, table, nomatch = 0L): object 'gear' not found
 {% endhighlight %}
 
 ##### Why does this work?
@@ -472,10 +745,7 @@ dt[, .GRP, by=cyl]
 
 
 {% highlight text %}
-##    cyl .GRP
-## 1:   6    1
-## 2:   4    2
-## 3:   8    3
+## Error in eval(expr, envir, enclos): object '.GRP' not found
 {% endhighlight %}
 
 
@@ -487,10 +757,7 @@ dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
 
 
 {% highlight text %}
-##    cyl .GRP V2
-## 1:   6    1  4
-## 2:   4    2  3
-## 3:   8    3  5
+## Error in eval(expr, envir, enclos): could not find function "."
 {% endhighlight %}
 
 
@@ -502,39 +769,43 @@ dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
 
 
 {% highlight text %}
-##    gear cyl .GRP V2
-## 1:    4   6    1  4
-## 2:    4   4    2  3
-## 3:    4   8    3  5
-## 4:    3   6    1  4
-## 5:    3   4    2  3
-## 6:    3   8    3  5
-## 7:    5   6    1  4
-## 8:    5   4    2  3
-## 9:    5   8    3  5
+## Error in eval(expr, envir, enclos): could not find function "."
 {% endhighlight %}
 
 ##### 1.b Setting key
 
 {% highlight r %}
 setkey(dt, gear)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "setkey"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 uid <- unique(dt$gear)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in dt$gear: object of type 'closure' is not subsettable
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, dt[!.(uid[.GRP]), mean(mpg), by=cyl] , by=gear] #unbiased mean
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   6 19.74
-## 2:    3   4 27.18
-## 3:    3   8 15.40
-## 4:    4   6 19.73
-## 5:    4   8 15.10
-## 6:    4   4 25.97
-## 7:    5   6 19.75
-## 8:    5   8 15.05
-## 9:    5   4 26.32
+## Error in eval(expr, envir, enclos): could not find function "."
 {% endhighlight %}
 
 
@@ -546,7 +817,7 @@ mean(dt[cyl==4 & gear!=3,mpg]) # testing
 
 
 {% highlight text %}
-## [1] 27.18
+## Error in mean(dt[cyl == 4 & gear != 3, mpg]): object 'cyl' not found
 {% endhighlight %}
 
 
@@ -558,7 +829,7 @@ mean(dt[cyl==6 & gear!=3,mpg]) # testing
 
 
 {% highlight text %}
-## [1] 19.74
+## Error in mean(dt[cyl == 6 & gear != 3, mpg]): object 'cyl' not found
 {% endhighlight %}
 
 ### METHOD 2: using `{}` and `.SD`
@@ -575,10 +846,7 @@ dt[,  .SD[, mean(mpg)], by=gear] # same as `dt[, mean(mpg), by=gear]`
 
 
 {% highlight text %}
-##    gear    V1
-## 1:    3 16.11
-## 2:    4 24.53
-## 3:    5 21.38
+## Error in eval(expr, envir, enclos): object '.SD' not found
 {% endhighlight %}
 
 
@@ -590,15 +858,7 @@ dt[,  .SD[, mean(mpg), by=cyl], by=gear] # same as `dt[, mean(mpg), by=.(cyl, by
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   6 19.75
-## 2:    3   8 15.05
-## 3:    3   4 21.50
-## 4:    4   6 19.75
-## 5:    4   4 26.93
-## 6:    5   4 28.20
-## 7:    5   8 15.40
-## 8:    5   6 19.70
+## Error in eval(expr, envir, enclos): object '.SD' not found
 {% endhighlight %}
 
 ##### Nested data.tables and `by` statements
@@ -617,15 +877,7 @@ dt[,{
 
 
 {% highlight text %}
-##    cyl gear  n  N sum_in_gear_cyl sum_in_cyl
-## 1:   6    3  7  2            39.5      138.2
-## 2:   6    4  7  4            79.0      138.2
-## 3:   6    5  7  1            19.7      138.2
-## 4:   8    3 14 12           180.6      211.4
-## 5:   8    5 14  2            30.8      211.4
-## 6:   4    3 11  1            21.5      293.3
-## 7:   4    4 11  8           215.4      293.3
-## 8:   4    5 11  2            56.4      293.3
+## Error in eval(expr, envir, enclos): object 'mpg' not found
 {% endhighlight %}
 
 
@@ -637,10 +889,7 @@ dt[,sum(mpg), by=cyl] # test
 
 
 {% highlight text %}
-##    cyl    V1
-## 1:   6 138.2
-## 2:   8 211.4
-## 3:   4 293.3
+## Error in eval(expr, envir, enclos): object 'mpg' not found
 {% endhighlight %}
 
 ##### Calculating "unbiased mean"
@@ -657,15 +906,7 @@ dt[,{
 
 
 {% highlight text %}
-##    cyl gear    V1
-## 1:   6    3 19.74
-## 2:   6    4 19.73
-## 3:   6    5 19.75
-## 4:   8    3 15.40
-## 5:   8    5 15.05
-## 6:   4    3 27.18
-## 7:   4    4 25.97
-## 8:   4    5 26.32
+## Error in mean(mpg): object 'mpg' not found
 {% endhighlight %}
 
 
@@ -679,23 +920,78 @@ that we want to exclude from the average and add that share.  Then extrapolate o
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,`:=`(avg_mpg_cyl=mean(mpg), Ncyl=.N), by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,`:=`(Ncylgear=.N, avg_mpg_cyl_gear=mean(mpg)), by=.(cyl, gear)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,unbmean:=(avg_mpg_cyl*Ncyl-(Ncylgear*avg_mpg_cyl_gear))/(Ncyl-Ncylgear)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 setkey(dt, cyl, gear)  
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "setkey"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     mpg cyl gear avg_mpg_cyl Ncyl Ncylgear avg_mpg_cyl_gear unbmean
-## 1: 21.5   4    3       26.66   11        1            21.50   27.18
-## 2: 22.8   4    4       26.66   11        8            26.93   25.97
-## 3: 24.4   4    4       26.66   11        8            26.93   25.97
-## 4: 22.8   4    4       26.66   11        8            26.93   25.97
-## 5: 32.4   4    4       26.66   11        8            26.93   25.97
-## 6: 30.4   4    4       26.66   11        8            26.93   25.97
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ##### Wrapping up code below into a function
@@ -712,21 +1008,54 @@ leaveOneOutMean <- function(dt, ind, bybig, bysmall) {
 }
 
 dt <- data.table(mtcars)[,.(mpg,cyl,gear)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,unbiased_mean:=leaveOneOutMean(.SD, ind='mpg', bybig='cyl', bysmall='gear')]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,biased_mean:=mean(mpg), by=cyl]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 head(dt)
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     mpg cyl gear unbiased_mean biased_mean
-## 1: 21.0   6    4         19.73       19.74
-## 2: 21.0   6    4         19.73       19.74
-## 3: 22.8   4    4         25.97       26.66
-## 4: 21.4   6    3         19.74       19.74
-## 5: 18.7   8    3         15.40       15.10
-## 6: 18.1   6    3         19.74       19.74
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ### Speed check
@@ -737,8 +1066,36 @@ but less generalizable; The other two methods allow any function to be passed.
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt <- dt[sample(1:.N, 100000, replace=T), ] # increase # of rows in mtcars
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in sample(1:.N, 1e+05, replace = T): object '.N' not found
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt$gear <- sample(1:300, nrow(dt), replace=T) # adding in more cateogries
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in sample.int(length(x), size, replace, prob): invalid 'size' argument
 {% endhighlight %}
 
 ##### Method 3:
@@ -751,8 +1108,13 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 
 {% highlight text %}
-##    user  system elapsed 
-##   0.058   0.008   0.066
+## Error in system.time(dt[, `:=`(unbiased_mean_vectorized, leaveOneOutMean(.SD, : could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Timing stopped at: 0 0 0
 {% endhighlight %}
 
 ##### Method 2:
@@ -765,22 +1127,43 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 
 {% highlight text %}
-##    user  system elapsed 
-##   5.381   0.951   6.386
+## Error in match(x, table, nomatch = 0L): object 'gear' not found
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Timing stopped at: 0 0 0
 {% endhighlight %}
 
 ##### Method 1:
 
 {% highlight r %}
 uid <- unique(dt$gear)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in dt$gear: object of type 'closure' is not subsettable
+{% endhighlight %}
+
+
+
+{% highlight r %}
 system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)])
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    user  system elapsed 
-##   4.700   0.749   5.469
+## Error in match(x, table, nomatch = 0L): object 'gear' not found
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Timing stopped at: 0 0 0.001
 {% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
@@ -793,18 +1176,24 @@ Categories are not sorted
 ## devtools::install_github('brooksandrew/Rsenal')
 library('Rsenal')
 tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), by=depthbin(mpg, 5, labelOrder=T)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "."
+{% endhighlight %}
+
+
+
+{% highlight r %}
 tmp
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##           depthbin     N   sum      mean
-## 1: [10.4,15.2] 1/5 25258     0 0.000e+00
-## 2:   (21,24.4] 4/5 18708 18708 5.345e-05
-## 3: (24.4,33.9] 5/5 18616 15489 4.469e-05
-## 4: (15.2,17.8] 2/5 15732  3099 1.252e-05
-## 5:   (17.8,21] 3/5 21686  6210 1.320e-05
+## Error in eval(expr, envir, enclos): object 'tmp' not found
 {% endhighlight %}
 
 
@@ -813,15 +1202,10 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-28](/assets/Rfig/unnamed-chunk-28.svg) 
+
 
 {% highlight text %}
-##      [,1]
-## [1,]  0.7
-## [2,]  1.9
-## [3,]  3.1
-## [4,]  4.3
-## [5,]  5.5
+## Error in eval(expr, envir, enclos): object 'tmp' not found
 {% endhighlight %}
 
 ##### With `keyby`
@@ -830,18 +1214,24 @@ tmp[,barplot(mean, names=depthbin, las=2)]
 ## devtools::install_github('brooksandrew/Rsenal')
 library('Rsenal')
 tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), keyby=depthbin(mpg, 5, labelOrder=T)]
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "."
+{% endhighlight %}
+
+
+
+{% highlight r %}
 tmp
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##           depthbin     N   sum      mean
-## 1: [10.4,15.2] 1/5 25258     0 0.000e+00
-## 2: (15.2,17.8] 2/5 15732  3099 1.252e-05
-## 3:   (17.8,21] 3/5 21686  6210 1.320e-05
-## 4:   (21,24.4] 4/5 18708 18708 5.345e-05
-## 5: (24.4,33.9] 5/5 18616 15489 4.469e-05
+## Error in eval(expr, envir, enclos): object 'tmp' not found
 {% endhighlight %}
 
 
@@ -850,15 +1240,10 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-29](/assets/Rfig/unnamed-chunk-29.svg) 
+
 
 {% highlight text %}
-##      [,1]
-## [1,]  0.7
-## [2,]  1.9
-## [3,]  3.1
-## [4,]  4.3
-## [5,]  5.5
+## Error in eval(expr, envir, enclos): object 'tmp' not found
 {% endhighlight %}
 
 ## => Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
@@ -869,17 +1254,36 @@ tmp[,barplot(mean, names=depthbin, las=2)]
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 setkey(dt,mpg)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "setkey"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    cyl    V1     V2
-## 1:   8 2.560 2.0926
-## 2:   6 1.454 0.8981
-## 3:   4 4.510 1.7729
+## Error in eval(expr, envir, enclos): could not find function "."
 {% endhighlight %}
 
 #### take highest value of column A when column B is highest by group
@@ -890,16 +1294,24 @@ Max of `qsec` for each category of `cyl`
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[, max(qsec), by=cyl]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    cyl    V1
-## 1:   6 20.22
-## 2:   4 22.90
-## 3:   8 18.00
+## Error in eval(expr, envir, enclos): object 'qsec' not found
 {% endhighlight %}
 
 ##### value of `qsec `when `mpg` is the highest per category of `cyl`
@@ -908,16 +1320,24 @@ dt[, max(qsec), by=cyl]
 
 {% highlight r %}
 setkey(dt, mpg)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "setkey"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,qsec[.N],  by=cyl]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##    cyl    V1
-## 1:   8 17.05
-## 2:   6 19.44
-## 3:   4 19.90
+## Error in eval(expr, envir, enclos): object 'qsec' not found
 {% endhighlight %}
 
 ##### value of `qsec` when `mpg` is the lowest per category of `cyl`
@@ -929,10 +1349,7 @@ dt[,qsec[1],  by=cyl]
 
 
 {% highlight text %}
-##    cyl    V1
-## 1:   8 17.98
-## 2:   6 18.90
-## 3:   4 18.60
+## Error in eval(expr, envir, enclos): object 'qsec' not found
 {% endhighlight %}
 
 ##### value of `qsec` when `mpg` is the median per category of `cyl`
@@ -944,10 +1361,7 @@ dt[,qsec[round(.N/2)],  by=cyl]
 
 
 {% highlight text %}
-##    cyl   V1
-## 1:   8 18.0
-## 2:   6 15.5
-## 3:   4 16.7
+## Error in eval(expr, envir, enclos): object 'qsec' not found
 {% endhighlight %}
 
 
@@ -962,24 +1376,21 @@ This way seems more data.table-ish because it maintains the practice of not usin
 
 
 {% highlight r %}
-dt <- data.table(mtcars)[.(cyl, mpg)]
+dt <- data.table(mtcars)[,.(cyl, mpg)]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Error: When i is a data.table (or character vector), x must be keyed (i.e.
-## sorted, and, marked as sorted) so data.table knows which columns to join
-## to and take advantage of x being sorted. Call setkey(x,...) first, see
-## ?setkey.
+## Error in eval(expr, envir, enclos): could not find function "data.table"
 {% endhighlight %}
 
 
 
 {% highlight r %}
 myfunc <- function(dt, v) {
-  v=deparse(substitute(v))
-  dt[,v]
+  v2=deparse(substitute(v))
+  dt[,v2, with=F][[1]] # [[1]] returns a vector instead of a data.table
 }
 
 myfunc(dt, mpg)
@@ -988,7 +1399,7 @@ myfunc(dt, mpg)
 
 
 {% highlight text %}
-## [1] "mpg"
+## Error in dt[, v2, with = F]: object of type 'closure' is not subsettable
 {% endhighlight %}
 
 ### Method 2: quotes and `get`
@@ -999,6 +1410,17 @@ repeatedly reference column names, but I often need to write such few lines of c
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 myfunc <- function(dt, v) dt[,get(v)]
 
 myfunc(dt, 'mpg')
@@ -1007,9 +1429,7 @@ myfunc(dt, 'mpg')
 
 
 {% highlight text %}
-##  [1] 21.0 21.0 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 17.8 16.4 17.3 15.2
-## [15] 10.4 10.4 14.7 32.4 30.4 33.9 21.5 15.5 15.2 13.3 19.2 27.3 26.0 30.4
-## [29] 15.8 19.7 15.0 21.4
+## Error in get(v): object 'mpg' not found
 {% endhighlight %}
 
 ## => Beware of scoping within data.table
@@ -1086,6 +1506,17 @@ these objects are tactually the same object.  data.table shaves computation time
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 add_column_dt <- function(dat) {
   dat[,addcol:='sticking_to_dt!'] # hits dt in glob env
   return(dat)
@@ -1096,13 +1527,7 @@ head(add_column_dt(dt)) # addcol here
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb          addcol
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 sticking_to_dt!
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 sticking_to_dt!
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 sticking_to_dt!
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 sticking_to_dt!
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 sticking_to_dt!
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 sticking_to_dt!
+## Error in add_column_dt(dt): could not find function ":="
 {% endhighlight %}
 
 
@@ -1114,13 +1539,13 @@ head(dt) # addcol also here
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb          addcol
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 sticking_to_dt!
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 sticking_to_dt!
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 sticking_to_dt!
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 sticking_to_dt!
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 sticking_to_dt!
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 sticking_to_dt!
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 So something like this renaming the local version using `copy` bypasses this behavior, but is likely somewhat less efficient (and elegant).  I suspect there's a cleaner and/or faster way to do this: keep some variables 
@@ -1129,6 +1554,17 @@ local to the function while persisting and returning other columns.
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 add_column_dt <- function(dat) {
   datloc <- copy(dat)
   datloc[,addcol:='not sticking_to_dt!'] # hits dt in glob env
@@ -1140,13 +1576,7 @@ head(add_column_dt(dt)) # addcol here
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb              addcol
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 not sticking_to_dt!
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 not sticking_to_dt!
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 not sticking_to_dt!
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 not sticking_to_dt!
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 not sticking_to_dt!
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 not sticking_to_dt!
+## Error in add_column_dt(dt): could not find function "copy"
 {% endhighlight %}
 
 
@@ -1158,13 +1588,13 @@ head(dt) # addcol not here
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+##                                             
+## 1 function (x, df, ncp, log = FALSE)        
+## 2 {                                         
+## 3     if (missing(ncp))                     
+## 4         .External(C_dt, x, df, log)       
+## 5     else .External(C_dnt, x, df, ncp, log)
+## 6 }
 {% endhighlight %}
 
 ## 4. PRINTING
@@ -1201,19 +1631,24 @@ df <- head(mtcars) # doesn't print
 {% highlight r %}
 # data.table way of printing after an assignment
 dt <- data.table(head(mtcars)) # doesn't print
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,hp2wt:=hp/wt][] # does print
 {% endhighlight %}
 
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb hp2wt
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 41.98
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 38.26
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 40.09
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 34.21
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 50.87
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 30.35
+## Error in eval(expr, envir, enclos): could not find function ":="
 {% endhighlight %}
  
 
@@ -1225,8 +1660,36 @@ the expression in `invisible`.  Other solutions alter the way you use data.table
 
 {% highlight r %}
 dt <- data.table(mtcars)
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function "data.table"
+{% endhighlight %}
+
+
+
+{% highlight r %}
 dt[,mpg2qsec:=mpg/qsec] # will print with knitr
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
+{% endhighlight %}
+
+
+
+{% highlight r %}
 invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Error in eval(expr, envir, enclos): could not find function ":="
 {% endhighlight %}
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf

@@ -183,7 +183,26 @@ dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 head(dt)
 ```
 
+## => Assign a column with `:=` named with a character object
 
+This is the advised way to assign a new column whose name you already have determined and saved as a character.  Simply surround the character object in parentheses.  
+
+```{r}
+dt <- data.table(mtcars)[, .(cyl, mpg)]
+
+thing2 <- 'mpgx2'
+dt[,(thing2):=mpg*2]
+
+head(dt)
+```
+
+This is old (now deprecated) way which still works for now.  Not advised.
+```{r}
+thing3 <- 'mpgx3'
+dt[,thing3:=mpg*3, with=F]
+
+head(dt)
+```
 
 ## 2. `BY`
 ---
@@ -415,10 +434,10 @@ dt[,qsec[round(.N/2)],  by=cyl]
 This way seems more data.table-ish because it maintains the practice of not using quotes on variable names in most cases.
 
 ```{r}
-dt <- data.table(mtcars)[.(cyl, mpg)]
+dt <- data.table(mtcars)[,.(cyl, mpg)]
 myfunc <- function(dt, v) {
-  v=deparse(substitute(v))
-  dt[,v]
+  v2=deparse(substitute(v))
+  dt[,v2, with=F][[1]] # [[1]] returns a vector instead of a data.table
 }
 
 myfunc(dt, mpg)
