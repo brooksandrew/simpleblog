@@ -461,7 +461,7 @@ Here is `addcol2`, but not `addcol`.
 head(df)
 ```
 
-### `data.table` way.
+### `data.table` way
 
 Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because
 these objects are tactually the same object.  data.table shaves computation time by not making copies unless explicity directed to.

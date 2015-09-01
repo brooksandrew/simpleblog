@@ -36,7 +36,15 @@ dt[,unique(gear), by=cyl]
 
 
 {% highlight text %}
-## Error: object 'gear' not found
+##    cyl V1
+## 1:   6  4
+## 2:   6  3
+## 3:   6  5
+## 4:   4  4
+## 5:   4  3
+## 6:   4  5
+## 7:   8  3
+## 8:   8  5
 {% endhighlight %}
 
 ##### summary table (short and narrow)
@@ -321,16 +329,16 @@ head(dt, 10)
 
 {% highlight text %}
 ##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   2      a          NA          NA
-##  2: 2011-01-01   5      a      1.5000      1.5000
-##  3: 2012-01-01   6      a      0.2000      0.2000
-##  4: 2013-01-01   6      a      0.0000      0.0000
-##  5: 2014-01-01   5      a     -0.1667     -0.1667
-##  6: 2015-01-01   4      a     -0.2000     -0.2000
-##  7: 2010-01-01   2      b          NA          NA
-##  8: 2011-01-01   8      b      3.0000      3.0000
-##  9: 2012-01-01   4      b     -0.5000     -0.5000
-## 10: 2013-01-01   5      b      0.2500      0.2500
+##  1: 2010-01-01   3      a          NA          NA
+##  2: 2011-01-01   6      a      1.0000      1.0000
+##  3: 2012-01-01   5      a     -0.1667     -0.1667
+##  4: 2013-01-01   8      a      0.6000      0.6000
+##  5: 2014-01-01   8      a      0.0000      0.0000
+##  6: 2015-01-01   7      a     -0.1250     -0.1250
+##  7: 2010-01-01   4      b          NA          NA
+##  8: 2011-01-01   7      b      0.7500      0.7500
+##  9: 2012-01-01   6      b     -0.1429     -0.1429
+## 10: 2013-01-01   6      b      0.0000      0.0000
 {% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
@@ -744,7 +752,7 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 {% highlight text %}
 ##    user  system elapsed 
-##   0.054   0.012   0.067
+##   0.057   0.009   0.067
 {% endhighlight %}
 
 ##### Method 2:
@@ -758,7 +766,7 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 {% highlight text %}
 ##    user  system elapsed 
-##   5.433   0.979   6.623
+##   5.426   0.973   6.518
 {% endhighlight %}
 
 ##### Method 1:
@@ -772,7 +780,7 @@ system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(
 
 {% highlight text %}
 ##    user  system elapsed 
-##   4.815   0.783   5.648
+##   4.550   0.762   5.340
 {% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
@@ -792,11 +800,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum      mean
-## 1:   (21,24.4] 4/5 19134 19134 5.226e-05
-## 2: (15.2,17.8] 2/5 15437  3016 1.266e-05
-## 3:   (17.8,21] 3/5 22048  6313 1.299e-05
-## 4: [10.4,15.2] 1/5 24695     0 0.000e+00
-## 5: (24.4,33.9] 5/5 18686 15545 4.452e-05
+## 1: (15.2,17.8] 2/5 15582  3073 1.266e-05
+## 2:   (17.8,21] 3/5 21888  6185 1.291e-05
+## 3:   (21,24.4] 4/5 18754 18754 5.332e-05
+## 4: [10.4,15.2] 1/5 25056     0 0.000e+00
+## 5: (24.4,33.9] 5/5 18720 15551 4.438e-05
 {% endhighlight %}
 
 
@@ -829,11 +837,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum      mean
-## 1: [10.4,15.2] 1/5 24695     0 0.000e+00
-## 2: (15.2,17.8] 2/5 15437  3016 1.266e-05
-## 3:   (17.8,21] 3/5 22048  6313 1.299e-05
-## 4:   (21,24.4] 4/5 19134 19134 5.226e-05
-## 5: (24.4,33.9] 5/5 18686 15545 4.452e-05
+## 1: [10.4,15.2] 1/5 25056     0 0.000e+00
+## 2: (15.2,17.8] 2/5 15582  3073 1.266e-05
+## 3:   (17.8,21] 3/5 21888  6185 1.291e-05
+## 4:   (21,24.4] 4/5 18754 18754 5.332e-05
+## 5: (24.4,33.9] 5/5 18720 15551 4.438e-05
 {% endhighlight %}
 
 
@@ -1070,7 +1078,7 @@ head(df)
 ## Valiant           in glob env!
 {% endhighlight %}
 
-### `data.table` way.
+### `data.table` way
 
 Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because
 these objects are tactually the same object.  data.table shaves computation time by not making copies unless explicity directed to.
