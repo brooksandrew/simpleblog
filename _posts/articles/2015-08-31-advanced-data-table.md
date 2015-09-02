@@ -3,7 +3,7 @@ layout: post
 title: Advanced Tips & Tricks with data.table
 date: 2015-08-31
 categories: articles
-tags: [data-science, R, data.table, R package, data wrangling]
+tags: [data science, R, data.table, R package, data wrangling]
 comments: true
 share: true
 ---
