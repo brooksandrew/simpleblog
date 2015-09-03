@@ -813,7 +813,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-28](/assets/Rfig/unnamed-chunk-28.svg) 
+![plot of chunk unnamed-chunk-28](simpleblog/assets/Rfig/unnamed-chunk-28.svg) 
 
 {% highlight text %}
 ##      [,1]
@@ -850,7 +850,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-29](/assets/Rfig/unnamed-chunk-29.svg) 
+![plot of chunk unnamed-chunk-29](simpleblog/assets/Rfig/unnamed-chunk-29.svg) 
 
 {% highlight text %}
 ##      [,1]
