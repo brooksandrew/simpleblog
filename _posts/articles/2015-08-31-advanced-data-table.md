@@ -861,11 +861,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-<<<<<<< HEAD:_posts/articles/2015-08-20-advanced-data-table.md
 ![plot of chunk unnamed-chunk-28](/simpleblog/assets/Rfig/unnamed-chunk-28.svg) 
-=======
-![plot of chunk unnamed-chunk-31](/simpleblog/assets/Rfig/unnamed-chunk-31-1.svg) 
->>>>>>> 80bb40b254026a98733d00ed81b8d5884e2ce753:_posts/articles/2015-08-31-advanced-data-table.md
 
 {% highlight text %}
 ##      [,1]
@@ -902,11 +898,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-<<<<<<< HEAD:_posts/articles/2015-08-20-advanced-data-table.md
-![plot of chunk unnamed-chunk-29](/simpleblog/assets/Rfig/unnamed-chunk-29.svg) 
-=======
 ![plot of chunk unnamed-chunk-32](/simpleblog/assets/Rfig/unnamed-chunk-32-1.svg) 
->>>>>>> 80bb40b254026a98733d00ed81b8d5884e2ce753:_posts/articles/2015-08-31-advanced-data-table.md
 
 {% highlight text %}
 ##      [,1]
