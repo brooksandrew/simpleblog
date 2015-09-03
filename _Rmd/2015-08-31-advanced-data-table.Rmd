@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Advanced Tips & Tricks with data.table
-date: 2015-08-20
+date: 2015-08-31
 categories: articles
 tags: [data-science, R, data.table, R package, data wrangling]
 comments: true
@@ -20,6 +20,10 @@ Most, if not all of these techniques were developed for real data science projec
 Some more advanced functionality from `data.table` creator Matt Dowle [here](http://user2014.stat.ucla.edu/files/tutorial_Matt.pdf).
 
 
+```{r, echo=F, warning=F, results='hide', eval=T}
+library('data.table')
+```
+
 ## 1. DATA STRUCTURES & ASSIGNMENT
 ---
 
@@ -29,6 +33,7 @@ Some more advanced functionality from `data.table` creator Matt Dowle [here](htt
 This could be useful, but is easily achievable using traditional methods.
 
 ```{r}
+dt <- data.table(mtcars)[, .(cyl, gear)]
 dt[,unique(gear), by=cyl]
 ```
 
@@ -183,7 +188,26 @@ dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 head(dt)
 ```
 
+## => Assign a column with `:=` named with a character object
 
+This is the advised way to assign a new column whose name you already have determined and saved as a character.  Simply surround the character object in parentheses.  
+
+```{r}
+dt <- data.table(mtcars)[, .(cyl, mpg)]
+
+thing2 <- 'mpgx2'
+dt[,(thing2):=mpg*2]
+
+head(dt)
+```
+
+This is old (now deprecated) way which still works for now.  Not advised.
+```{r}
+thing3 <- 'mpgx3'
+dt[,thing3:=mpg*3, with=F]
+
+head(dt)
+```
 
 ## 2. `BY`
 ---
@@ -350,7 +374,7 @@ Categories are not sorted
 
 ```{r}
 ## devtools::install_github('brooksandrew/Rsenal')
-library('Rsenal')
+library('Rsenal') # grabbing depthbin function
 tmp <- dt[, .(N=.N, sum=sum(vs), mean=mean(vs)/.N), by=depthbin(mpg, 5, labelOrder=T)]
 tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
@@ -367,22 +391,13 @@ tmp[,barplot(mean, names=depthbin, las=2)]
 
 ## => Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
-##### subset rows within by statement 
-`V1` is the standard deviation of `mpg` by `cyl`.  `V2` is the standard deviation of `mpg` for just the first half of `mpg`.
-
-```{r}
-dt <- data.table(mtcars)
-setkey(dt,mpg)
-dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
-```
-
 #### take highest value of column A when column B is highest by group
 
 Max of `qsec` for each category of `cyl`
 (this is easy)
 
 ```{r}
-dt <- data.table(mtcars)
+dt <- data.table(mtcars)[, .(cyl, mpg, qsec)]
 dt[, max(qsec), by=cyl]
 ```
 
@@ -404,6 +419,14 @@ dt[,qsec[1],  by=cyl]
 dt[,qsec[round(.N/2)],  by=cyl]
 ```
 
+##### subset rows within by statement 
+`V1` is the standard deviation of `mpg` by `cyl`.  `V2` is the standard deviation of `mpg` for just the first half of `mpg`.
+
+```{r}
+dt <- data.table(mtcars)
+setkey(dt,mpg)
+dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
+```
 
 ## 3. FUNCTIONS
 ---
@@ -415,10 +438,10 @@ dt[,qsec[round(.N/2)],  by=cyl]
 This way seems more data.table-ish because it maintains the practice of not using quotes on variable names in most cases.
 
 ```{r}
-dt <- data.table(mtcars)[.(cyl, mpg)]
+dt <- data.table(mtcars)[,.(cyl, mpg)]
 myfunc <- function(dt, v) {
-  v=deparse(substitute(v))
-  dt[,v]
+  v2=deparse(substitute(v))
+  dt[,v2, with=F][[1]] # [[1]] returns a vector instead of a data.table
 }
 
 myfunc(dt, mpg)
@@ -443,7 +466,7 @@ When you add something to a `data.frame` within a function that exists in the gl
 global environment unless you return and reassign it as such, or you use the `<<-` operator.  
 
 ```{r}
-df <- mtcars
+df <- mtcars[,c('cyl', 'mpg')]
 add_column_df <- function(df) {
   df$addcol1<- 'here in func!'
   df$addcol2 <<- 'in glob env!'

@@ -4,6 +4,8 @@ title:  "Getting feet wet with AWS"
 date:   2014-11-10
 categories: articles
 tags: [data science, Amazon Web Services, AWS, EC2, S3, RDS, SimpleDB]
+comments: true
+share: true
 ---
 
 I've been intrigued by **Amazon Web Services (AWS)** for a while now.  I spent some time this week exploring

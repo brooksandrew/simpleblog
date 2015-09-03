@@ -4,6 +4,8 @@ title:  "Deploying Shiny apps with shinyapps.io"
 date:   2014-10-11
 categories: articles
 tags: [data science, R, RStudio, shiny, shinyapps.io]
+comments: true
+share: true
 ---
 
 So I've been messing around with Shiny for a year or so now.  It's great tool and getting greater.
@@ -76,5 +78,7 @@ free hosting of multiple apps with an easy-to-use R and web interface and unintr
 This is a visualization around the [IPIP-NEO personality test](http://www.personal.psu.edu/j5j/IPIP/).  I generated some fake personalities for some familiar names (if you're a [GoT](http://en.wikipedia.org/wiki/Game_of_Thrones) geek).
 
 Also viewable at the URL: [https://brooksandrew.shinyapps.io/ipipex/](https://brooksandrew.shinyapps.io/ipipex/)
+
+**Update (9/1/2015):** It appears I've been bumping up against my monthly limit of free hours with shinyapps.io, so if the app below is not rendered, that's why.  If you're hosting an app on a website like this, you can change Idle Instance Timeout time in Settings to 5 minutes instead of the default of 15 to conserve some hours.
 
 <iframe src='https://brooksandrew.shinyapps.io/ipipex/' style="border: none; width: 1000px; height: 1000px"></iframe>
