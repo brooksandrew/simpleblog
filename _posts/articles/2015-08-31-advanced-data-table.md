@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Advanced Tips and Tricks with data.table"
+title: Advanced Tips and Tricks with data.table
 date: 2015-08-31
 categories: articles
 tags: [data science, R, data.table, R package, data wrangling]
@@ -187,10 +187,10 @@ dt[,{tmp1=mean(mpg); tmp2=mean(abs(mpg-tmp1)); tmp3=round(tmp2, 2); list(tmp2=tm
 
 
 {% highlight text %}
-##    cyl  tmp2 tmp3
-## 1:   6 1.192 1.19
-## 2:   4 3.833 3.83
-## 3:   8 1.786 1.79
+##    cyl     tmp2 tmp3
+## 1:   6 1.191837 1.19
+## 2:   4 3.833058 3.83
+## 3:   8 1.785714 1.79
 {% endhighlight %}
 
 Can also write it like this without semicolons.
@@ -206,10 +206,10 @@ dt[,{tmp1=mean(mpg)
 
 
 {% highlight text %}
-##    cyl  tmp2 tmp3
-## 1:   6 1.192 1.19
-## 2:   4 3.833 3.83
-## 3:   8 1.786 1.79
+##    cyl     tmp2 tmp3
+## 1:   6 1.191837 1.19
+## 2:   4 3.833058 3.83
+## 3:   8 1.785714 1.79
 {% endhighlight %}
 
 This is trickier with `:=` assignments... I don't think `:=` is intended to work when wrapped in `{`.  Assigning multiple columns with `:=` at once
@@ -226,13 +226,13 @@ head(dt)
 
 
 {% highlight text %}
-##    cyl  mpg  tmp2
-## 1:   6 21.0 1.192
-## 2:   6 21.0 1.192
-## 3:   4 22.8 3.833
-## 4:   6 21.4 1.192
-## 5:   8 18.7 1.786
-## 6:   6 18.1 1.192
+##    cyl  mpg     tmp2
+## 1:   6 21.0 1.191837
+## 2:   6 21.0 1.191837
+## 3:   4 22.8 3.833058
+## 4:   6 21.4 1.191837
+## 5:   8 18.7 1.785714
+## 6:   6 18.1 1.191837
 {% endhighlight %}
 
 
@@ -332,16 +332,16 @@ head(dt, 10)
 
 {% highlight text %}
 ##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   2      a          NA          NA
-##  2: 2011-01-01   5      a      1.5000      1.5000
-##  3: 2012-01-01   6      a      0.2000      0.2000
-##  4: 2013-01-01   6      a      0.0000      0.0000
-##  5: 2014-01-01   5      a     -0.1667     -0.1667
-##  6: 2015-01-01   3      a     -0.4000     -0.4000
-##  7: 2010-01-01   4      b          NA          NA
-##  8: 2011-01-01   5      b      0.2500      0.2500
-##  9: 2012-01-01   2      b     -0.6000     -0.6000
-## 10: 2013-01-01   1      b     -0.5000     -0.5000
+##  1: 2010-01-01   6      a          NA          NA
+##  2: 2011-01-01   5      a  -0.1666667  -0.1666667
+##  3: 2012-01-01   4      a  -0.2000000  -0.2000000
+##  4: 2013-01-01   3      a  -0.2500000  -0.2500000
+##  5: 2014-01-01   3      a   0.0000000   0.0000000
+##  6: 2015-01-01   3      a   0.0000000   0.0000000
+##  7: 2010-01-01   6      b          NA          NA
+##  8: 2011-01-01   3      b  -0.5000000  -0.5000000
+##  9: 2012-01-01   4      b   0.3333333   0.3333333
+## 10: 2013-01-01   1      b  -0.7500000  -0.7500000
 {% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
@@ -358,13 +358,13 @@ head(dt)
 
 
 {% highlight text %}
-##     mpg cyl   avg  med  min
-## 1: 21.0   6 19.74 19.7 17.8
-## 2: 21.0   6 19.74 19.7 17.8
-## 3: 22.8   4 26.66 26.0 21.4
-## 4: 21.4   6 19.74 19.7 17.8
-## 5: 18.7   8 15.10 15.2 10.4
-## 6: 18.1   6 19.74 19.7 17.8
+##     mpg cyl      avg  med  min
+## 1: 21.0   6 19.74286 19.7 17.8
+## 2: 21.0   6 19.74286 19.7 17.8
+## 3: 22.8   4 26.66364 26.0 21.4
+## 4: 21.4   6 19.74286 19.7 17.8
+## 5: 18.7   8 15.10000 15.2 10.4
+## 6: 18.1   6 19.74286 19.7 17.8
 {% endhighlight %}
 
 ## => Assign a column with `:=` named with a character object
@@ -443,12 +443,12 @@ head(dt)
 
 {% highlight text %}
 ##    cyl gear  mpg mpg_biased_mean
-## 1:   6    4 21.0           19.74
-## 2:   6    4 21.0           19.74
-## 3:   4    4 22.8           26.66
-## 4:   6    3 21.4           19.74
-## 5:   8    3 18.7           15.10
-## 6:   6    3 18.1           19.74
+## 1:   6    4 21.0        19.74286
+## 2:   6    4 21.0        19.74286
+## 3:   4    4 22.8        26.66364
+## 4:   6    3 21.4        19.74286
+## 5:   8    3 18.7        15.10000
+## 6:   6    3 18.1        19.74286
 {% endhighlight %}
 
 #####  1.a `.GRP` without setting key
@@ -461,16 +461,16 @@ dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    4   6 19.73
-## 2:    4   8 15.10
-## 3:    4   4 25.97
-## 4:    3   6 19.74
-## 5:    3   4 27.18
-## 6:    3   8 15.40
-## 7:    5   6 19.75
-## 8:    5   4 26.32
-## 9:    5   8 15.05
+##    gear cyl       V1
+## 1:    4   6 19.73333
+## 2:    4   8 15.10000
+## 3:    4   4 25.96667
+## 4:    3   6 19.74000
+## 5:    3   4 27.18000
+## 6:    3   8 15.40000
+## 7:    5   6 19.75000
+## 8:    5   4 26.32222
+## 9:    5   8 15.05000
 {% endhighlight %}
 
 
@@ -483,7 +483,7 @@ dt[gear!=4 & cyl==6, mean(mpg)]
 
 
 {% highlight text %}
-## [1] 19.73
+## [1] 19.73333
 {% endhighlight %}
 
 ##### 1.b Same as 1.a, but a little faster
@@ -497,16 +497,16 @@ dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] 
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   4 27.18
-## 2:    4   4 25.97
-## 3:    5   4 26.32
-## 4:    3   6 19.74
-## 5:    4   6 19.73
-## 6:    5   6 19.75
-## 7:    3   8 15.40
-## 8:    4   8 15.10
-## 9:    5   8 15.05
+##    gear cyl       V1
+## 1:    3   4 27.18000
+## 2:    4   4 25.96667
+## 3:    5   4 26.32222
+## 4:    3   6 19.74000
+## 5:    4   6 19.73333
+## 6:    5   6 19.75000
+## 7:    3   8 15.40000
+## 8:    4   8 15.10000
+## 9:    5   8 15.05000
 {% endhighlight %}
 
 ##### Why does this work?
@@ -573,16 +573,16 @@ dt[, dt[!.(uid[.GRP]), mean(mpg), by=cyl] , by=gear] #unbiased mean
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   6 19.74
-## 2:    3   4 27.18
-## 3:    3   8 15.40
-## 4:    4   6 19.73
-## 5:    4   8 15.10
-## 6:    4   4 25.97
-## 7:    5   6 19.75
-## 8:    5   8 15.05
-## 9:    5   4 26.32
+##    gear cyl       V1
+## 1:    3   6 19.74000
+## 2:    3   4 27.18000
+## 3:    3   8 15.40000
+## 4:    4   6 19.73333
+## 5:    4   8 15.10000
+## 6:    4   4 25.96667
+## 7:    5   6 19.75000
+## 8:    5   8 15.05000
+## 9:    5   4 26.32222
 {% endhighlight %}
 
 
@@ -623,10 +623,10 @@ dt[,  .SD[, mean(mpg)], by=gear] # same as `dt[, mean(mpg), by=gear]`
 
 
 {% highlight text %}
-##    gear    V1
-## 1:    3 16.11
-## 2:    4 24.53
-## 3:    5 21.38
+##    gear       V1
+## 1:    3 16.10667
+## 2:    4 24.53333
+## 3:    5 21.38000
 {% endhighlight %}
 
 
@@ -638,15 +638,15 @@ dt[,  .SD[, mean(mpg), by=cyl], by=gear] # same as `dt[, mean(mpg), by=.(cyl, by
 
 
 {% highlight text %}
-##    gear cyl    V1
-## 1:    3   6 19.75
-## 2:    3   8 15.05
-## 3:    3   4 21.50
-## 4:    4   6 19.75
-## 5:    4   4 26.93
-## 6:    5   4 28.20
-## 7:    5   8 15.40
-## 8:    5   6 19.70
+##    gear cyl     V1
+## 1:    3   6 19.750
+## 2:    3   8 15.050
+## 3:    3   4 21.500
+## 4:    4   6 19.750
+## 5:    4   4 26.925
+## 6:    5   4 28.200
+## 7:    5   8 15.400
+## 8:    5   6 19.700
 {% endhighlight %}
 
 ##### Nested data.tables and `by` statements
@@ -705,15 +705,15 @@ dt[,{
 
 
 {% highlight text %}
-##    cyl gear    V1
-## 1:   6    3 19.74
-## 2:   6    4 19.73
-## 3:   6    5 19.75
-## 4:   8    3 15.40
-## 5:   8    5 15.05
-## 6:   4    3 27.18
-## 7:   4    4 25.97
-## 8:   4    5 26.32
+##    cyl gear       V1
+## 1:   6    3 19.74000
+## 2:   6    4 19.73333
+## 3:   6    5 19.75000
+## 4:   8    3 15.40000
+## 5:   8    5 15.05000
+## 6:   4    3 27.18000
+## 7:   4    4 25.96667
+## 8:   4    5 26.32222
 {% endhighlight %}
 
 
@@ -737,13 +737,13 @@ head(dt)
 
 
 {% highlight text %}
-##     mpg cyl gear avg_mpg_cyl Ncyl Ncylgear avg_mpg_cyl_gear unbmean
-## 1: 21.5   4    3       26.66   11        1            21.50   27.18
-## 2: 22.8   4    4       26.66   11        8            26.93   25.97
-## 3: 24.4   4    4       26.66   11        8            26.93   25.97
-## 4: 22.8   4    4       26.66   11        8            26.93   25.97
-## 5: 32.4   4    4       26.66   11        8            26.93   25.97
-## 6: 30.4   4    4       26.66   11        8            26.93   25.97
+##     mpg cyl gear avg_mpg_cyl Ncyl Ncylgear avg_mpg_cyl_gear  unbmean
+## 1: 21.5   4    3    26.66364   11        1           21.500 27.18000
+## 2: 22.8   4    4    26.66364   11        8           26.925 25.96667
+## 3: 24.4   4    4    26.66364   11        8           26.925 25.96667
+## 4: 22.8   4    4    26.66364   11        8           26.925 25.96667
+## 5: 32.4   4    4    26.66364   11        8           26.925 25.96667
+## 6: 30.4   4    4    26.66364   11        8           26.925 25.96667
 {% endhighlight %}
 
 ##### Wrapping up code below into a function
@@ -769,12 +769,12 @@ head(dt)
 
 {% highlight text %}
 ##     mpg cyl gear unbiased_mean biased_mean
-## 1: 21.0   6    4         19.73       19.74
-## 2: 21.0   6    4         19.73       19.74
-## 3: 22.8   4    4         25.97       26.66
-## 4: 21.4   6    3         19.74       19.74
-## 5: 18.7   8    3         15.40       15.10
-## 6: 18.1   6    3         19.74       19.74
+## 1: 21.0   6    4      19.73333    19.74286
+## 2: 21.0   6    4      19.73333    19.74286
+## 3: 22.8   4    4      25.96667    26.66364
+## 4: 21.4   6    3      19.74000    19.74286
+## 5: 18.7   8    3      15.40000    15.10000
+## 6: 18.1   6    3      19.74000    19.74286
 {% endhighlight %}
 
 ### Speed check
@@ -800,7 +800,7 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 {% highlight text %}
 ##    user  system elapsed 
-##   0.056   0.008   0.064
+##   0.034   0.003   0.038
 {% endhighlight %}
 
 ##### Method 2:
@@ -814,7 +814,7 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 {% highlight text %}
 ##    user  system elapsed 
-##   5.524   0.957   6.653
+##   3.934   0.377   4.311
 {% endhighlight %}
 
 ##### Method 1:
@@ -828,7 +828,7 @@ system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(
 
 {% highlight text %}
 ##    user  system elapsed 
-##   4.808   0.856   5.779
+##   3.527   0.346   3.874
 {% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
@@ -847,12 +847,12 @@ tmp
 
 
 {% highlight text %}
-##           depthbin     N   sum      mean
-## 1: [10.4,15.2] 1/5 24756     0 0.000e+00
-## 2:   (21,24.4] 4/5 18846 18846 5.306e-05
-## 3: (15.2,17.8] 2/5 15638  3075 1.257e-05
-## 4: (24.4,33.9] 5/5 18696 15654 4.478e-05
-## 5:   (17.8,21] 3/5 22064  6140 1.261e-05
+##           depthbin     N   sum         mean
+## 1: [10.4,15.2] 1/5 24978     0 0.000000e+00
+## 2: (24.4,33.9] 5/5 18740 15591 4.439508e-05
+## 3:   (17.8,21] 3/5 21934  6221 1.293077e-05
+## 4: (15.2,17.8] 2/5 15585  3089 1.271757e-05
+## 5:   (21,24.4] 4/5 18763 18763 5.329638e-05
 {% endhighlight %}
 
 
@@ -861,7 +861,11 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-31](/assets/Rfig/unnamed-chunk-31.svg) 
+<<<<<<< HEAD:_posts/articles/2015-08-20-advanced-data-table.md
+![plot of chunk unnamed-chunk-28](/simpleblog/assets/Rfig/unnamed-chunk-28.svg) 
+=======
+![plot of chunk unnamed-chunk-31](/simpleblog/assets/Rfig/unnamed-chunk-31-1.svg) 
+>>>>>>> 80bb40b254026a98733d00ed81b8d5884e2ce753:_posts/articles/2015-08-31-advanced-data-table.md
 
 {% highlight text %}
 ##      [,1]
@@ -884,12 +888,12 @@ tmp
 
 
 {% highlight text %}
-##           depthbin     N   sum      mean
-## 1: [10.4,15.2] 1/5 24756     0 0.000e+00
-## 2: (15.2,17.8] 2/5 15638  3075 1.257e-05
-## 3:   (17.8,21] 3/5 22064  6140 1.261e-05
-## 4:   (21,24.4] 4/5 18846 18846 5.306e-05
-## 5: (24.4,33.9] 5/5 18696 15654 4.478e-05
+##           depthbin     N   sum         mean
+## 1: [10.4,15.2] 1/5 24978     0 0.000000e+00
+## 2: (15.2,17.8] 2/5 15585  3089 1.271757e-05
+## 3:   (17.8,21] 3/5 21934  6221 1.293077e-05
+## 4:   (21,24.4] 4/5 18763 18763 5.329638e-05
+## 5: (24.4,33.9] 5/5 18740 15591 4.439508e-05
 {% endhighlight %}
 
 
@@ -898,7 +902,11 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-32](/assets/Rfig/unnamed-chunk-32.svg) 
+<<<<<<< HEAD:_posts/articles/2015-08-20-advanced-data-table.md
+![plot of chunk unnamed-chunk-29](/simpleblog/assets/Rfig/unnamed-chunk-29.svg) 
+=======
+![plot of chunk unnamed-chunk-32](/simpleblog/assets/Rfig/unnamed-chunk-32-1.svg) 
+>>>>>>> 80bb40b254026a98733d00ed81b8d5884e2ce753:_posts/articles/2015-08-31-advanced-data-table.md
 
 {% highlight text %}
 ##      [,1]
@@ -992,10 +1000,10 @@ dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
 
 
 {% highlight text %}
-##    cyl    V1     V2
-## 1:   8 2.560 2.0926
-## 2:   6 1.454 0.8981
-## 3:   4 4.510 1.7729
+##    cyl       V1        V2
+## 1:   8 2.560048 2.0926174
+## 2:   6 1.453567 0.8981462
+## 3:   4 4.509828 1.7728508
 {% endhighlight %}
 
 ## 3. FUNCTIONS
@@ -1228,13 +1236,13 @@ dt[,hp2wt:=hp/wt][] # does print
 
 
 {% highlight text %}
-##     mpg cyl disp  hp drat    wt  qsec vs am gear carb hp2wt
-## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 41.98
-## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 38.26
-## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 40.09
-## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 34.21
-## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 50.87
-## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 30.35
+##     mpg cyl disp  hp drat    wt  qsec vs am gear carb    hp2wt
+## 1: 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 41.98473
+## 2: 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 38.26087
+## 3: 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 40.08621
+## 4: 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 34.21462
+## 5: 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 50.87209
+## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 30.34682
 {% endhighlight %}
  
 
