@@ -7,7 +7,7 @@ sitemap: false
 		<title>{{ site.name | xml_escape }} - R</title>
 		<description>Posts categorized as 'R'</description>
 		<link>{{ site.url }}</link>
-		<atom:link href="{{ site.url }}/feed.category.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="{{ site.url }}/feed.tags.xml" rel="self" type="application/rss+xml" />
 		{% for post in site.tags.R limit:70 %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
