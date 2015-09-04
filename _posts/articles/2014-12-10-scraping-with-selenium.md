@@ -159,7 +159,7 @@ head(master)
 {% highlight text %}
 ## [1] "FidelityAA Global Balanced Fund (FGBLX)"                    
 ## [2] "FidelityAA Global Strategies Fund (FDYSX)"                  
-## [3] "Fidelity FreedomÂ® 2055 Fund (FDEEX)"                       
+## [3] "Fidelity FreedomA 2055 Fund (FDEEX)"                       
 ## [4] "Aberdeen Dynamic Allocation Fund Class A (GMMAX)"           
 ## [5] "Aberdeen Dynamic Allocation Fund Class C (GMMCX)"           
 ## [6] "AllianceBernstein Real Asset Strategy Advisor Class (AMTYX)"

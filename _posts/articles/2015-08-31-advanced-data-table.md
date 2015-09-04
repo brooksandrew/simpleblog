@@ -1250,6 +1250,11 @@ dt[,mpg2qsec:=mpg/qsec] # will print with knitr
 invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
 {% endhighlight %}
 
+---
+
+> This article is also posted [R-Bloggers](http://www.r-bloggers.com/)
+
+
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
 
 
