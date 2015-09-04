@@ -4,7 +4,7 @@ sitemap: false
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{{ site.name | xml_escape }} - R</title>
+		<title>{{ site.name | xml_escape }} Andrew Brooks - R</title>
 		<description>Posts categorized as 'R'</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.tags.xml" rel="self" type="application/rss+xml" />
