@@ -8,7 +8,7 @@ sitemap: false
 		<description>Posts categorized as 'R'</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.tags.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.tags.R limit:70 %}
+		{% for post in site.tags.R limit: 100 %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
 				{% if post.excerpt %}

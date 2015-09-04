@@ -4,19 +4,20 @@ sitemap: false
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
-		<title>{{ site.name | xml_escape }} Andrew Brooks - R</title>
+		<title>{{ site.name | xml_escape }} - R</title>
 		<description>Posts categorized as 'R'</description>
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.tags.xml" rel="self" type="application/rss+xml" />
-		{% for post in site.tags.R limit 100 %}
+		{% for post in site.tags.R limit: 100 %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
-				<description>{{ post.content | xml_escape }}</description>
-				
-				<pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+				{% if post.excerpt %}
+					<description>{{ post.excerpt | xml_escape }}</description>
+				{% else %}
+					<description>{{ post.content | xml_escape }}</description>
+				{% endif %}
+				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
-				<content type="html">{{ post.content | xml_escape }}
-  					&lt;p&gt;&lt;a href=&quot;{{ site.url }}{{ post.url }}&quot;&gt;{{ post.title }}&lt;/a&gt; was originally published by {{ author.name }} at &lt;a href=&quot;{{ site.url }}&quot;&gt;{{ site.title }}&lt;/a&gt; on {{ post.date | date: "%B %d, %Y" }}.&lt;/p&gt;</content>
 				<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
 			</item>
 		{% endfor %}
