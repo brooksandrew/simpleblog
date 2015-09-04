@@ -1252,7 +1252,7 @@ invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
 
 ---
 
-> This article is also posted [R-Bloggers](http://www.r-bloggers.com/)
+> This article is also published on [R-Bloggers](http://www.r-bloggers.com/)
 
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
