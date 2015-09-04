@@ -104,7 +104,7 @@ So the raw HTML of this page doesn't help us much.
 
 My plan B was to grab the url for each fund from the table, navigate to that fund's page, and extract the ticker from there.
 However these links weren't in our http response.  I noticed that the URLs for each fund followed a simple consistent structure.    
-[https://fundresearch.fidelity.com/mutual-funds/summary/72201F433]([https://fundresearch.fidelity.com/mutual-funds/summary/72201F433]) for example.
+[https://fundresearch.fidelity.com/mutual-funds/summary/72201F433](https://fundresearch.fidelity.com/mutual-funds/summary/72201F433) for example.
 I thought maybe I could find 72201F433 which looks like some sort of fund ID in a list with all fund IDs in the http response.
 No dice.  Plan C -- Selenium.
 
