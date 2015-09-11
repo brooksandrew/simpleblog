@@ -1,5 +1,5 @@
 
-Useful resources for exploring random forests and black box models
+### Useful resources for exploring random forests and black box models
 
 * Exploratory Data Analysis using Random Forests [[Paper](https://github.com/kjw0612/awesome-random-forest)]
   * Zachary Jones and Fridolin Linder, 2015. 
