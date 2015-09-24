@@ -64,6 +64,13 @@ str(head(dt[,gearL1]))
 str(head(dt[,gearS1]))
 ```
 
+**Update 9/24/2015:** Per Matt Dowle's comments, a slightly more syntactically succinct way of doing this:
+
+```{r}
+dt[,gearL1:=lapply(gearsL, `[`, 2)]
+dt[,gearS1:=sapply(gearsL, `[`, 2)]
+```
+
 Calculate all the `gear`s for all cars of each `cyl` (excluding the current current row).
 This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
 
@@ -72,9 +79,14 @@ dt[,other_gear:=mapply(function(x, y) setdiff(x, y), x=gearsL, y=gear)]
 head(dt)
 ```
 
+**Update 9/24/2015:** Per Matt Dowle's comments, this achieves the same as above.
+
+```{r}
+dt[,other_gear:=mapply(setdiff, gearsL, gear)]
+```
 ## => Suppressing intermediate output with {}
 
-This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some doucmentation and examples.
+This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some documentation and examples.
 I've only used it within the J slot of data.table, it might be more generalizable.  I find it pretty useful for generating columns
 on the fly when I need to perform some multi-step vectorized operation.  It can clean up code by allowing you to reference the same temporary variable
 by a concise name rather than rewriting the code to re-compute it.
@@ -122,7 +134,7 @@ However, if you must loop, `set` is orders of magnitude faster than native R ass
     New function set(DT,i,j,value) allows fast assignment to elements
     of DT. Similar to := but avoids the overhead of [.data.table, so is
     much faster inside a loop. Less flexible than :=, but as flexible
-    as matrix subassignment. Similar in spirit to setnames(), setcolorder(),
+    as matrix sub-assignment. Similar in spirit to setnames(), setcolorder(),
     setkey() and setattr(); i.e., assigns by reference with no copy at all.
 
     M = matrix(1,nrow=100000,ncol=100)
@@ -181,7 +193,7 @@ head(dt, 10)
 ## => Create multiple columns with `:=` in one statement
 
 This is useful, but note that that the columns operated on must be atomic vectors or lists.  That is they must exist before running computation.  
-Building columns referencing other columns in this set need to be done indiviually or chained.
+Building columns referencing other columns in this set need to be done individually or chained.
 ```{r}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
 dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
@@ -242,6 +254,12 @@ dt[, dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], by=gear] #unbiased
 dt[gear!=4 & cyl==6, mean(mpg)]
 ```
 
+**Update 9/24/2015:** Per Matt Dowle's comments, this also works with slightly less code. For my simple example, there was also a marginal speed gain.  Time savings relative to the `.GRP` method will likely increase with the complexity of the problem.
+
+```{r}
+dt[, dt[!gear %in% .BY[[1]], mean(mpg), by=cyl], by=gear] #unbiased mean
+```
+
 ##### 1.b Same as 1.a, but a little faster
 
 ```{r}
@@ -256,6 +274,7 @@ dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)] 
 dt[, .GRP, by=cyl]
 dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
 dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
+
 ```
 
 ##### 1.b Setting key
@@ -272,7 +291,7 @@ mean(dt[cyl==6 & gear!=3,mpg]) # testing
 `{}` is used for to suppress intermediate operations.
 
 ##### Building up
-No surpises here.
+No surprises here.
 
 ```{r}
 dt[,  .SD[, mean(mpg)], by=gear] # same as `dt[, mean(mpg), by=gear]`
@@ -487,7 +506,7 @@ head(df)
 ### `data.table` way
 
 Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because
-these objects are tactually the same object.  data.table shaves computation time by not making copies unless explicity directed to.
+these objects are actually the same object.  data.table shaves computation time by not making copies unless explicitly directed to.
 
 ```{r}
 dt <- data.table(mtcars)
@@ -544,6 +563,7 @@ dt <- data.table(mtcars)
 dt[,mpg2qsec:=mpg/qsec] # will print with knitr
 invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
 ```
+
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Advanced Tips and Tricks with data.table
+title: "Advanced Tips and Tricks with data.table"
 date: 2015-08-31
 categories: articles
 tags: [data science, R, data.table, R package, data wrangling]
@@ -130,6 +130,14 @@ str(head(dt[,gearS1]))
 ##  num [1:6] 3 3 3 3 5 3
 {% endhighlight %}
 
+**Update 9/24/2015:** Per Matt Dowle's comments, a slightly more syntactically succinct way of doing this:
+
+
+{% highlight r %}
+dt[,gearL1:=lapply(gearsL, `[`, 2)]
+dt[,gearS1:=sapply(gearsL, `[`, 2)]
+{% endhighlight %}
+
 Calculate all the `gear`s for all cars of each `cyl` (excluding the current current row).
 This can be useful for comparing observations to the mean of groups, where the group mean is not biased by the observation of interest.
 
@@ -151,9 +159,15 @@ head(dt)
 ## 6:    3   6  4,3,5      3      3        4,5
 {% endhighlight %}
 
+**Update 9/24/2015:** Per Matt Dowle's comments, this achieves the same as above.
+
+
+{% highlight r %}
+dt[,other_gear:=mapply(setdiff, gearsL, gear)]
+{% endhighlight %}
 ## => Suppressing intermediate output with {}
 
-This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some doucmentation and examples.
+This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some documentation and examples.
 I've only used it within the J slot of data.table, it might be more generalizable.  I find it pretty useful for generating columns
 on the fly when I need to perform some multi-step vectorized operation.  It can clean up code by allowing you to reference the same temporary variable
 by a concise name rather than rewriting the code to re-compute it.
@@ -245,7 +259,7 @@ However, if you must loop, `set` is orders of magnitude faster than native R ass
     New function set(DT,i,j,value) allows fast assignment to elements
     of DT. Similar to := but avoids the overhead of [.data.table, so is
     much faster inside a loop. Less flexible than :=, but as flexible
-    as matrix subassignment. Similar in spirit to setnames(), setcolorder(),
+    as matrix sub-assignment. Similar in spirit to setnames(), setcolorder(),
     setkey() and setattr(); i.e., assigns by reference with no copy at all.
 
     M = matrix(1,nrow=100000,ncol=100)
@@ -332,22 +346,22 @@ head(dt, 10)
 
 {% highlight text %}
 ##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   6      a          NA          NA
-##  2: 2011-01-01   5      a  -0.1666667  -0.1666667
-##  3: 2012-01-01   4      a  -0.2000000  -0.2000000
-##  4: 2013-01-01   3      a  -0.2500000  -0.2500000
-##  5: 2014-01-01   3      a   0.0000000   0.0000000
-##  6: 2015-01-01   3      a   0.0000000   0.0000000
-##  7: 2010-01-01   6      b          NA          NA
-##  8: 2011-01-01   3      b  -0.5000000  -0.5000000
-##  9: 2012-01-01   4      b   0.3333333   0.3333333
-## 10: 2013-01-01   1      b  -0.7500000  -0.7500000
+##  1: 2010-01-01   4      a          NA          NA
+##  2: 2011-01-01   6      a   0.5000000   0.5000000
+##  3: 2012-01-01   7      a   0.1666667   0.1666667
+##  4: 2013-01-01   4      a  -0.4285714  -0.4285714
+##  5: 2014-01-01   4      a   0.0000000   0.0000000
+##  6: 2015-01-01   7      a   0.7500000   0.7500000
+##  7: 2010-01-01   5      b          NA          NA
+##  8: 2011-01-01   8      b   0.6000000   0.6000000
+##  9: 2012-01-01   8      b   0.0000000   0.0000000
+## 10: 2013-01-01   7      b  -0.1250000  -0.1250000
 {% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
 
 This is useful, but note that that the columns operated on must be atomic vectors or lists.  That is they must exist before running computation.  
-Building columns referencing other columns in this set need to be done indiviually or chained.
+Building columns referencing other columns in this set need to be done individually or chained.
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(mpg, cyl)]
@@ -486,6 +500,28 @@ dt[gear!=4 & cyl==6, mean(mpg)]
 ## [1] 19.73333
 {% endhighlight %}
 
+**Update 9/24/2015:** Per Matt Dowle's comments, this also works with slightly less code. For my simple example, there was also a marginal speed gain.  Time savings relative to the `.GRP` method will likely increase with the complexity of the problem.
+
+
+{% highlight r %}
+dt[, dt[!gear %in% .BY[[1]], mean(mpg), by=cyl], by=gear] #unbiased mean
+{% endhighlight %}
+
+
+
+{% highlight text %}
+##    gear cyl       V1
+## 1:    4   6 19.73333
+## 2:    4   8 15.10000
+## 3:    4   4 25.96667
+## 4:    3   6 19.74000
+## 5:    3   4 27.18000
+## 6:    3   8 15.40000
+## 7:    5   6 19.75000
+## 8:    5   4 26.32222
+## 9:    5   8 15.05000
+{% endhighlight %}
+
 ##### 1.b Same as 1.a, but a little faster
 
 
@@ -613,7 +649,7 @@ mean(dt[cyl==6 & gear!=3,mpg]) # testing
 `{}` is used for to suppress intermediate operations.
 
 ##### Building up
-No surpises here.
+No surprises here.
 
 
 {% highlight r %}
@@ -800,7 +836,7 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 {% highlight text %}
 ##    user  system elapsed 
-##   0.034   0.003   0.038
+##   0.035   0.006   0.041
 {% endhighlight %}
 
 ##### Method 2:
@@ -814,7 +850,7 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.934   0.377   4.311
+##   3.784   0.914   4.699
 {% endhighlight %}
 
 ##### Method 1:
@@ -828,7 +864,7 @@ system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.527   0.346   3.874
+##   3.355   0.750   4.104
 {% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
@@ -848,11 +884,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1: [10.4,15.2] 1/5 24978     0 0.000000e+00
-## 2: (24.4,33.9] 5/5 18740 15591 4.439508e-05
-## 3:   (17.8,21] 3/5 21934  6221 1.293077e-05
-## 4: (15.2,17.8] 2/5 15585  3089 1.271757e-05
-## 5:   (21,24.4] 4/5 18763 18763 5.329638e-05
+## 1:   (17.8,21] 3/5 21675  6272 1.335020e-05
+## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
+## 3: [10.4,15.2] 1/5 25083     0 0.000000e+00
+## 4: (24.4,33.9] 5/5 18779 15667 4.442638e-05
+## 5:   (21,24.4] 4/5 18826 18826 5.311803e-05
 {% endhighlight %}
 
 
@@ -861,7 +897,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-28](/simpleblog/assets/Rfig/unnamed-chunk-28.svg) 
+![plot of chunk unnamed-chunk-34](/assets/Rfig/unnamed-chunk-34-1.svg) 
 
 {% highlight text %}
 ##      [,1]
@@ -885,11 +921,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1: [10.4,15.2] 1/5 24978     0 0.000000e+00
-## 2: (15.2,17.8] 2/5 15585  3089 1.271757e-05
-## 3:   (17.8,21] 3/5 21934  6221 1.293077e-05
-## 4:   (21,24.4] 4/5 18763 18763 5.329638e-05
-## 5: (24.4,33.9] 5/5 18740 15591 4.439508e-05
+## 1: [10.4,15.2] 1/5 25083     0 0.000000e+00
+## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
+## 3:   (17.8,21] 3/5 21675  6272 1.335020e-05
+## 4:   (21,24.4] 4/5 18826 18826 5.311803e-05
+## 5: (24.4,33.9] 5/5 18779 15667 4.442638e-05
 {% endhighlight %}
 
 
@@ -898,7 +934,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-32](/simpleblog/assets/Rfig/unnamed-chunk-32-1.svg) 
+![plot of chunk unnamed-chunk-35](/assets/Rfig/unnamed-chunk-35-1.svg) 
 
 {% highlight text %}
 ##      [,1]
@@ -1102,7 +1138,7 @@ head(df)
 ### `data.table` way
 
 Unlike data.frame, the `:=` operator adds a column to both the object living in the global environment and used in the function.  I think this is because
-these objects are tactually the same object.  data.table shaves computation time by not making copies unless explicity directed to.
+these objects are actually the same object.  data.table shaves computation time by not making copies unless explicitly directed to.
 
 
 {% highlight r %}
@@ -1249,10 +1285,6 @@ dt <- data.table(mtcars)
 dt[,mpg2qsec:=mpg/qsec] # will print with knitr
 invisible(dt[,mpg2qsec:=mpg/qsec]) # won't print with knitr
 {% endhighlight %}
-
----
-
-> This article is also published on [R-Bloggers](http://www.r-bloggers.com/)
 
 
 [official documentation]:https://cran.r-project.org/web/packages/data.table/data.table.pdf
