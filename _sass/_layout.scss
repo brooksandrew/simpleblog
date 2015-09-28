@@ -356,11 +356,11 @@ span + .entry-title {
   }
   li {
     @include font-size(16,no,18);
-    border-bottom: 1px solid $border-color;
+    //border-bottom: 1px solid $border-color;
     list-style-type: none;
-    margin: 0 0 1px 0;
+    margin: 0 0 0px 0;
   }
-  h3 {
+  h6 {
     margin: 0;
     padding: (.25 * $gutter) (.5 * $gutter);
     background: $table-stripe-color;
@@ -369,7 +369,7 @@ span + .entry-title {
     display: block;
     padding: (.25 * $gutter) (.5 * $gutter);
     border-left: 2px solid transparent;
-    border-bottom: 0 solid transparent;
+    border-bottom: 1 solid transparent;
     &:hover,
     &:focus {
       background: lighten($border-color,5);
