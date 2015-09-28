@@ -11,7 +11,7 @@ share: true
 * Table of Contents
 {:toc}
 
-## Tips and tricks learned along the way 
+#### Tips and tricks learned along the way 
 
 This is mostly a running list of `data.table` tricks that took me a while to figure out either by digging into the [official documentation], adapting StackOverflow posts, or more often than not, experimenting for hours.  I'd like to persist these discoveries somewhere with more memory than my head (hello internet) so I can reuse them after my mental memory forgets them.  A less organized and concise addition to DataCamp's sweet [cheat sheet for the basics](https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf).
 
@@ -22,10 +22,10 @@ Some more advanced functionality from `data.table` creator Matt Dowle [here](htt
 
 
 
-## 1. DATA STRUCTURES & ASSIGNMENT
+# 1. DATA STRUCTURES & ASSIGNMENT
 ---
 
-## => Columns of lists
+## Columns of lists
   
 ##### summary table (long and narrow)
 This could be useful, but is easily achievable using traditional methods.
@@ -165,7 +165,7 @@ head(dt)
 {% highlight r %}
 dt[,other_gear:=mapply(setdiff, gearsL, gear)]
 {% endhighlight %}
-## => Suppressing intermediate output with {}
+## Suppressing intermediate output with {}
 
 This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some documentation and examples.
 I've only used it within the J slot of data.table, it might be more generalizable.  I find it pretty useful for generating columns
@@ -250,7 +250,7 @@ head(dt)
 {% endhighlight %}
 
 
-## => Fast looping with `set`
+## Fast looping with `set`
 
 I still haven't worked much with the loop + `set` framework.  I've been able to achieve pretty much everything with `:=` which is more flexible and powerful.
 However, if you must loop, `set` is orders of magnitude faster than native R assignments within loops.  Here's a snippet from data.table news a while back:
@@ -295,7 +295,7 @@ head(dt)
 {% endhighlight %}
 
 
-## => Using `shift` for to lead/lag vectors and lists
+## Using `shift` for to lead/lag vectors and lists
 
 Note this feature is only available in version 1.9.5 (currently on Github, not CRAN)
 Base R surprisingly does not have great tools for dealing with leads/lags of vectors that most social science
@@ -346,19 +346,19 @@ head(dt, 10)
 
 {% highlight text %}
 ##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   4      a          NA          NA
-##  2: 2011-01-01   6      a   0.5000000   0.5000000
-##  3: 2012-01-01   7      a   0.1666667   0.1666667
-##  4: 2013-01-01   4      a  -0.4285714  -0.4285714
-##  5: 2014-01-01   4      a   0.0000000   0.0000000
-##  6: 2015-01-01   7      a   0.7500000   0.7500000
-##  7: 2010-01-01   5      b          NA          NA
-##  8: 2011-01-01   8      b   0.6000000   0.6000000
-##  9: 2012-01-01   8      b   0.0000000   0.0000000
-## 10: 2013-01-01   7      b  -0.1250000  -0.1250000
+##  1: 2010-01-01   3      a          NA          NA
+##  2: 2011-01-01   2      a  -0.3333333  -0.3333333
+##  3: 2012-01-01   5      a   1.5000000   1.5000000
+##  4: 2013-01-01   4      a  -0.2000000  -0.2000000
+##  5: 2014-01-01   1      a  -0.7500000  -0.7500000
+##  6: 2015-01-01   5      a   4.0000000   4.0000000
+##  7: 2010-01-01   2      b          NA          NA
+##  8: 2011-01-01   6      b   2.0000000   2.0000000
+##  9: 2012-01-01   8      b   0.3333333   0.3333333
+## 10: 2013-01-01   9      b   0.1250000   0.1250000
 {% endhighlight %}
 
-## => Create multiple columns with `:=` in one statement
+## Create multiple columns with `:=` in one statement
 
 This is useful, but note that that the columns operated on must be atomic vectors or lists.  That is they must exist before running computation.  
 Building columns referencing other columns in this set need to be done individually or chained.
@@ -381,7 +381,7 @@ head(dt)
 ## 6: 18.1   6 19.74286 19.7 17.8
 {% endhighlight %}
 
-## => Assign a column with `:=` named with a character object
+## Assign a column with `:=` named with a character object
 
 This is the advised way to assign a new column whose name you already have determined and saved as a character.  Simply surround the character object in parentheses.  
 
@@ -428,10 +428,10 @@ head(dt)
 ## 6:   6 18.1  36.2  54.3
 {% endhighlight %}
 
-## 2. `BY`
+# 2. `BY`
 ---
 
-## => Calculate a function over a group (using `by`) excluding each entity in a second category.
+## Calculate a function over a group (using `by`) excluding each entity in a second category.
 
 This title probably doesn't immediately make much sense.  Let me explain what I'm going to calculate and why with an example.
 We want to compare the `mpg` of each car to the average `mpg` of cars in the same class (the same # of cylinders).  However, we don't want 
@@ -836,7 +836,7 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 {% highlight text %}
 ##    user  system elapsed 
-##   0.035   0.006   0.041
+##   0.033   0.003   0.035
 {% endhighlight %}
 
 ##### Method 2:
@@ -850,7 +850,7 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.784   0.914   4.699
+##   3.709   0.359   4.069
 {% endhighlight %}
 
 ##### Method 1:
@@ -864,10 +864,10 @@ system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.355   0.750   4.104
+##   3.345   0.331   3.677
 {% endhighlight %}
 
-## => `keyby` to key resulting aggregate table
+## `keyby` to key resulting aggregate table
 
 ##### Without `keyby`
 Categories are not sorted
@@ -884,11 +884,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1:   (17.8,21] 3/5 21675  6272 1.335020e-05
-## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
-## 3: [10.4,15.2] 1/5 25083     0 0.000000e+00
-## 4: (24.4,33.9] 5/5 18779 15667 4.442638e-05
-## 5:   (21,24.4] 4/5 18826 18826 5.311803e-05
+## 1: (15.2,17.8] 2/5 15372  3131 1.325020e-05
+## 2:   (17.8,21] 3/5 21839  6204 1.300787e-05
+## 3: [10.4,15.2] 1/5 25255     0 0.000000e+00
+## 4:   (21,24.4] 4/5 18817 18817 5.314343e-05
+## 5: (24.4,33.9] 5/5 18717 15581 4.447571e-05
 {% endhighlight %}
 
 
@@ -921,11 +921,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1: [10.4,15.2] 1/5 25083     0 0.000000e+00
-## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
-## 3:   (17.8,21] 3/5 21675  6272 1.335020e-05
-## 4:   (21,24.4] 4/5 18826 18826 5.311803e-05
-## 5: (24.4,33.9] 5/5 18779 15667 4.442638e-05
+## 1: [10.4,15.2] 1/5 25255     0 0.000000e+00
+## 2: (15.2,17.8] 2/5 15372  3131 1.325020e-05
+## 3:   (17.8,21] 3/5 21839  6204 1.300787e-05
+## 4:   (21,24.4] 4/5 18817 18817 5.314343e-05
+## 5: (24.4,33.9] 5/5 18717 15581 4.447571e-05
 {% endhighlight %}
 
 
@@ -945,7 +945,7 @@ tmp[,barplot(mean, names=depthbin, las=2)]
 ## [5,]  5.5
 {% endhighlight %}
 
-## => Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
+## Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
 #### take highest value of column A when column B is highest by group
 
@@ -1034,10 +1034,10 @@ dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
 ## 3:   4 4.509828 1.7728508
 {% endhighlight %}
 
-## 3. FUNCTIONS
+# 3. FUNCTIONS
 ---
 
-## => Passing `data.table` column names as function arguments 
+## Passing `data.table` column names as function arguments 
 
 #### Method 1: No quotes, and `deparse` + `substitute`
 
@@ -1083,7 +1083,7 @@ myfunc(dt, 'mpg')
 ## [29] 15.8 19.7 15.0 21.4
 {% endhighlight %}
 
-## => Beware of scoping within data.table
+## Beware of scoping within data.table
 
 ### `data.frame` way
 When you add something to a `data.frame` within a function that exists in the global environment, it does not affect that object in the 
@@ -1224,10 +1224,10 @@ head(dt) # addcol not here
 ## 6: 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 {% endhighlight %}
 
-## 4. PRINTING
+# 4. PRINTING
 ---
 
-## => Print data.table with `[]`
+## Print data.table with `[]`
 
 Nothing groundbreaking here, but a small miscellaneous piece of functionality.
 In `data.frame` world, wrapping an expression in `()` prints the output to the console.  This also works with data.table, but there is another way.
@@ -1274,7 +1274,7 @@ dt[,hp2wt:=hp/wt][] # does print
 {% endhighlight %}
  
 
-## => Hide output from `:=` with knitr
+## Hide output from `:=` with knitr
 
 It used to be that assignments using the `:=` operator printed the object to console when knitting documents with `knitr` and `rmarkdown`.  This is actually fixed in data.table v1.9.5.  However at the time of my writing, this currently not available on CRAN... only Github.  For 1.9.4 users, [this StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has some hacky solutions.  This least impedance approach I found was simply wrapping
 the expression in `invisible`.  Other solutions alter the way you use data.table which I didn't like.

@@ -341,8 +341,8 @@ span + .entry-title {
 		}
 	}
 }
+
 // Table of Contents
-// table of contents
 #markdown-toc {
 	font-family: $alt-font;
 	margin-top: $gutter;
@@ -352,14 +352,15 @@ span + .entry-title {
 	border-radius: $border-radius;
   ul {
   	list-style-type: none;
-  	padding-left: 0;
+  	padding-left: 20px;
   }
   li {
     @include font-size(16,no,18);
     border-bottom: 1px solid $border-color;
     list-style-type: none;
+    margin: 0 0 1px 0;
   }
-  h6 {
+  h3 {
     margin: 0;
     padding: (.25 * $gutter) (.5 * $gutter);
     background: $table-stripe-color;
