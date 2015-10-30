@@ -11,7 +11,7 @@ share: true
 * Table of Contents
 {:toc}
 
-## Tips and tricks learned along the way 
+#### Tips and tricks learned along the way 
 
 This is mostly a running list of `data.table` tricks that took me a while to figure out either by digging into the [official documentation], adapting StackOverflow posts, or more often than not, experimenting for hours.  I'd like to persist these discoveries somewhere with more memory than my head (hello internet) so I can reuse them after my mental memory forgets them.  A less organized and concise addition to DataCamp's sweet [cheat sheet for the basics](https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf).
 
@@ -24,10 +24,10 @@ Some more advanced functionality from `data.table` creator Matt Dowle [here](htt
 library('data.table')
 ```
 
-## 1. DATA STRUCTURES & ASSIGNMENT
+# 1. DATA STRUCTURES & ASSIGNMENT
 ---
 
-## => Columns of lists
+## Columns of lists
   
 ##### summary table (long and narrow)
 This could be useful, but is easily achievable using traditional methods.
@@ -88,7 +88,7 @@ head(dt)
 ```{r}
 dt[,other_gear:=mapply(setdiff, gearsL, gear)]
 ```
-## => Suppressing intermediate output with {}
+## Suppressing intermediate output with {}
 
 This is actually a base R trick that I didn't discover until working with data.table.  See ``` ?`{` ``` for some documentation and examples.
 I've only used it within the J slot of data.table, it might be more generalizable.  I find it pretty useful for generating columns
@@ -129,7 +129,7 @@ head(dt)
 ```
 
 
-## => Fast looping with `set`
+## Fast looping with `set`
 
 I still haven't worked much with the loop + `set` framework.  I've been able to achieve pretty much everything with `:=` which is more flexible and powerful.
 However, if you must loop, `set` is orders of magnitude faster than native R assignments within loops.  Here's a snippet from data.table news a while back:
@@ -161,7 +161,7 @@ head(dt)
 ```
 
 
-## => Using `shift` for to lead/lag vectors and lists
+## Using `shift` for to lead/lag vectors and lists
 
 Note this feature is only available in version 1.9.5 (currently on Github, not CRAN)
 Base R surprisingly does not have great tools for dealing with leads/lags of vectors that most social science
@@ -194,7 +194,7 @@ dt[,indpct_slow:=(ind/lagpad(ind, 1))-1, by=entity]
 head(dt, 10)
 ```
 
-## => Create multiple columns with `:=` in one statement
+## Create multiple columns with `:=` in one statement
 
 This is useful, but note that that the columns operated on must be atomic vectors or lists.  That is they must exist before running computation.  
 Building columns referencing other columns in this set need to be done individually or chained.
@@ -204,7 +204,7 @@ dt[,`:=`(avg=mean(mpg), med=median(mpg), min=min(mpg)), by=cyl]
 head(dt)
 ```
 
-## => Assign a column with `:=` named with a character object
+## Assign a column with `:=` named with a character object
 
 This is the advised way to assign a new column whose name you already have determined and saved as a character.  Simply surround the character object in parentheses.  
 
@@ -225,10 +225,10 @@ dt[,thing3:=mpg*3, with=F]
 head(dt)
 ```
 
-## 2. `BY`
+# 2. `BY`
 ---
 
-## => Calculate a function over a group (using `by`) excluding each entity in a second category.
+## Calculate a function over a group (using `by`) excluding each entity in a second category.
 
 This title probably doesn't immediately make much sense.  Let me explain what I'm going to calculate and why with an example.
 We want to compare the `mpg` of each car to the average `mpg` of cars in the same class (the same # of cylinders).  However, we don't want 
@@ -390,7 +390,7 @@ uid <- unique(dt$gear)
 system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(cyl, gear)])
 ```
 
-## => `keyby` to key resulting aggregate table
+## `keyby` to key resulting aggregate table
 
 ##### Without `keyby`
 Categories are not sorted
@@ -412,7 +412,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 ```
 
-## => Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
+## Using `[1]`, `[.N]`, `setkey` and `by` for within group subsetting
 
 #### take highest value of column A when column B is highest by group
 
@@ -451,10 +451,10 @@ setkey(dt,mpg)
 dt[, .(sd(mpg), sd(mpg[1:round(.N/2)])), by=cyl]
 ```
 
-## 3. FUNCTIONS
+# 3. FUNCTIONS
 ---
 
-## => Passing `data.table` column names as function arguments 
+## Passing `data.table` column names as function arguments 
 
 #### Method 1: No quotes, and `deparse` + `substitute`
 
@@ -482,7 +482,7 @@ myfunc <- function(dt, v) dt[,get(v)]
 myfunc(dt, 'mpg')
 ```
 
-## => Beware of scoping within data.table
+## Beware of scoping within data.table
 
 ### `data.frame` way
 When you add something to a `data.frame` within a function that exists in the global environment, it does not affect that object in the 
@@ -536,10 +536,10 @@ head(add_column_dt(dt)) # addcol here
 head(dt) # addcol not here
 ```
 
-## 4. PRINTING
+# 4. PRINTING
 ---
 
-## => Print data.table with `[]`
+## Print data.table with `[]`
 
 Nothing groundbreaking here, but a small miscellaneous piece of functionality.
 In `data.frame` world, wrapping an expression in `()` prints the output to the console.  This also works with data.table, but there is another way.
@@ -557,7 +557,7 @@ dt[,hp2wt:=hp/wt][] # does print
 ```
  
 
-## => Hide output from `:=` with knitr
+## Hide output from `:=` with knitr
 
 It used to be that assignments using the `:=` operator printed the object to console when knitting documents with `knitr` and `rmarkdown`.  This is actually fixed in data.table v1.9.5.  However at the time of my writing, this currently not available on CRAN... only Github.  For 1.9.4 users, [this StackOverflow post](http://stackoverflow.com/questions/15267018/knitr-gets-tricked-by-data-table-assignment) has some hacky solutions.  This least impedance approach I found was simply wrapping
 the expression in `invisible`.  Other solutions alter the way you use data.table which I didn't like.
