@@ -59,7 +59,8 @@ Can also be useful for more serious data engineering.
 
 {% highlight r %}
 dt <- data.table(mtcars)[,.(gear, cyl)]
-dt[,gearsL:=list(list(unique(gear))), by=cyl]
+dt[,gearsL:=list(list(unique(gear))), by=cyl] # original, ugly
+dt[,gearsL:=.(list(unique(gear))), by=cyl] # improved, pretty
 head(dt)
 {% endhighlight %}
 
@@ -74,6 +75,9 @@ head(dt)
 ## 5:    3   8    3,5
 ## 6:    3   6  4,3,5
 {% endhighlight %}
+
+**Update 10/29/2015:** Per [these comments](http://stackoverflow.com/questions/33113013/use-of-list-in-data-tables-j-argument) 
+on StackOverlow referencing my post, `t[,gearsL:=list(list(unique(gear))), by=cyl]` can be more elegantly written as `t[,gearsL:=.(list(unique(gear))), by=cyl]`.  Thanks for pointing out my unnecessarily verbose and unusual syntax!  I think I wrote the first thing that worked when I posted this, not realizing the normal `.(` syntax was equivalent to the outer list.
 
 ### Accessing elements from a column of lists
 
@@ -346,16 +350,16 @@ head(dt, 10)
 
 {% highlight text %}
 ##           date ind entity indpct_fast indpct_slow
-##  1: 2010-01-01   4      a          NA          NA
-##  2: 2011-01-01   6      a   0.5000000   0.5000000
-##  3: 2012-01-01   7      a   0.1666667   0.1666667
-##  4: 2013-01-01   4      a  -0.4285714  -0.4285714
-##  5: 2014-01-01   4      a   0.0000000   0.0000000
-##  6: 2015-01-01   7      a   0.7500000   0.7500000
+##  1: 2010-01-01   5      a          NA          NA
+##  2: 2011-01-01   3      a  -0.4000000  -0.4000000
+##  3: 2012-01-01   2      a  -0.3333333  -0.3333333
+##  4: 2013-01-01   4      a   1.0000000   1.0000000
+##  5: 2014-01-01   9      a   1.2500000   1.2500000
+##  6: 2015-01-01   2      a  -0.7777778  -0.7777778
 ##  7: 2010-01-01   5      b          NA          NA
-##  8: 2011-01-01   8      b   0.6000000   0.6000000
-##  9: 2012-01-01   8      b   0.0000000   0.0000000
-## 10: 2013-01-01   7      b  -0.1250000  -0.1250000
+##  8: 2011-01-01   2      b  -0.6000000  -0.6000000
+##  9: 2012-01-01   1      b  -0.5000000  -0.5000000
+## 10: 2013-01-01   7      b   6.0000000   6.0000000
 {% endhighlight %}
 
 ## => Create multiple columns with `:=` in one statement
@@ -556,10 +560,10 @@ dt[, .GRP, by=cyl]
 
 
 {% highlight text %}
-##    cyl .GRP
-## 1:   6    1
-## 2:   4    2
-## 3:   8    3
+##    cyl GRP
+## 1:   6   1
+## 2:   4   2
+## 3:   8   3
 {% endhighlight %}
 
 
@@ -571,10 +575,10 @@ dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl]
 
 
 {% highlight text %}
-##    cyl .GRP V2
-## 1:   6    1  4
-## 2:   4    2  3
-## 3:   8    3  5
+##    cyl GRP V2
+## 1:   6   1  4
+## 2:   4   2  3
+## 3:   8   3  5
 {% endhighlight %}
 
 
@@ -586,16 +590,16 @@ dt[,dt[, .(.GRP, unique(dt$gear)[.GRP]), by=cyl], by=gear]
 
 
 {% highlight text %}
-##    gear cyl .GRP V2
-## 1:    4   6    1  4
-## 2:    4   4    2  3
-## 3:    4   8    3  5
-## 4:    3   6    1  4
-## 5:    3   4    2  3
-## 6:    3   8    3  5
-## 7:    5   6    1  4
-## 8:    5   4    2  3
-## 9:    5   8    3  5
+##    gear cyl GRP V2
+## 1:    4   6   1  4
+## 2:    4   4   2  3
+## 3:    4   8   3  5
+## 4:    3   6   1  4
+## 5:    3   4   2  3
+## 6:    3   8   3  5
+## 7:    5   6   1  4
+## 8:    5   4   2  3
+## 9:    5   8   3  5
 {% endhighlight %}
 
 ##### 1.b Setting key
@@ -836,7 +840,7 @@ system.time(dt[,unbiased_mean_vectorized:=leaveOneOutMean(.SD, ind='mpg', bybig=
 
 {% highlight text %}
 ##    user  system elapsed 
-##   0.035   0.006   0.041
+##   0.049   0.006   0.057
 {% endhighlight %}
 
 ##### Method 2:
@@ -850,7 +854,7 @@ system.time(tmp <- dt[,dt[!gear %in% unique(dt$gear)[.GRP], mean(mpg), by=cyl], 
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.784   0.914   4.699
+##   3.249   1.144   4.520
 {% endhighlight %}
 
 ##### Method 1:
@@ -864,7 +868,7 @@ system.time(dt[, dt[!gear %in% (uid[.GRP]), mean(mpg), by=cyl] , by=gear][order(
 
 {% highlight text %}
 ##    user  system elapsed 
-##   3.355   0.750   4.104
+##   2.710   0.878   3.598
 {% endhighlight %}
 
 ## => `keyby` to key resulting aggregate table
@@ -884,11 +888,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1:   (17.8,21] 3/5 21675  6272 1.335020e-05
-## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
-## 3: [10.4,15.2] 1/5 25083     0 0.000000e+00
-## 4: (24.4,33.9] 5/5 18779 15667 4.442638e-05
-## 5:   (21,24.4] 4/5 18826 18826 5.311803e-05
+## 1: (15.2,17.8] 2/5 15600  3112 1.278764e-05
+## 2: [10.4,15.2] 1/5 24855     0 0.000000e+00
+## 3:   (17.8,21] 3/5 21900  6392 1.332750e-05
+## 4:   (21,24.4] 4/5 18761 18761 5.330206e-05
+## 5: (24.4,33.9] 5/5 18884 15703 4.403466e-05
 {% endhighlight %}
 
 
@@ -921,11 +925,11 @@ tmp
 
 {% highlight text %}
 ##           depthbin     N   sum         mean
-## 1: [10.4,15.2] 1/5 25083     0 0.000000e+00
-## 2: (15.2,17.8] 2/5 15637  3153 1.289487e-05
-## 3:   (17.8,21] 3/5 21675  6272 1.335020e-05
-## 4:   (21,24.4] 4/5 18826 18826 5.311803e-05
-## 5: (24.4,33.9] 5/5 18779 15667 4.442638e-05
+## 1: [10.4,15.2] 1/5 24855     0 0.000000e+00
+## 2: (15.2,17.8] 2/5 15600  3112 1.278764e-05
+## 3:   (17.8,21] 3/5 21900  6392 1.332750e-05
+## 4:   (21,24.4] 4/5 18761 18761 5.330206e-05
+## 5: (24.4,33.9] 5/5 18884 15703 4.403466e-05
 {% endhighlight %}
 
 

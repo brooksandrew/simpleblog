@@ -45,9 +45,13 @@ Can also be useful for more serious data engineering.
 
 ```{r}
 dt <- data.table(mtcars)[,.(gear, cyl)]
-dt[,gearsL:=list(list(unique(gear))), by=cyl]
+dt[,gearsL:=list(list(unique(gear))), by=cyl] # original, ugly
+dt[,gearsL:=.(list(unique(gear))), by=cyl] # improved, pretty
 head(dt)
 ```
+
+**Update 10/29/2015:** Per [these comments](http://stackoverflow.com/questions/33113013/use-of-list-in-data-tables-j-argument) 
+on StackOverlow referencing my post, `t[,gearsL:=list(list(unique(gear))), by=cyl]` can be more elegantly written as `t[,gearsL:=.(list(unique(gear))), by=cyl]`.  Thanks for pointing out my unnecessarily verbose and unusual syntax!  I think I wrote the first thing that worked when I posted this, not realizing the normal `.(` syntax was equivalent to the outer list.
 
 ### Accessing elements from a column of lists
 
