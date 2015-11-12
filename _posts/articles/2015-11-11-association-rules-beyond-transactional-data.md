@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Association Analysis Beyond Transactional Data
+title: Association rule analysis beyond transaction data
 date: 2015-11-11
 categories: articles
 tags: [data science, association rules, association analysis, arules, arulesViz]

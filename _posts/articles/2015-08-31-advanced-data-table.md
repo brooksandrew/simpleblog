@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Advanced Tips and Tricks with data.table"
+title: "Advanced tips and tricks with data.table"
 date: 2015-08-31
 categories: articles
 tags: [data science, R, data.table, R package, data wrangling]
