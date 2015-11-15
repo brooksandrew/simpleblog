@@ -11,7 +11,7 @@ share: true
 * Table of Contents
 {:toc}
 
-**Note:** I originally prepared this post as an article for Predictive Analytics Times, geared towards a broad audience with a business/practitioner leaning.  I ended up writing [this article](http://www.predictiveanalyticsworld.com/patimes/from-code-to-reports-with-knitr-050915/5328/) on knitr instead.  In a subsequent post, I will discuss the [shiny app](https://github.com/brooksandrew/Rsenal/blob/master/R/shiny_arules.R) I created to interactively explore and visualize association rules.
+**Note  :** I originally prepared this post as an article for Predictive Analytics Times, geared towards a broad audience with a business/practitioner leaning.  I ended up writing [this article](http://www.predictiveanalyticsworld.com/patimes/from-code-to-reports-with-knitr-050915/5328/) on knitr instead.  In a subsequent post, I will discuss the [shiny app](https://github.com/brooksandrew/Rsenal/blob/master/R/shiny_arules.R) I created to interactively explore and visualize association rules.
 
 Most analysts think of association rules when dealing with transactional or market basket data.  However, association analysis can also provide value with traditional [tabular data], especially when little is known about the structure of the data and its domain. 
 
