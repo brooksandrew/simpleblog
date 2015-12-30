@@ -73,7 +73,7 @@ Here you should see the libraries from build.sbt and all their dependencies.  No
 
 <a data-flickr-embed="true"  href="https://farm2.staticflickr.com/1689/23944025972_bcf7686627_b.jpg" title="downloading libraries with sbt"><img src="https://farm2.staticflickr.com/1689/23944025972_bcf7686627_b.jpg" width="1024" height="498" alt="Screen Shot 2015-12-29 at 4.38.29 PM"></a>
 
-### My stack
+### My environment
 
 I configured my environment as recommended by the [Functional Programming Principles in Scala course]:
 
