@@ -11,6 +11,7 @@ share: true
 * Table of Contents
 {:toc}
 
+
 #### Tips and tricks learned along the way 
 
 This is mostly a running list of `data.table` tricks that took me a while to figure out either by digging into the [official documentation], adapting StackOverflow posts, or more often than not, experimenting for hours.  I'd like to persist these discoveries somewhere with more memory than my head (hello internet) so I can reuse them after my mental memory forgets them.  A less organized and concise addition to DataCamp's sweet [cheat sheet for the basics](https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf).
@@ -900,7 +901,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-34](/assets/Rfig/unnamed-chunk-34-1.svg) 
+![plot of chunk barplot 1](/assets/svg/2015_08_31_datatable/mean_barchart_1.svg)  
 
 {% highlight text %}
 ##      [,1]
@@ -937,7 +938,7 @@ tmp
 tmp[,barplot(mean, names=depthbin, las=2)]
 {% endhighlight %}
 
-![plot of chunk unnamed-chunk-35](/assets/Rfig/unnamed-chunk-35-1.svg) 
+![plot of chunk barplot 2](/assets/svg/2015_08_31_datatable/mean_barchart_2.svg) 
 
 {% highlight text %}
 ##      [,1]

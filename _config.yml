@@ -5,14 +5,14 @@ locale: en_US
 description: data science side projects, thoughts & experiments
 logo: ab-logo.jpg
 search: true
-#url:              http://localhost:4000
-url:               http://brooksandrew.github.io/simpleblog
+#url: http://localhost:4000
+url: http://brooksandrew.github.io/simpleblog
 
 
 # Jekyll configuration
 
-permalink:   /:categories/:title/
-markdown:    kramdown
+permalink: /:categories/:title/
+markdown: kramdown
 highlighter: rouge
 sass:
   sass_dir: _sass
