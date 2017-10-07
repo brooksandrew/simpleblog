@@ -1,7 +1,8 @@
-_site
+site
 .DS_Store
 *.sublime-project
 *.sublime-workspace
 codekit-config.json
 node_modules
-Gemfile.lock
+gemfile.lock
+*.scssc
