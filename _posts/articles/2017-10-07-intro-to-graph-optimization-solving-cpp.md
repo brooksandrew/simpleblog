@@ -1,5 +1,5 @@
 ---
-title: "Intro to Graph Optimization: Solving the Chinese Postman Problem"
+title: "Intro to graph optimization: solving the Chinese Postman Problem"
 date: 2017-10-07
 categories: articles
 original_extension: ipynb
