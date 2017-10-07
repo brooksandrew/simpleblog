@@ -16,7 +16,7 @@ explicit.  Most of the changes are around the passing and setting of attributes 
 
 So... **TL;DR:**
 
-1. This is the NetworkX **2.0** compatible version of the Chinese Postman DataCamp tutorial originally posted [here].
+1. This is the NetworkX **2.0** compatible version of the Chinese Postman DataCamp tutorial originally posted [here][datacamp_post].
 2. The ideas introduced in this tutorial are packaged into the [postman_problems] library which is the mature implementation of these concepts.
 
 **A note on the making of this post**.  The original post was created in a Jupyter notebook and converted to HTML with some style tweaks by the DataCamp publishing team.  This post was converted from
