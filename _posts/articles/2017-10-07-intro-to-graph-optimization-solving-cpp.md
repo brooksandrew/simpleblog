@@ -1,16 +1,14 @@
 ---
-title: "intro-to-graph-optimization-solving-cpp"
-original_title: "intro-to-graph-optimization-solving-cpp"
-original_file_path: "/Users/ajb/Documents/github/simpleblog/_ipynb/2017-10-07-intro-to-graph-optimization-solving-cpp.ipynb"
+title: "Intro to Graph Optimization: Solving the Chinese Postman Problem"
+date: 2017-10-07
+categories: articles
 original_extension: ipynb
 lines_of_code: 333
-tags:
-    - jupyter
-    - python
-    - notebook
 layout: post
-
+comments: true
+share: true
 ---
+
 **This post was originally published as a tutorial for DataCamp [here][datacamp_post] on September 12 2017** using NetworkX **1.11**.  On September 20 2017, NetworkX [announced] the release of a new
 version **2.0**, after two years in the making.  While **2.0** introduces lots of great features (some have already been used to improve this project in [postman_problems]), it also introduced
 backwards incompatible API changes that broke the original tutorial :(.  I've commented out lines deprecated by **2.0** and tagged with `# deprecated after NX 1.11`, so the changes made here are
@@ -87,22 +85,13 @@ For another reference, the Sleeping Giant trail map is provided below:
 [postman_problems]:https://github.com/brooksandrew/postman_problems
 
 
-{% highlight python %}
-from IPython.display import IFrame, HTML  # TODO: Remove this cell when the PDF is embedded directly within HTML
-IFrame("http://www.ct.gov/deep/lib/deep/stateparks/maps/sleepgiant.pdf", width=600, height=450)
-{% endhighlight %}
-
-
-
-
-
-        <iframe
-            width="600"
-            height="450"
-            src="http://www.ct.gov/deep/lib/deep/stateparks/maps/sleepgiant.pdf"
-            frameborder="0"
-            allowfullscreen
-        ></iframe>
+<iframe
+    width="600"
+    height="450"
+    src="http://www.ct.gov/deep/lib/deep/stateparks/maps/sleepgiant.pdf"
+    frameborder="0"
+    allowfullscreen
+></iframe>
         
 
 
