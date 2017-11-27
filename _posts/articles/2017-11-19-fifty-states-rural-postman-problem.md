@@ -692,7 +692,7 @@ print(sum([e[2]['distance'] for e in g_st_contracted.edges(data=True) if e[2].ge
     12.341087779659958
 
 
-So that leaves us with a single component of 124 miles of required edges to optimize a route through.  That means the distance of deduped state avenues alone, without connectors (~112 miles) is just a
+So that leaves us with a single component of 125 miles of required edges to optimize a route through.  That means the distance of deduped state avenues alone, without connectors (~112 miles) is just a
 couple miles away from what [Wikipedia reports](https://en.wikipedia.org/wiki/List_of_state-named_roadways_in_Washington,_D.C.) (115 miles).
 
 
