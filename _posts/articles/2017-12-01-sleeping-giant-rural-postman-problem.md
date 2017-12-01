@@ -16,17 +16,6 @@ image:
   feature: feature-2017-12-01-sleepinggiant.png
 ---
 
-{% highlight python %}
-import sys
-sys.path.append("..") # Adds higher directory to python modules path.
-
-%load_ext autoreload
-%autoreload 2
-{% endhighlight %}
-
-    The autoreload extension is already loaded. To reload it, use:
-      %reload_ext autoreload
-
 
 This problem originated from a blog post I wrote for DataCamp on graph optimization [here][datacamp_graph_optimization].  The algorithm I sketched out there for solving the Chinese Problem on the
 [Sleeping Giant state park] trail network has since been formalized into the [postman_problems] python library.  I've also added the Rural Postman solver that is implemented here.
