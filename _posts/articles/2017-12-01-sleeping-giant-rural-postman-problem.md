@@ -36,6 +36,17 @@ The motivation and background around this problem is written up more thoroughly 
 [graph_optimization_nx2]:http://brooksandrew.github.io/simpleblog/articles/intro-to-graph-optimization-solving-cpp
 [Sleeping Giant state park]: http://www.ct.gov/deep/cwp/view.asp?a=2716&q=325264&deepNav_GID=1650%20
 
+
+#### RPP Solution Route Animation
+
+Here's the full route animation.  More details [here][sg_animation].  Kudos to my sister [@laurabrooks] for coding this up!
+
+[sg_animation]: https://github.com/brooksandrew/postman_problems_examples/tree/master/sleepinggiant/animation
+[@laurabrooks]: https://github.com/laurabrooks
+
+<iframe src="http://cdn.rawgit.com/brooksandrew/postman_problems_examples/master/sleepinggiant/animation/index.html" height="400" width="750"></iframe>
+
+
 #### Table of Contents
 
 
