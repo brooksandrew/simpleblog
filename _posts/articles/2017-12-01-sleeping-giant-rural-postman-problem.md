@@ -520,7 +520,7 @@ rpp_stats
 
 
 
-Leveraging the optional roads and trails, we're able to shave a about 3 miles off the CPP route.  Total mileage checks in at 30.71, just under a 50K (30.1 miles).
+Leveraging the optional roads and trails, we're able to shave about 3 miles off the CPP route.  Total mileage checks in at 30.71, just under a 50K (30.1 miles).
 
 
 {% highlight python %}
@@ -635,7 +635,7 @@ mplleaflet.save_html(fig, 'maps/rpp_solution_edge_cnts.html', tiles='cartodb_pos
 
 ## Create geojson solution
 
-Used for the forthcoming D3 route animation.
+Used for the D3 route animation at the beginning of the post (also [here](http://cdn.rawgit.com/brooksandrew/postman_problems_examples/master/sleepinggiant/animation/index.html)).  More details [here][sg_animation].
 
 
 {% highlight python %}
