@@ -60,14 +60,14 @@ used to author this blog post and a conda environment.
 <sup>†</sup> While there are 50 *roadways*, there are technically only 48 state named *avenues*: Ohio Drive and California Street are the stubborn exceptions.
 
 
-#### Animation
+<!-- #### Animation
 
 Big thanks and kudos to my sister [@laurabrooks](https://github.com/laurabrooks) for helping me create this.  Street names are there, they just need a bit of zoom.  Code [here][rpp_animation_gh].
 
 [rpp_animation_gh]: https://github.com/brooksandrew/postman_problems_examples/tree/master/50states/animation
 
-<iframe src="https://cdn.rawgit.com/brooksandrew/postman_problems_examples/e97708fe106f23e73cd33e2f4835c23ea076f9d7/50states/animation/index.html" height="600" width="750"></iframe>
-
+<iframe src="https://cdn.rawgit.com/brooksandrew/postman_problems_examples/9d4f0965ca02ff69cbbe80a477f9baa1b1678b2f/50states/animation/index.html" height="600" width="750"></iframe>
+ -->
 
 
 
